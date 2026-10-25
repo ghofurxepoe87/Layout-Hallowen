@@ -12,20 +12,22 @@
 
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at 50% 20%, #1e293b 0%, #111827 60%, #0b0f17 100%);
+      /* Background Slate & Navy Eksklusif (Bukan Hitam Polos) */
+      --bg-page: radial-gradient(circle at 50% 15%, #243046 0%, #172030 55%, #0f1522 100%);
       --gold-primary: #d4af37;
-      --gold-bright: #fef08a;
+      --gold-light: #fef08a;
       --gold-grad: linear-gradient(135deg, #fce08a 0%, #d4af37 50%, #856108 100%);
-      --gold-glow: rgba(212, 175, 55, 0.45);
+      --floor-color: #1e2736;
+      --upper-deck: #2a364a;
+      --line-border: #475569;
       
-      --color-avail-desk: #1e293b;
-      --color-avail-border: #38bdf8;
-      
-      --color-booked-main: #dc2626;
-      --color-booked-dark: #7f1d1d;
-      --color-booked-glow: rgba(220, 38, 38, 0.85);
+      /* Merah Booking 3D Menyala */
+      --red-main: #ef4444;
+      --red-dark: #991b1b;
+      --red-deep: #7f1d1d;
+      --red-glow: rgba(239, 68, 68, 0.75);
 
-      --card-bg: rgba(23, 31, 48, 0.94);
+      --card-bg: rgba(26, 35, 51, 0.95);
     }
 
     * {
@@ -38,7 +40,7 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-gradient);
+      background: var(--bg-page);
       color: #f8fafc;
       min-height: 100vh;
       display: flex;
@@ -46,21 +48,21 @@
       overflow-x: hidden;
     }
 
-    /* HEADER ULTRA LUXURY */
+    /* HEADER HOTEL MEWAH */
     header {
-      background: rgba(15, 23, 42, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 12px 18px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 10px 18px;
       position: sticky;
       top: 0;
       z-index: 60;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
 
-    .header-wrap {
-      max-width: 1500px;
+    .hdr-inner {
+      max-width: 1600px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -69,25 +71,24 @@
       flex-wrap: wrap;
     }
 
-    .brand-section {
+    .brand-box {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
     .brand-logo-frame {
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       background: rgba(255, 255, 255, 0.05);
       border: 1.5px solid var(--gold-primary);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 15px var(--gold-glow);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
       position: relative;
-      overflow: hidden;
     }
 
     .brand-logo-frame img {
@@ -98,13 +99,11 @@
 
     .brand-logo-fallback {
       display: none;
-      flex-direction: column;
-      align-items: center;
       color: var(--gold-primary);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
-    .brand-text h1 {
+    .brand-title h1 {
       font-family: 'Cinzel', serif;
       font-size: 1.15rem;
       font-weight: 700;
@@ -115,8 +114,8 @@
       line-height: 1.2;
     }
 
-    .brand-text p {
-      font-size: 0.75rem;
+    .brand-title p {
+      font-size: 0.72rem;
       color: #94a3b8;
       letter-spacing: 0.8px;
       display: flex;
@@ -124,40 +123,40 @@
       gap: 6px;
     }
 
-    .event-badge {
+    .badge-event {
       background: rgba(236, 72, 153, 0.2);
       border: 1px solid #ec4899;
       color: #f472b6;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.65rem;
       font-weight: 700;
     }
 
-    /* STATS HEADER */
-    .header-stats {
+    /* STATISTIK HEADER */
+    .hdr-metrics {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .stat-pill {
+    .metric-card {
       background: rgba(30, 41, 59, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      padding: 6px 12px;
+      padding: 5px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .stat-pill i { font-size: 0.95rem; }
-    .stat-pill .info { display: flex; flex-direction: column; line-height: 1.1; }
-    .stat-pill .info span { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; }
-    .stat-pill .info strong { font-size: 0.85rem; }
+    .metric-card i { font-size: 0.95rem; }
+    .metric-card .txt-wrap { display: flex; flex-direction: column; line-height: 1.1; }
+    .metric-card .txt-wrap span { font-size: 0.62rem; color: #94a3b8; text-transform: uppercase; }
+    .metric-card .txt-wrap strong { font-size: 0.82rem; }
 
-    .btn-gold {
+    .btn-action-gold {
       background: var(--gold-grad);
       color: #111;
       border: none;
@@ -169,13 +168,13 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35);
     }
 
-    /* MOBILE / VIEWPORT CONTROLS */
-    .view-toolbar {
-      max-width: 1500px;
-      margin: 10px auto 0;
+    /* TOOLBAR ZOOM / NAVIGASI HP */
+    .toolbar-bar {
+      max-width: 1600px;
+      margin: 8px auto 0;
       padding: 0 16px;
       width: 100%;
       display: flex;
@@ -185,137 +184,134 @@
       flex-wrap: wrap;
     }
 
-    .legend-box {
+    .legend-tag {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(15, 23, 42, 0.6);
-      padding: 6px 14px;
+      background: rgba(15, 23, 42, 0.65);
+      padding: 5px 12px;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
-    .dot.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+    .dot-node { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+    .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
-    .zoom-controls {
+    .zoom-group {
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .btn-zoom {
-      width: 34px;
-      height: 34px;
+    .btn-tool {
+      width: 32px;
+      height: 32px;
       border-radius: 8px;
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(30, 41, 59, 0.85);
       border: 1px solid rgba(212, 175, 55, 0.3);
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    /* 3D SCENE CONTAINER */
-    .scene-viewport {
+    /* VIEWPORT DENAH */
+    .viewport-area {
       flex: 1;
       position: relative;
       overflow: hidden;
-      touch-action: none;
+      touch-action: pan-x pan-y;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
-      perspective: 1200px;
+      padding: 8px;
     }
 
-    .scene-canvas {
+    .map-frame {
       width: 100%;
-      max-width: 1250px;
-      transform-style: preserve-3d;
-      transform: rotateX(24deg) rotateZ(0deg) scale(0.95);
-      transition: transform 0.25s ease-out;
+      max-width: 1300px;
       transform-origin: center center;
+      transition: transform 0.15s ease-out;
     }
 
-    /* 3D BLUEPRINT SVG */
-    svg.blueprint-3d {
+    svg.lounge-map {
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.6));
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
     }
 
-    /* INTERAKTIF MEJA & SOFA */
-    .tbl-node {
+    /* INTERAKTIVITAS MEJA 3D */
+    .table-3d-node {
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: transform 0.18s ease, filter 0.18s ease;
     }
 
-    .tbl-node:hover {
-      filter: drop-shadow(0 0 10px rgba(254, 240, 138, 0.9));
+    .table-3d-node:hover {
+      filter: drop-shadow(0 0 10px rgba(254, 240, 138, 0.8));
     }
 
-    /* STATUS TERSEDIA */
-    .tbl-node.is-avail .t-chair {
-      fill: #1e293b;
-      stroke: #64748b;
-      stroke-width: 1.5;
-    }
-    .tbl-node.is-avail .t-desk {
-      fill: #0f172a;
-      stroke: var(--color-avail-border);
-      stroke-width: 2;
-    }
-    .tbl-node.is-avail text {
-      fill: #f8fafc;
-      font-weight: 700;
-    }
+    /* STATUS TERSEDIA (3D REALISTIK ELEGAN) */
+    .table-3d-node.is-avail .sofa-cushion { fill: url(#gradSofaAvail); stroke: #475569; stroke-width: 1; }
+    .table-3d-node.is-avail .sofa-table { fill: url(#gradTableAvail); stroke: #38bdf8; stroke-width: 1.5; }
+    .table-3d-node.is-avail .cocktail-cloth { fill: url(#gradCocktailAvail); stroke: #64748b; stroke-width: 1; }
+    .table-3d-node.is-avail .cocktail-rim { fill: #1e293b; stroke: #38bdf8; stroke-width: 1.5; }
+    .table-3d-node.is-avail .lbl-num { fill: #ffffff; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
 
-    /* STATUS TERBOOKING -> MERAH MENYALA BESERTA SELURUH SOFA & KURSI */
-    .tbl-node.is-booked .t-chair {
-      fill: var(--color-booked-dark) !important;
-      stroke: var(--color-booked-main) !important;
-      stroke-width: 2 !important;
-      filter: drop-shadow(0 0 6px var(--color-booked-glow));
+    /* STATUS TERBOOKING -> MERAH 3D CRIMSON MENYALA DI SEMUA ELEMEN KURSI & SOFA */
+    .table-3d-node.is-booked .sofa-cushion {
+      fill: url(#gradSofaBooked) !important;
+      stroke: var(--red-main) !important;
+      stroke-width: 1.5 !important;
+      filter: drop-shadow(0 0 6px var(--red-glow));
     }
-    .tbl-node.is-booked .t-desk {
-      fill: #991b1b !important;
+    .table-3d-node.is-booked .sofa-table {
+      fill: #7f1d1d !important;
       stroke: #f87171 !important;
-      stroke-width: 2.5 !important;
-      filter: drop-shadow(0 0 8px var(--color-booked-glow));
+      stroke-width: 2 !important;
+      filter: drop-shadow(0 0 8px var(--red-glow));
     }
-    .tbl-node.is-booked text {
+    .table-3d-node.is-booked .cocktail-cloth {
+      fill: url(#gradCocktailBooked) !important;
+      stroke: var(--red-main) !important;
+      stroke-width: 1.5 !important;
+      filter: drop-shadow(0 0 6px var(--red-glow));
+    }
+    .table-3d-node.is-booked .cocktail-rim {
+      fill: #991b1b !important;
+      stroke: #ff7676 !important;
+      stroke-width: 2 !important;
+    }
+    .table-3d-node.is-booked .lbl-num {
       fill: #ffffff !important;
       font-weight: 800 !important;
+      text-shadow: 0 0 6px rgba(0,0,0,0.9);
     }
 
-    /* MODAL POPUP FORM (OPTIMIZED FOR ANDROID & IOS) */
-    .modal-overlay {
+    /* MODAL FORM RESERVASI DENGAN INPUT DP RUPIAH MANUAL */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
     }
 
-    .modal-overlay.open {
-      display: flex;
-    }
+    .modal-backdrop.open { display: flex; }
 
-    .modal-card {
+    .modal-container {
       background: var(--card-bg);
       border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 16px;
+      border-radius: 14px;
       width: 100%;
       max-width: 440px;
       max-height: 90vh;
@@ -323,22 +319,22 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
     }
 
-    .modal-head {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      padding: 14px 18px;
+    .modal-header {
+      background: linear-gradient(135deg, #243044 0%, #151e2c 100%);
+      padding: 12px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .modal-head h3 {
+    .modal-header h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      color: var(--gold-bright);
+      font-size: 1rem;
+      color: var(--gold-light);
     }
 
-    .btn-close {
+    .btn-x {
       background: transparent;
       border: none;
       color: #94a3b8;
@@ -346,20 +342,20 @@
       cursor: pointer;
     }
 
-    .modal-content {
-      padding: 18px;
+    .modal-body {
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .form-item {
+    .form-row {
       display: flex;
       flex-direction: column;
       gap: 5px;
     }
 
-    .form-item label {
+    .form-row label {
       font-size: 0.75rem;
       font-weight: 600;
       color: #cbd5e1;
@@ -368,7 +364,7 @@
       gap: 6px;
     }
 
-    .input-box {
+    .inp-field {
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 8px;
@@ -379,15 +375,15 @@
       -webkit-appearance: none;
     }
 
-    .input-box:focus {
+    .inp-field:focus {
       border-color: var(--gold-primary);
     }
 
-    .currency-wrap {
+    .money-input-box {
       position: relative;
     }
 
-    .currency-wrap span {
+    .money-input-box span {
       position: absolute;
       left: 12px;
       top: 50%;
@@ -397,39 +393,39 @@
       font-size: 0.85rem;
     }
 
-    .currency-wrap input {
+    .money-input-box input {
       padding-left: 42px;
       width: 100%;
     }
 
-    .modal-actions {
-      padding: 14px 18px;
+    .modal-footer {
+      padding: 12px 16px;
       background: #0f172a;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .btn-delete-bk {
+    .btn-del {
       background: #7f1d1d;
       color: #fca5a5;
       border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.78rem;
+      padding: 8px 12px;
+      border-radius: 7px;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
     }
 
-    .btn-confirm-bk {
+    .btn-save {
       background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
       color: #fff;
       border: none;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 7px;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -443,42 +439,40 @@
 
   <!-- HEADER MEWAH -->
   <header>
-    <div class="header-wrap">
-      <div class="brand-section">
+    <div class="hdr-inner">
+      <div class="brand-box">
         <div class="brand-logo-frame">
-          <img id="mainLogo" src="logo.png" alt="Platinum Hotel Logo" 
-               onerror="this.onerror=null; this.src='logo platinum hotel Balikpapan.png'; this.addEventListener('error', showLogoFallback);">
-          <div id="fallbackLogo" class="brand-logo-fallback">
-            <i class="fa-solid fa-crown"></i>
-          </div>
+          <img id="hotelLogo" src="logo.png" alt="Logo Platinum Hotel"
+               onerror="this.onerror=null; this.src='logo platinum hotel Balikpapan.png'; this.addEventListener('error', () => { this.style.display='none'; document.getElementById('logoIcon').style.display='block'; });">
+          <i id="logoIcon" class="fa-solid fa-crown brand-logo-fallback"></i>
         </div>
-        <div class="brand-text">
+        <div class="brand-title">
           <h1>Platinum Hotel & Convention Hall</h1>
           <p>
             <span>INFINITY SKY LOUNGE</span>
-            <span class="event-badge"><i class="fa-solid fa-ghost"></i> HALLOWEEN 2026</span>
+            <span class="badge-event"><i class="fa-solid fa-ghost"></i> HALLOWEEN 30 OCT 2026</span>
           </p>
         </div>
       </div>
 
-      <div class="header-stats">
-        <div class="stat-pill">
+      <div class="hdr-metrics">
+        <div class="metric-card">
           <i class="fa-solid fa-couch" style="color: var(--gold-primary);"></i>
-          <div class="info">
+          <div class="txt-wrap">
             <span>Status</span>
-            <strong><span id="txtBooked" style="color: #ef4444;">0</span> / <span id="txtTotal">35</span> Booked</strong>
+            <strong><span id="statBookedCount" style="color: #ef4444;">0</span> / <span id="statTotalCount">35</span> Terisi</strong>
           </div>
         </div>
 
-        <div class="stat-pill">
+        <div class="metric-card">
           <i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i>
-          <div class="info">
+          <div class="txt-wrap">
             <span>Total DP</span>
-            <strong id="txtTotalDP" style="color: #34d399;">Rp 0</strong>
+            <strong id="statDPTotal" style="color: #34d399;">Rp 0</strong>
           </div>
         </div>
 
-        <button class="btn-gold" onclick="downloadCSVReport()">
+        <button class="btn-action-gold" onclick="exportReservationsCSV()">
           <i class="fa-solid fa-file-csv"></i> Unduh CSV
         </button>
       </div>
@@ -486,51 +480,74 @@
   </header>
 
   <!-- CONTROLS & LEGENDA -->
-  <div class="view-toolbar">
-    <div class="legend-box">
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot avail"></div> Tersedia</div>
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot booked"></div> Terbooking (Merah)</div>
+  <div class="toolbar-bar">
+    <div class="legend-tag">
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> Tersedia</div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> Terbooking (Merah)</div>
     </div>
-    <div class="zoom-controls">
-      <button class="btn-zoom" onclick="adjustPerspective(-5)"><i class="fa-solid fa-rotate-left"></i></button>
-      <button class="btn-zoom" onclick="adjustPerspective(5)"><i class="fa-solid fa-rotate-right"></i></button>
-      <button class="btn-zoom" onclick="scaleScene(0.1)"><i class="fa-solid fa-plus"></i></button>
-      <button class="btn-zoom" onclick="scaleScene(-0.1)"><i class="fa-solid fa-minus"></i></button>
-      <button class="btn-zoom" onclick="resetScene()"><i class="fa-solid fa-arrows-rotate"></i></button>
+    <div class="zoom-group">
+      <button class="btn-tool" onclick="zoomMap(0.1)"><i class="fa-solid fa-plus"></i></button>
+      <button class="btn-tool" onclick="zoomMap(-0.1)"><i class="fa-solid fa-minus"></i></button>
+      <button class="btn-tool" onclick="resetZoom()"><i class="fa-solid fa-arrows-rotate"></i></button>
     </div>
   </div>
 
-  <!-- PERSPEKTIF DENAH ISOMETRIK 3D SESUAI ASLI -->
-  <div class="scene-viewport" id="viewportTouchArea">
-    <div class="scene-canvas" id="sceneContainer">
-      <svg class="blueprint-3d" viewBox="0 0 1200 1150" xmlns="http://www.w3.org/2000/svg">
+  <!-- VIEWPORT DENAH ARSITEKTURAL PRESISI -->
+  <main class="viewport-area" id="mapTouchArea">
+    <div class="map-frame" id="mapFrame">
+      <svg class="lounge-map" viewBox="0 0 1200 1150" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Efek 3D Ambient & Drop Shadow -->
-          <filter id="shadowDepth" x="-10%" y="-10%" width="120%" height="130%">
-            <feDropShadow dx="2" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+          <!-- Gradien 3D Sofa Tersedia -->
+          <linearGradient id="gradSofaAvail" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#334155" />
+            <stop offset="50%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+          </linearGradient>
+
+          <!-- Gradien Meja Kaca Tengah Tersedia -->
+          <linearGradient id="gradTableAvail" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#090d16" />
+          </linearGradient>
+
+          <!-- Gradien 3D Kain Cocktail Table Tersedia -->
+          <linearGradient id="gradCocktailAvail" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#64748b" />
+            <stop offset="40%" stop-color="#334155" />
+            <stop offset="70%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#475569" />
+          </linearGradient>
+
+          <!-- Gradien 3D Sofa Terbooking (Merah Menyala Realistis) -->
+          <linearGradient id="gradSofaBooked" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f87171" />
+            <stop offset="40%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#7f1d1d" />
+          </linearGradient>
+
+          <!-- Gradien 3D Kain Cocktail Terbooking -->
+          <linearGradient id="gradCocktailBooked" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f87171" />
+            <stop offset="50%" stop-color="#b91c1c" />
+            <stop offset="100%" stop-color="#7f1d1d" />
+          </linearGradient>
+
+          <!-- Drop Shadow 3D -->
+          <filter id="shadow3D" x="-15%" y="-15%" width="130%" height="130%">
+            <feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.6"/>
           </filter>
-          <linearGradient id="deckWood" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2d3748" />
-            <stop offset="100%" stop-color="#1e293b" />
-          </linearGradient>
-          <linearGradient id="mainFloor" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#232d3f" />
-            <stop offset="100%" stop-color="#18202f" />
-          </linearGradient>
-          <linearGradient id="djBeam" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(56, 189, 248, 0.4)" />
-            <stop offset="100%" stop-color="rgba(168, 85, 247, 0)" />
-          </linearGradient>
         </defs>
 
-        <!-- LANTAI UTAMA SLATE MEWAH -->
-        <polygon points="40,240 500,240 500,40 1160,40 1160,550 630,550 630,1110 40,1110" fill="url(#mainFloor)" stroke="#475569" stroke-width="2.5" />
+        <!-- ================= GARIS BATAS RUANGAN DENAH ASLI ================= -->
+        <!-- Area Lantai Utama -->
+        <polygon points="40,240 500,240 500,40 1160,40 1160,550 630,550 630,1110 40,1110" 
+                 fill="var(--floor-color)" stroke="var(--line-border)" stroke-width="2.5" />
 
-        <!-- UPPER SKY FLOOR (TERANGKAT 3D) -->
-        <rect x="520" y="55" width="620" height="240" fill="url(#deckWood)" rx="8" stroke="#d4af37" stroke-width="1.2" filter="url(#shadowDepth)" />
-
-        <!-- Tangga & Photobox -->
-        <rect x="990" y="65" width="40" height="150" fill="#334155" stroke="#64748b" />
+        <!-- UPPER LEVEL (SKY FLOOR ATAS) -->
+        <rect x="520" y="55" width="620" height="240" fill="var(--upper-deck)" rx="6" stroke="var(--line-border)" stroke-width="1.8" />
+        
+        <!-- Akses Tangga & Photobox -->
+        <rect x="990" y="65" width="40" height="150" fill="#334155" stroke="var(--line-border)" />
         <line x1="990" y1="85" x2="1030" y2="85" stroke="#94a3b8" stroke-width="2" />
         <line x1="990" y1="105" x2="1030" y2="105" stroke="#94a3b8" stroke-width="2" />
         <line x1="990" y1="125" x2="1030" y2="125" stroke="#94a3b8" stroke-width="2" />
@@ -538,33 +555,28 @@
         <line x1="990" y1="165" x2="1030" y2="165" stroke="#94a3b8" stroke-width="2" />
         <line x1="990" y1="185" x2="1030" y2="185" stroke="#94a3b8" stroke-width="2" />
 
-        <text x="1050" y="100" fill="#cbd5e1" font-size="14" font-weight="700" font-style="italic">Sky Floor</text>
-        <rect x="1045" y="150" width="95" height="48" fill="#ec4899" rx="4" filter="url(#shadowDepth)" />
+        <text x="1050" y="98" fill="#cbd5e1" font-size="14" font-weight="700" font-style="italic">Sky Floor</text>
+        <rect x="1045" y="150" width="95" height="48" fill="#ec4899" rx="4" filter="url(#shadow3D)" />
         <text x="1092" y="178" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">photobox</text>
 
-        <!-- Akses Pintu & Restroom -->
-        <text x="540" y="225" fill="#38bdf8" font-size="11" font-weight="700">IN | OUT</text>
-        <text x="520" y="240" fill="#94a3b8" font-size="9">LIFT ACCES FROM 10TH FLOOR</text>
+        <!-- Akses Lift & Rooftop Terrace -->
+        <text x="540" y="222" fill="#38bdf8" font-size="11" font-weight="700">IN | OUT</text>
+        <text x="520" y="238" fill="#94a3b8" font-size="9">LIFT ACCES FROM 10TH FLOOR</text>
 
-        <rect x="655" y="210" width="55" height="25" fill="#1e293b" stroke="#64748b" rx="2" />
-        <text x="682" y="225" fill="#cbd5e1" font-size="8" font-weight="700" text-anchor="middle">RESTROOM</text>
+        <rect x="655" y="208" width="58" height="26" fill="#1e293b" stroke="var(--line-border)" rx="2" />
+        <text x="684" y="224" fill="#cbd5e1" font-size="8" font-weight="700" text-anchor="middle">RESTROOM</text>
 
-        <text x="1045" y="225" fill="#38bdf8" font-size="11" font-weight="700">IN | OUT</text>
-        <text x="1030" y="240" fill="#94a3b8" font-size="9">ACCES FROM ROOFTOP TERACE</text>
+        <text x="1045" y="222" fill="#38bdf8" font-size="11" font-weight="700">IN | OUT</text>
+        <text x="1030" y="238" fill="#94a3b8" font-size="9">ACCES FROM ROOFTOP TERACE</text>
 
-        <!-- PANGGUNG DJ DENGAN LIGHTING BEAM 3D -->
-        <g id="dj_stage" transform="translate(180, 260)" filter="url(#shadowDepth)">
-          <!-- Efek Beam Sorot Cahaya -->
-          <polygon points="20,60 -60,280 100,280" fill="url(#djBeam)" opacity="0.4" />
-          <polygon points="20,60 140,280 280,280" fill="url(#djBeam)" opacity="0.4" />
-
-          <!-- Panggung & Rig -->
-          <rect x="-80" y="0" width="200" height="125" fill="#1e293b" stroke="#d4af37" stroke-width="1.5" rx="6" />
+        <!-- PANGGUNG DJ LENGKAP RIG LIGHTING -->
+        <g id="djStage" transform="translate(180, 260)" filter="url(#shadow3D)">
+          <rect x="-80" y="0" width="200" height="125" fill="#1e293b" stroke="#64748b" stroke-width="2" rx="6" />
           <rect x="-40" y="75" width="120" height="42" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" rx="3" />
-          <circle cx="20" cy="55" r="14" fill="#f59e0b" filter="url(#shadowDepth)" />
+          <circle cx="20" cy="55" r="14" fill="#f59e0b" filter="url(#shadow3D)" />
           <text x="20" y="102" fill="#38bdf8" font-size="12" font-weight="800" text-anchor="middle">DJ BOOTH</text>
 
-          <!-- Rig Lighting -->
+          <!-- Rig Lighting Kiri & Kanan -->
           <circle cx="-135" cy="50" r="18" fill="#0f172a" stroke="#d4af37" stroke-width="2"/>
           <line x1="-135" y1="68" x2="-160" y2="135" stroke="#d4af37" stroke-width="2" />
           <line x1="-135" y1="68" x2="-110" y2="135" stroke="#d4af37" stroke-width="2" />
@@ -574,13 +586,13 @@
         </g>
 
         <!-- BAR STATION -->
-        <g id="bar_station" transform="translate(535, 450)" filter="url(#shadowDepth)">
+        <g id="barStation" transform="translate(535, 450)" filter="url(#shadow3D)">
           <rect x="0" y="0" width="85" height="18" fill="#ec4899" rx="3" />
-          <rect x="0" y="18" width="85" height="125" fill="#7c3aed" rx="4" />
+          <rect x="0" y="18" width="85" height="125" fill="#8b5cf6" rx="4" />
           <text x="42" y="85" fill="#fff" font-size="10" font-weight="800" text-anchor="middle">BAR STATION</text>
         </g>
 
-        <!-- TEKS ELEGAN LANTAI -->
+        <!-- TEKS ELEGAN LANTAI SESUAI GAMBAR -->
         <g transform="translate(650, 560)">
           <text x="0" y="30" fill="#f1f5f9" font-family="'Cinzel', serif" font-size="28" font-weight="800" letter-spacing="2">INFINITY</text>
           <text x="0" y="65" fill="#f1f5f9" font-family="'Cinzel', serif" font-size="28" font-weight="800" letter-spacing="2">SKY LOUNGE</text>
@@ -588,272 +600,310 @@
           <text x="12" y="245" fill="#cbd5e1" font-size="24" font-weight="500">30 October 2026</text>
         </g>
 
-        <!-- ================= DAFTAR MEJA & SOFA LENGKAP ================= -->
+        <!-- ================= MEJA 3D REALISTIK SESUAI POSISI DENAH ================= -->
 
-        <!-- DINING TABLE ATAS 8 KURSI: 123, 122, 121, 120 -->
-        <g id="tbl-123" class="tbl-node is-avail" onclick="openModal('123', 'Dining Table 8-Pax', 8)" transform="translate(585, 70)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-8" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="-8" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="52" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="52" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="8" y="-8" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="-8" width="12" height="8" rx="2" />
-          <rect class="t-chair" x="8" y="54" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="54" width="12" height="8" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="54" rx="4" />
-          <text x="26" y="32" font-size="13" text-anchor="middle">123</text>
+        <!-- 1. DINING TABLE 8-KURSI (SKY FLOOR ATAS): 123, 122, 121, 120 -->
+        <g id="node-123" class="table-3d-node is-avail" onclick="openBooking('123', 'Dining Table 8-Pax', 8)" transform="translate(585, 68)" filter="url(#shadow3D)">
+          <!-- 8 Kursi berbusa realistis -->
+          <rect class="sofa-cushion" x="-10" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="-10" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="53" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="53" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="8" y="-10" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="-10" width="14" height="9" rx="3" />
+          <rect class="sofa-cushion" x="8" y="55" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="55" width="14" height="9" rx="3" />
+          <!-- Meja Utama -->
+          <rect class="sofa-table" x="0" y="0" width="52" height="54" rx="4" />
+          <text class="lbl-num" x="26" y="32" font-size="13" text-anchor="middle">123</text>
         </g>
 
-        <g id="tbl-122" class="tbl-node is-avail" onclick="openModal('122', 'Dining Table 8-Pax', 8)" transform="translate(675, 70)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-8" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="-8" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="52" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="52" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="8" y="-8" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="-8" width="12" height="8" rx="2" />
-          <rect class="t-chair" x="8" y="54" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="54" width="12" height="8" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="54" rx="4" />
-          <text x="26" y="32" font-size="13" text-anchor="middle">122</text>
+        <g id="node-122" class="table-3d-node is-avail" onclick="openBooking('122', 'Dining Table 8-Pax', 8)" transform="translate(675, 68)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-10" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="-10" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="53" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="53" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="8" y="-10" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="-10" width="14" height="9" rx="3" />
+          <rect class="sofa-cushion" x="8" y="55" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="55" width="14" height="9" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="54" rx="4" />
+          <text class="lbl-num" x="26" y="32" font-size="13" text-anchor="middle">122</text>
         </g>
 
-        <g id="tbl-121" class="tbl-node is-avail" onclick="openModal('121', 'Dining Table 8-Pax', 8)" transform="translate(765, 70)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-8" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="-8" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="52" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="52" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="8" y="-8" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="-8" width="12" height="8" rx="2" />
-          <rect class="t-chair" x="8" y="54" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="54" width="12" height="8" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="54" rx="4" />
-          <text x="26" y="32" font-size="13" text-anchor="middle">121</text>
+        <g id="node-121" class="table-3d-node is-avail" onclick="openBooking('121', 'Dining Table 8-Pax', 8)" transform="translate(765, 68)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-10" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="-10" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="53" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="53" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="8" y="-10" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="-10" width="14" height="9" rx="3" />
+          <rect class="sofa-cushion" x="8" y="55" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="55" width="14" height="9" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="54" rx="4" />
+          <text class="lbl-num" x="26" y="32" font-size="13" text-anchor="middle">121</text>
         </g>
 
-        <g id="tbl-120" class="tbl-node is-avail" onclick="openModal('120', 'Dining Table 8-Pax', 8)" transform="translate(855, 70)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-8" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="-8" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="52" y="10" width="8" height="12" rx="2" /><rect class="t-chair" x="52" y="32" width="8" height="12" rx="2" />
-          <rect class="t-chair" x="8" y="-8" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="-8" width="12" height="8" rx="2" />
-          <rect class="t-chair" x="8" y="54" width="12" height="8" rx="2" /><rect class="t-chair" x="32" y="54" width="12" height="8" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="54" rx="4" />
-          <text x="26" y="32" font-size="13" text-anchor="middle">120</text>
+        <g id="node-120" class="table-3d-node is-avail" onclick="openBooking('120', 'Dining Table 8-Pax', 8)" transform="translate(855, 68)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-10" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="-10" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="53" y="8" width="9" height="14" rx="3" /><rect class="sofa-cushion" x="53" y="32" width="9" height="14" rx="3" />
+          <rect class="sofa-cushion" x="8" y="-10" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="-10" width="14" height="9" rx="3" />
+          <rect class="sofa-cushion" x="8" y="55" width="14" height="9" rx="3" /><rect class="sofa-cushion" x="30" y="55" width="14" height="9" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="54" rx="4" />
+          <text class="lbl-num" x="26" y="32" font-size="13" text-anchor="middle">120</text>
         </g>
 
-        <!-- SOFA SKY FLOOR: 117, 118, 119 -->
-        <g id="tbl-117" class="tbl-node is-avail" onclick="openModal('117', 'Sky Floor VIP Sofa', 6)" transform="translate(605, 160)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-12" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="0" y="38" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="34" rx="3" />
-          <text x="26" y="22" font-size="12" text-anchor="middle">117</text>
+        <!-- 2. SOFA VIP SKY FLOOR: 117, 118, 119 -->
+        <g id="node-117" class="table-3d-node is-avail" onclick="openBooking('117', 'Sky Floor VIP Sofa', 6)" transform="translate(605, 155)" filter="url(#shadow3D)">
+          <!-- Sandaran Lengan Kiri & Kanan -->
+          <rect class="sofa-cushion" x="-15" y="2" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="2" width="12" height="30" rx="3" />
+          <!-- Sandaran Punggung Panjang Depan -->
+          <rect class="sofa-cushion" x="0" y="37" width="52" height="14" rx="3" />
+          <!-- Meja Kaca Kopi -->
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="12" text-anchor="middle">117</text>
         </g>
 
-        <g id="tbl-118" class="tbl-node is-avail" onclick="openModal('118', 'Sky Floor VIP Sofa', 6)" transform="translate(730, 160)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-12" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="0" y="38" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="34" rx="3" />
-          <text x="26" y="22" font-size="12" text-anchor="middle">118</text>
+        <g id="node-118" class="table-3d-node is-avail" onclick="openBooking('118', 'Sky Floor VIP Sofa', 6)" transform="translate(730, 155)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="2" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="2" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="0" y="37" width="52" height="14" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="12" text-anchor="middle">118</text>
         </g>
 
-        <g id="tbl-119" class="tbl-node is-avail" onclick="openModal('119', 'Sky Floor VIP Sofa', 6)" transform="translate(855, 160)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-12" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="10" height="28" rx="2" />
-          <rect class="t-chair" x="0" y="38" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="34" rx="3" />
-          <text x="26" y="22" font-size="12" text-anchor="middle">119</text>
+        <g id="node-119" class="table-3d-node is-avail" onclick="openBooking('119', 'Sky Floor VIP Sofa', 6)" transform="translate(855, 155)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="2" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="2" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="0" y="37" width="52" height="14" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="12" text-anchor="middle">119</text>
         </g>
 
-        <!-- STANDING BAR COCKTAIL SKY FLOOR: 124 s/d 129 -->
-        <g id="tbl-124" class="tbl-node is-avail" onclick="openModal('124', 'Cocktail High Table', 4)" transform="translate(770, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">124</text></g>
-        <g id="tbl-125" class="tbl-node is-avail" onclick="openModal('125', 'Cocktail High Table', 4)" transform="translate(815, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">125</text></g>
-        <g id="tbl-126" class="tbl-node is-avail" onclick="openModal('126', 'Cocktail High Table', 4)" transform="translate(860, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">126</text></g>
-        <g id="tbl-127" class="tbl-node is-avail" onclick="openModal('127', 'Cocktail High Table', 4)" transform="translate(905, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">127</text></g>
-        <g id="tbl-128" class="tbl-node is-avail" onclick="openModal('128', 'Cocktail High Table', 4)" transform="translate(950, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">128</text></g>
-        <g id="tbl-129" class="tbl-node is-avail" onclick="openModal('129', 'Cocktail High Table', 4)" transform="translate(995, 260)"><circle class="t-chair" cx="0" cy="0" r="16" /><circle class="t-desk" cx="0" cy="0" r="10" /><text x="0" y="4" font-size="9" text-anchor="middle">129</text></g>
-
-        <!-- VIP SOFA ATAS KANAN: 105, 103, 102, 101 -->
-        <g id="tbl-105" class="tbl-node is-avail" onclick="openModal('105', 'VIP Lounge Sofa', 6)" transform="translate(710, 440)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="58" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="0" y="44" width="56" height="14" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="56" height="40" rx="3" />
-          <text x="28" y="25" font-size="13" text-anchor="middle">105</text>
+        <!-- 3. COCKTAIL TABLE 124-129 (DI BAWAH / DI LUAR DARI GARIS SKY FLOOR) -->
+        <!-- Model 3D Menampilkan Drapery Lipatan Kain Meja Cocktail Berdiri -->
+        <g id="node-124" class="table-3d-node is-avail" onclick="openBooking('124', 'Cocktail Table', 4)" transform="translate(780, 310)" filter="url(#shadow3D)">
+          <!-- Kain Jatuh Berlipat 3D -->
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <!-- Meja Bundar Atas -->
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">124</text>
         </g>
 
-        <g id="tbl-103" class="tbl-node is-avail" onclick="openModal('103', 'VIP Lounge Sofa', 6)" transform="translate(835, 440)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="58" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="0" y="44" width="56" height="14" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="56" height="40" rx="3" />
-          <text x="28" y="25" font-size="13" text-anchor="middle">103</text>
+        <g id="node-125" class="table-3d-node is-avail" onclick="openBooking('125', 'Cocktail Table', 4)" transform="translate(825, 310)" filter="url(#shadow3D)">
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">125</text>
         </g>
 
-        <g id="tbl-102" class="tbl-node is-avail" onclick="openModal('102', 'VIP Lounge Sofa', 6)" transform="translate(960, 440)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="58" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="0" y="44" width="56" height="14" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="56" height="40" rx="3" />
-          <text x="28" y="25" font-size="13" text-anchor="middle">102</text>
+        <g id="node-126" class="table-3d-node is-avail" onclick="openBooking('126', 'Cocktail Table', 4)" transform="translate(870, 310)" filter="url(#shadow3D)">
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">126</text>
         </g>
 
-        <g id="tbl-101" class="tbl-node is-avail" onclick="openModal('101', 'Prime VIP Sofa', 6)" transform="translate(1075, 440)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="58" y="6" width="12" height="32" rx="2" />
-          <rect class="t-chair" x="0" y="44" width="56" height="14" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="56" height="40" rx="3" />
-          <text x="28" y="25" font-size="13" text-anchor="middle">101</text>
+        <g id="node-127" class="table-3d-node is-avail" onclick="openBooking('127', 'Cocktail Table', 4)" transform="translate(915, 310)" filter="url(#shadow3D)">
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">127</text>
         </g>
 
-        <!-- VIP SOFA SISI KIRI: 116, 115, 113, 112 -->
-        <g id="tbl-116" class="tbl-node is-avail" onclick="openModal('116', 'Perimeter VIP Sofa', 6)" transform="translate(60, 450)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-16" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">116</text>
+        <g id="node-128" class="table-3d-node is-avail" onclick="openBooking('128', 'Cocktail Table', 4)" transform="translate(960, 310)" filter="url(#shadow3D)">
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">128</text>
         </g>
 
-        <g id="tbl-115" class="tbl-node is-avail" onclick="openModal('115', 'Perimeter VIP Sofa', 6)" transform="translate(60, 600)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-16" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">115</text>
+        <g id="node-129" class="table-3d-node is-avail" onclick="openBooking('129', 'Cocktail Table', 4)" transform="translate(1005, 310)" filter="url(#shadow3D)">
+          <polygon class="cocktail-cloth" points="-14,-4 -18,18 18,18 14,-4" />
+          <circle class="cocktail-rim" cx="0" cy="-6" r="14" />
+          <text class="lbl-num" x="0" y="-2" font-size="9" text-anchor="middle">129</text>
         </g>
 
-        <g id="tbl-113" class="tbl-node is-avail" onclick="openModal('113', 'Perimeter VIP Sofa', 6)" transform="translate(60, 750)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-16" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">113</text>
+        <!-- 4. SOFA VIP KANAN ATAS (MEPET GARIS SIKU): 105, 103, 102, 101 -->
+        <g id="node-105" class="table-3d-node is-avail" onclick="openBooking('105', 'VIP Lounge Sofa', 6)" transform="translate(710, 435)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="59" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="0" y="42" width="56" height="15" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="56" height="38" rx="3" />
+          <text class="lbl-num" x="28" y="24" font-size="13" text-anchor="middle">105</text>
         </g>
 
-        <g id="tbl-112" class="tbl-node is-avail" onclick="openModal('112', 'Perimeter VIP Sofa', 6)" transform="translate(60, 890)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-16" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">112</text>
+        <g id="node-103" class="table-3d-node is-avail" onclick="openBooking('103', 'VIP Lounge Sofa', 6)" transform="translate(835, 435)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="59" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="0" y="42" width="56" height="15" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="56" height="38" rx="3" />
+          <text class="lbl-num" x="28" y="24" font-size="13" text-anchor="middle">103</text>
         </g>
 
-        <!-- VIP SOFA SISI KANAN BAWAH: 106, 107, 108 -->
-        <g id="tbl-106" class="tbl-node is-avail" onclick="openModal('106', 'Center VIP Sofa', 6)" transform="translate(440, 630)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="42" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">106</text>
+        <g id="node-102" class="table-3d-node is-avail" onclick="openBooking('102', 'VIP Lounge Sofa', 6)" transform="translate(960, 435)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="59" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="0" y="42" width="56" height="15" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="56" height="38" rx="3" />
+          <text class="lbl-num" x="28" y="24" font-size="13" text-anchor="middle">102</text>
         </g>
 
-        <g id="tbl-107" class="tbl-node is-avail" onclick="openModal('107', 'Center VIP Sofa', 6)" transform="translate(440, 750)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="42" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">107</text>
+        <!-- MEPET GARIS SISI KANAN -->
+        <g id="node-101" class="table-3d-node is-avail" onclick="openBooking('101', 'Prime VIP Sofa', 6)" transform="translate(1085, 435)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="59" y="4" width="12" height="32" rx="3" />
+          <rect class="sofa-cushion" x="0" y="42" width="56" height="15" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="56" height="38" rx="3" />
+          <text class="lbl-num" x="28" y="24" font-size="13" text-anchor="middle">101</text>
         </g>
 
-        <g id="tbl-108" class="tbl-node is-avail" onclick="openModal('108', 'Center VIP Sofa', 6)" transform="translate(440, 870)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="42" y="0" width="12" height="52" rx="2" />
-          <rect class="t-chair" x="4" y="-12" width="28" height="10" rx="2" />
-          <rect class="t-chair" x="4" y="54" width="28" height="10" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="36" height="52" rx="3" />
-          <text x="18" y="31" font-size="13" text-anchor="middle">108</text>
+        <!-- 5. SOFA VIP SISI KIRI (MEPET DINDING KIRI): 116, 115, 113, 112 -->
+        <g id="node-116" class="table-3d-node is-avail" onclick="openBooking('116', 'Perimeter VIP Sofa', 6)" transform="translate(56, 450)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-16" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="2" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="2" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">116</text>
         </g>
 
-        <!-- VIP SOFA SISI BAWAH: 111, 110, 109 -->
-        <g id="tbl-111" class="tbl-node is-avail" onclick="openModal('111', 'Frontline VIP Sofa', 6)" transform="translate(115, 1005)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="0" y="40" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="36" rx="3" />
-          <text x="26" y="23" font-size="13" text-anchor="middle">111</text>
+        <g id="node-115" class="table-3d-node is-avail" onclick="openBooking('115', 'Perimeter VIP Sofa', 6)" transform="translate(56, 600)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-16" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="2" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="2" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">115</text>
         </g>
 
-        <g id="tbl-110" class="tbl-node is-avail" onclick="openModal('110', 'Frontline VIP Sofa', 6)" transform="translate(245, 1005)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="0" y="40" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="36" rx="3" />
-          <text x="26" y="23" font-size="13" text-anchor="middle">110</text>
+        <g id="node-113" class="table-3d-node is-avail" onclick="openBooking('113', 'Perimeter VIP Sofa', 6)" transform="translate(56, 750)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-16" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="2" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="2" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">113</text>
         </g>
 
-        <g id="tbl-109" class="tbl-node is-avail" onclick="openModal('109', 'Frontline VIP Sofa', 6)" transform="translate(375, 1005)" filter="url(#shadowDepth)">
-          <rect class="t-chair" x="-14" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="54" y="4" width="12" height="30" rx="2" />
-          <rect class="t-chair" x="0" y="40" width="52" height="12" rx="2" />
-          <rect class="t-desk" x="0" y="0" width="52" height="36" rx="3" />
-          <text x="26" y="23" font-size="13" text-anchor="middle">109</text>
+        <g id="node-112" class="table-3d-node is-avail" onclick="openBooking('112', 'Perimeter VIP Sofa', 6)" transform="translate(56, 890)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-16" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="2" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="2" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">112</text>
         </g>
 
-        <!-- STANDING COCKTAIL AREA TENGAH: 130 s/d 155 -->
-        <g id="tbl-130" class="tbl-node is-avail" onclick="openModal('130', 'Cocktail Table', 4)" transform="translate(180, 480)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">130</text></g>
-        <g id="tbl-131" class="tbl-node is-avail" onclick="openModal('131', 'Cocktail Table', 4)" transform="translate(265, 460)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">131</text></g>
-        <g id="tbl-132" class="tbl-node is-avail" onclick="openModal('132', 'Cocktail Table', 4)" transform="translate(350, 500)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">132</text></g>
-        
-        <g id="tbl-133" class="tbl-node is-avail" onclick="openModal('133', 'Cocktail Table', 4)" transform="translate(260, 545)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">133</text></g>
-        <g id="tbl-135" class="tbl-node is-avail" onclick="openModal('135', 'Cocktail Table', 4)" transform="translate(400, 580)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">135</text></g>
+        <!-- 6. SOFA VIP SISI KANAN BAWAH: 106, 107, 108 -->
+        <g id="node-106" class="table-3d-node is-avail" onclick="openBooking('106', 'Center VIP Sofa', 6)" transform="translate(440, 630)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="40" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="4" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="4" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">106</text>
+        </g>
 
-        <g id="tbl-138" class="tbl-node is-avail" onclick="openModal('138', 'Cocktail Table', 4)" transform="translate(175, 605)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">138</text></g>
-        <g id="tbl-137" class="tbl-node is-avail" onclick="openModal('137', 'Cocktail Table', 4)" transform="translate(235, 645)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">137</text></g>
-        <g id="tbl-136" class="tbl-node is-avail" onclick="openModal('136', 'Cocktail Table', 4)" transform="translate(325, 635)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">136</text></g>
+        <g id="node-107" class="table-3d-node is-avail" onclick="openBooking('107', 'Center VIP Sofa', 6)" transform="translate(440, 750)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="40" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="4" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="4" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">107</text>
+        </g>
 
-        <g id="tbl-139" class="tbl-node is-avail" onclick="openModal('139', 'Cocktail Table', 4)" transform="translate(165, 730)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">139</text></g>
-        <g id="tbl-150" class="tbl-node is-avail" onclick="openModal('150', 'Cocktail Table', 4)" transform="translate(265, 740)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">150</text></g>
-        <g id="tbl-151" class="tbl-node is-avail" onclick="openModal('151', 'Cocktail Table', 4)" transform="translate(365, 715)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">151</text></g>
+        <g id="node-108" class="table-3d-node is-avail" onclick="openBooking('108', 'Center VIP Sofa', 6)" transform="translate(440, 870)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="40" y="0" width="14" height="52" rx="3" />
+          <rect class="sofa-cushion" x="4" y="-14" width="30" height="12" rx="3" />
+          <rect class="sofa-cushion" x="4" y="54" width="30" height="12" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="36" height="52" rx="3" />
+          <text class="lbl-num" x="18" y="31" font-size="13" text-anchor="middle">108</text>
+        </g>
 
-        <g id="tbl-155" class="tbl-node is-avail" onclick="openModal('155', 'Cocktail Table', 4)" transform="translate(170, 835)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">155</text></g>
-        <g id="tbl-153" class="tbl-node is-avail" onclick="openModal('153', 'Cocktail Table', 4)" transform="translate(265, 845)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">153</text></g>
-        <g id="tbl-152" class="tbl-node is-avail" onclick="openModal('152', 'Cocktail Table', 4)" transform="translate(365, 825)"><circle class="t-chair" cx="0" cy="0" r="18" /><circle class="t-desk" cx="0" cy="0" r="12" /><text x="0" y="4" font-size="10" text-anchor="middle">152</text></g>
+        <!-- 7. SOFA VIP SISI BAWAH (MEPET DINDING BAWAH): 111, 110, 109 -->
+        <g id="node-111" class="table-3d-node is-avail" onclick="openBooking('111', 'Frontline VIP Sofa', 6)" transform="translate(115, 1030)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="0" y="38" width="52" height="14" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="13" text-anchor="middle">111</text>
+        </g>
+
+        <g id="node-110" class="table-3d-node is-avail" onclick="openBooking('110', 'Frontline VIP Sofa', 6)" transform="translate(245, 1030)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="0" y="38" width="52" height="14" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="13" text-anchor="middle">110</text>
+        </g>
+
+        <g id="node-109" class="table-3d-node is-avail" onclick="openBooking('109', 'Frontline VIP Sofa', 6)" transform="translate(375, 1030)" filter="url(#shadow3D)">
+          <rect class="sofa-cushion" x="-15" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="55" y="4" width="12" height="30" rx="3" />
+          <rect class="sofa-cushion" x="0" y="38" width="52" height="14" rx="3" />
+          <rect class="sofa-table" x="0" y="0" width="52" height="34" rx="3" />
+          <text class="lbl-num" x="26" y="22" font-size="13" text-anchor="middle">109</text>
+        </g>
+
+        <!-- 8. COCKTAIL HIGH TABLE AREA TENGAH (BERBENTUK KAIN DRAPED 3D ASLI): 130 s/d 155 -->
+        <g id="node-130" class="table-3d-node is-avail" onclick="openBooking('130', 'Cocktail Table', 4)" transform="translate(180, 480)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">130</text></g>
+        <g id="node-131" class="table-3d-node is-avail" onclick="openBooking('131', 'Cocktail Table', 4)" transform="translate(265, 460)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">131</text></g>
+        <g id="node-132" class="table-3d-node is-avail" onclick="openBooking('132', 'Cocktail Table', 4)" transform="translate(350, 500)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">132</text></g>
+
+        <g id="node-133" class="table-3d-node is-avail" onclick="openBooking('133', 'Cocktail Table', 4)" transform="translate(260, 545)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">133</text></g>
+        <g id="node-135" class="table-3d-node is-avail" onclick="openBooking('135', 'Cocktail Table', 4)" transform="translate(400, 580)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">135</text></g>
+
+        <g id="node-138" class="table-3d-node is-avail" onclick="openBooking('138', 'Cocktail Table', 4)" transform="translate(175, 605)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">138</text></g>
+        <g id="node-137" class="table-3d-node is-avail" onclick="openBooking('137', 'Cocktail Table', 4)" transform="translate(235, 645)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">137</text></g>
+        <g id="node-136" class="table-3d-node is-avail" onclick="openBooking('136', 'Cocktail Table', 4)" transform="translate(325, 635)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">136</text></g>
+
+        <g id="node-139" class="table-3d-node is-avail" onclick="openBooking('139', 'Cocktail Table', 4)" transform="translate(165, 730)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">139</text></g>
+        <g id="node-150" class="table-3d-node is-avail" onclick="openBooking('150', 'Cocktail Table', 4)" transform="translate(265, 740)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">150</text></g>
+        <g id="node-151" class="table-3d-node is-avail" onclick="openBooking('151', 'Cocktail Table', 4)" transform="translate(365, 715)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">151</text></g>
+
+        <g id="node-155" class="table-3d-node is-avail" onclick="openBooking('155', 'Cocktail Table', 4)" transform="translate(170, 835)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">155</text></g>
+        <g id="node-153" class="table-3d-node is-avail" onclick="openBooking('153', 'Cocktail Table', 4)" transform="translate(265, 845)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">153</text></g>
+        <g id="node-152" class="table-3d-node is-avail" onclick="openBooking('152', 'Cocktail Table', 4)" transform="translate(365, 825)" filter="url(#shadow3D)"><polygon class="cocktail-cloth" points="-15,-5 -20,20 20,20 15,-5" /><circle class="cocktail-rim" cx="0" cy="-6" r="16" /><text class="lbl-num" x="0" y="-1" font-size="10" text-anchor="middle">152</text></g>
       </svg>
     </div>
-  </div>
+  </main>
 
-  <!-- POPUP FORM RESERVASI / BOOKING & DP MANUAL -->
-  <div id="bookingModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3><i class="fa-solid fa-chair" style="color: var(--gold-bright);"></i> Reservasi <span id="lblTableNum">#101</span></h3>
-        <button class="btn-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+  <!-- MODAL FORM POPUP RESERVASI & DP RUPIAH -->
+  <div id="bookingModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-chair" style="color: var(--gold-light);"></i> Reservasi <span id="modalTitle">#101</span></h3>
+        <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="modal-content">
-        <div class="form-item">
+      <div class="modal-body">
+        <div class="form-row">
           <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
-          <input type="text" id="inName" class="input-box" placeholder="Contoh: Jessica Alexandra">
+          <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="form-item">
-            <label><i class="fa-brands fa-whatsapp"></i> No. WA / HP *</label>
-            <input type="tel" id="inPhone" class="input-box" placeholder="0812-xxxx-xxxx">
+          <div class="form-row">
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
-          <div class="form-item">
+          <div class="form-row">
             <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
-            <input type="number" id="inPax" class="input-box" value="6" min="1">
+            <input type="number" id="guestPax" class="inp-field" value="6" min="1">
           </div>
         </div>
 
-        <!-- KOLOM INPUT MANUAL DP RUPIAH -->
-        <div class="form-item">
+        <!-- INPUT NOMINAL DP RUPIAH SECARA MANUAL -->
+        <div class="form-row">
           <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Manual) *</label>
-          <div class="currency-wrap">
+          <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="inDP" class="input-box" placeholder="Contoh: 500.000" onkeyup="maskCurrency(this)">
+            <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
           </div>
         </div>
 
-        <div class="form-item">
+        <div class="form-row">
           <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
-          <select id="inTime" class="input-box">
+          <select id="guestTime" class="inp-field">
             <option value="20:00 WITA">20:00 WITA (Gate Opening)</option>
             <option value="21:00 WITA" selected>21:00 WITA (Main DJ Set)</option>
             <option value="22:00 WITA">22:00 WITA (Midnight Bash)</option>
           </select>
         </div>
 
-        <div class="form-item">
+        <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
-          <input type="text" id="inNotes" class="input-box" placeholder="Cth: Request bucket ice, fruit platter...">
+          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice & glasses...">
         </div>
       </div>
 
-      <div class="modal-actions">
-        <button id="btnCancelBook" class="btn-delete-bk" onclick="deleteCurrentBook()" style="display:none;">
+      <div class="modal-footer">
+        <button id="btnRemoveBooking" class="btn-del" onclick="deleteBooking()" style="display: none;">
           <i class="fa-solid fa-trash"></i> Hapus Reservasi
         </button>
-        <button class="btn-delete-bk" style="background:#334155; color:#cbd5e1;" onclick="closeModal()">Tutup</button>
-        <button class="btn-confirm-bk" onclick="saveCurrentBook()">
+        <button class="btn-del" style="background:#334155; color:#cbd5e1;" onclick="closeBookingModal()">Tutup</button>
+        <button class="btn-save" onclick="saveBooking()">
           <i class="fa-solid fa-check"></i> Simpan (Ubah ke Merah)
         </button>
       </div>
@@ -864,101 +914,91 @@
     const STORAGE_KEY = 'infinity_halloween_2026_bookings';
     let bookings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     let currentTable = null;
-
-    let rotX = 24;
-    let currentScale = 0.95;
+    let zoomLevel = 1.0;
 
     window.addEventListener('DOMContentLoaded', () => {
-      refreshVisuals();
-      recalcTotals();
-      initTouchGestures();
+      refreshMapNodes();
+      updateMetrics();
+      initGestures();
     });
 
-    function showLogoFallback() {
-      const img = document.getElementById('mainLogo');
-      const fallback = document.getElementById('fallbackLogo');
-      if (img) img.style.display = 'none';
-      if (fallback) fallback.style.display = 'flex';
-    }
+    function openBooking(tableId, tableType, defaultPax) {
+      currentTable = tableId;
+      document.getElementById('modalTitle').innerText = '#' + tableId + ' (' + tableType + ')';
 
-    // Modal Handlers
-    function openModal(num, label, defPax) {
-      currentTable = num;
-      document.getElementById('lblTableNum').innerText = '#' + num + ' (' + label + ')';
-      
-      const data = bookings[num];
-      const btnDel = document.getElementById('btnCancelBook');
+      const data = bookings[tableId];
+      const btnDel = document.getElementById('btnRemoveBooking');
 
       if (data) {
-        document.getElementById('inName').value = data.name || '';
-        document.getElementById('inPhone').value = data.phone || '';
-        document.getElementById('inPax').value = data.pax || defPax;
-        document.getElementById('inDP').value = data.dp ? parseInt(data.dp, 10).toLocaleString('id-ID') : '';
-        document.getElementById('inTime').value = data.time || '21:00 WITA';
-        document.getElementById('inNotes').value = data.notes || '';
+        document.getElementById('guestName').value = data.name || '';
+        document.getElementById('guestPhone').value = data.phone || '';
+        document.getElementById('guestPax').value = data.pax || defaultPax;
+        document.getElementById('guestDP').value = data.dp ? parseInt(data.dp, 10).toLocaleString('id-ID') : '';
+        document.getElementById('guestTime').value = data.time || '21:00 WITA';
+        document.getElementById('guestNotes').value = data.notes || '';
         btnDel.style.display = 'inline-flex';
       } else {
-        document.getElementById('inName').value = '';
-        document.getElementById('inPhone').value = '';
-        document.getElementById('inPax').value = defPax;
-        document.getElementById('inDP').value = '';
-        document.getElementById('inTime').value = '21:00 WITA';
-        document.getElementById('inNotes').value = '';
+        document.getElementById('guestName').value = '';
+        document.getElementById('guestPhone').value = '';
+        document.getElementById('guestPax').value = defaultPax;
+        document.getElementById('guestDP').value = '';
+        document.getElementById('guestTime').value = '21:00 WITA';
+        document.getElementById('guestNotes').value = '';
         btnDel.style.display = 'none';
       }
 
       document.getElementById('bookingModal').classList.add('open');
     }
 
-    function closeModal() {
+    function closeBookingModal() {
       document.getElementById('bookingModal').classList.remove('open');
       currentTable = null;
     }
 
-    function maskCurrency(el) {
+    function formatCurrencyInput(el) {
       let val = el.value.replace(/[^0-9]/g, '');
       el.value = val ? parseInt(val, 10).toLocaleString('id-ID') : '';
     }
 
-    function saveCurrentBook() {
-      const name = document.getElementById('inName').value.trim();
-      const phone = document.getElementById('inPhone').value.trim();
-      const rawDP = document.getElementById('inDP').value.replace(/[^0-9]/g, '');
+    function saveBooking() {
+      const name = document.getElementById('guestName').value.trim();
+      const phone = document.getElementById('guestPhone').value.trim();
+      const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
 
       if (!name) {
-        alert('Silakan masukkan nama pemesan tamu.');
+        alert('Silakan masukkan nama tamu pemesan.');
         return;
       }
 
       bookings[currentTable] = {
         name: name,
         phone: phone,
-        pax: document.getElementById('inPax').value,
+        pax: document.getElementById('guestPax').value,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
-        time: document.getElementById('inTime').value,
-        notes: document.getElementById('inNotes').value,
+        time: document.getElementById('guestTime').value,
+        notes: document.getElementById('guestNotes').value,
         timestamp: new Date().toISOString()
       };
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-      refreshVisuals();
-      recalcTotals();
-      closeModal();
+      refreshMapNodes();
+      updateMetrics();
+      closeBookingModal();
     }
 
-    function deleteCurrentBook() {
+    function deleteBooking() {
       if (confirm('Batalkan reservasi meja #' + currentTable + '? Meja akan kembali berwarna normal (tersedia).')) {
         delete bookings[currentTable];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-        refreshVisuals();
-        recalcTotals();
-        closeModal();
+        refreshMapNodes();
+        updateMetrics();
+        closeBookingModal();
       }
     }
 
-    function refreshVisuals() {
-      document.querySelectorAll('.tbl-node').forEach(node => {
-        const id = node.id.replace('tbl-', '');
+    function refreshMapNodes() {
+      document.querySelectorAll('.table-3d-node').forEach(node => {
+        const id = node.id.replace('node-', '');
         if (bookings[id]) {
           node.classList.remove('is-avail');
           node.classList.add('is-booked');
@@ -969,59 +1009,53 @@
       });
     }
 
-    function recalcTotals() {
+    function updateMetrics() {
       const keys = Object.keys(bookings);
-      document.getElementById('txtBooked').innerText = keys.length;
+      document.getElementById('statBookedCount').innerText = keys.length;
       let total = 0;
       keys.forEach(k => {
         total += (bookings[k].dp || 0);
       });
-      document.getElementById('txtTotalDP').innerText = 'Rp ' + total.toLocaleString('id-ID');
+      document.getElementById('statDPTotal').innerText = 'Rp ' + total.toLocaleString('id-ID');
     }
 
-    function downloadCSVReport() {
+    function exportReservationsCSV() {
       const keys = Object.keys(bookings);
       if (keys.length === 0) {
-        alert('Belum ada data pemesanan yang tersimpan.');
+        alert('Belum ada data reservasi yang terisi.');
         return;
       }
-      let csv = 'Nomor Meja,Nama Tamu,WhatsApp,Pax,Nominal DP (IDR),Jam Tiba,Catatan\n';
+
+      let csv = 'Nomor Meja,Nama Pemesan,WhatsApp,Pax,Nominal DP (IDR),Jam Tiba,Catatan\n';
       keys.forEach(k => {
         const b = bookings[k];
         csv += `"${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.notes || ''}"\n`;
       });
+
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'Laporan_Reservasi_Infinity_Halloween_2026.csv';
+      a.download = 'Reservasi_Infinity_Halloween_2026.csv';
       a.click();
     }
 
-    // 3D Controls & Gestures
-    function adjustPerspective(deg) {
-      rotX = Math.max(0, Math.min(50, rotX + deg));
-      updateSceneTransform();
+    // Zoom & Pan untuk Android / iOS
+    function zoomMap(delta) {
+      zoomLevel = Math.max(0.6, Math.min(2.0, zoomLevel + delta));
+      applyTransform();
     }
 
-    function scaleScene(delta) {
-      currentScale = Math.max(0.6, Math.min(1.8, currentScale + delta));
-      updateSceneTransform();
+    function resetZoom() {
+      zoomLevel = 1.0;
+      applyTransform();
     }
 
-    function resetScene() {
-      rotX = 24;
-      currentScale = 0.95;
-      updateSceneTransform();
+    function applyTransform() {
+      document.getElementById('mapFrame').style.transform = `scale(${zoomLevel})`;
     }
 
-    function updateSceneTransform() {
-      const scene = document.getElementById('sceneContainer');
-      scene.style.transform = `rotateX(${rotX}deg) scale(${currentScale})`;
-    }
-
-    // Mobile Pinch & Drag handler
-    function initTouchGestures() {
-      const area = document.getElementById('viewportTouchArea');
+    function initGestures() {
+      const area = document.getElementById('mapTouchArea');
       let startDist = 0;
 
       area.addEventListener('touchstart', (e) => {
@@ -1041,8 +1075,8 @@
           );
           if (startDist > 0) {
             const diff = dist - startDist;
-            if (Math.abs(diff) > 10) {
-              scaleScene(diff > 0 ? 0.03 : -0.03);
+            if (Math.abs(diff) > 12) {
+              zoomMap(diff > 0 ? 0.03 : -0.03);
               startDist = dist;
             }
           }
