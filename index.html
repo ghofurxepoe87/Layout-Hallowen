@@ -14,7 +14,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- HTML2Canvas untuk Download Gambar JPG -->
+  <!-- Supabase JS Client & HTML2Canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -567,7 +568,7 @@
 
       <div class="hdr-metrics">
         <!-- COUNTER SOFA INVENTORY -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian Sofa">
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian Sofa">
           <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
           <div class="txt-wrap">
             <span>Sofa VIP</span>
@@ -576,7 +577,7 @@
         </div>
 
         <!-- COUNTER COCKTAIL INVENTORY -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian Cocktail">
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian Cocktail">
           <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
           <div class="txt-wrap">
             <span>Cocktail</span>
@@ -602,22 +603,19 @@
           </div>
         </div>
 
-        <!-- BUTTON DASHBOARD REPORT -->
+        <!-- BUTTONS -->
         <button class="btn-action btn-dashboard" onclick="openReportModal()">
           <i class="fa-solid fa-chart-pie"></i> Report
         </button>
 
-        <!-- INPUT FDC -->
         <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
           <i class="fa-solid fa-user-plus"></i> + FDC
         </button>
 
-        <!-- DOWNLOAD JPG -->
         <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
           <i class="fa-solid fa-file-image"></i> Share JPG
         </button>
 
-        <!-- EXPORT CSV -->
         <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
           <i class="fa-solid fa-file-csv"></i> CSV
         </button>
@@ -773,7 +771,7 @@
         </button>
         <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeBookingModal()">Tutup</button>
         <button class="btn-modal-save" onclick="saveBooking()">
-          <i class="fa-solid fa-check"></i> Simpan (Merah)
+          <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
         </button>
       </div>
     </div>
@@ -933,11 +931,14 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'infinity_halloween_2026_bookings';
-    const FDC_STORAGE_KEY = 'infinity_halloween_2026_fdc_bookings';
+    // ================= KREDENSIAL SUPABASE REALTIME CLOUD =================
+    const SUPABASE_URL = 'https://hupvhnvztvzqbdhuukpt.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1cHZobnZ6dHZ6cWJkaHV1a3B0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDY4NTIsImV4cCI6MjEwNTgyMjg1Mn0.E-XiAzngGIe_KAe2Znk201Jy55zwLUMOwL4cHhxQCPQ';
+
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const FDC_DEFAULT_PRICE = 125000;
 
-    // DEFINISI DAFTAR SOFA (21 UNIT) & COCKTAIL (20 UNIT)
+    // DAFTAR SOFA (21 UNIT) & COCKTAIL (20 UNIT)
     const SOFA_IDS = [
       '101', '102', '103', '105', 
       '106', '107', '108', 
@@ -945,16 +946,16 @@
       '112', '113', '115', '116', 
       '117', '118', '119', 
       '120', '121', '122', '123'
-    ]; // 21 Sofa / Dining Lounge
+    ];
 
     const COCKTAIL_IDS = [
       '124', '125', '126', '127', '128', '129', 
       '130', '131', '132', '133', '135', '136', '137', '138', '139', 
       '150', '151', '152', '153', '155'
-    ]; // 20 Cocktail Tables
+    ];
 
-    let bookings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    let fdcBookings = JSON.parse(localStorage.getItem(FDC_STORAGE_KEY)) || [];
+    let bookings = {};
+    let fdcBookings = [];
     let currentTable = null;
     let currentCategory = 'sofa';
     let zoomLevel = 1.0;
@@ -987,11 +988,63 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      refreshMapNodes();
-      updateMetrics();
+    window.addEventListener('DOMContentLoaded', async () => {
+      await fetchAllCloudData();
       initGestures();
+      subscribeRealtime();
     });
+
+    // ================= FUNGSI CLOUD SUPABASE =================
+    async function fetchAllCloudData() {
+      try {
+        // Ambil Data Meja
+        const { data: tableData, error: tErr } = await _supabase.from('table_bookings').select('*');
+        if (!tErr && tableData) {
+          bookings = {};
+          tableData.forEach(row => {
+            bookings[row.table_id] = {
+              name: row.guest_name,
+              phone: row.guest_phone,
+              category: row.category,
+              pax: row.pax,
+              dp: Number(row.dp),
+              time: row.arrival_time,
+              notes: row.notes
+            };
+          });
+        }
+
+        // Ambil Data FDC
+        const { data: fdcData, error: fErr } = await _supabase.from('fdc_bookings').select('*');
+        if (!fErr && fdcData) {
+          fdcBookings = fdcData.map(row => ({
+            id: row.id,
+            name: row.guest_name,
+            phone: row.guest_phone,
+            pax: row.pax,
+            amount: Number(row.amount),
+            notes: row.notes
+          }));
+        }
+
+        refreshMapNodes();
+        updateMetrics();
+      } catch (err) {
+        console.error('Koneksi Supabase gagal:', err);
+      }
+    }
+
+    function subscribeRealtime() {
+      _supabase
+        .channel('schema-db-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'table_bookings' }, () => {
+          fetchAllCloudData();
+        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'fdc_bookings' }, () => {
+          fetchAllCloudData();
+        })
+        .subscribe();
+    }
 
     // ================= MODAL MEJA =================
     function openBooking(tableId, tableType, defaultPax, category) {
@@ -1028,7 +1081,7 @@
       currentTable = null;
     }
 
-    function saveBooking() {
+    async function saveBooking() {
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
@@ -1038,30 +1091,36 @@
         return;
       }
 
-      bookings[currentTable] = {
-        name: name,
-        phone: phone,
+      const payload = {
+        table_id: currentTable,
+        guest_name: name,
+        guest_phone: phone,
         category: currentCategory,
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
-        time: document.getElementById('guestTime').value,
-        notes: document.getElementById('guestNotes').value,
-        timestamp: new Date().toISOString()
+        arrival_time: document.getElementById('guestTime').value,
+        notes: document.getElementById('guestNotes').value
       };
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-      refreshMapNodes();
-      updateMetrics();
+      const { error } = await _supabase.from('table_bookings').upsert(payload);
+      if (error) {
+        alert('Gagal menyimpan ke database Supabase: ' + error.message);
+        return;
+      }
+
       closeBookingModal();
+      await fetchAllCloudData();
     }
 
-    function deleteBooking() {
+    async function deleteBooking() {
       if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali berwarna normal (tersedia).')) {
-        delete bookings[currentTable];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-        refreshMapNodes();
-        updateMetrics();
-        closeBookingModal();
+        const { error } = await _supabase.from('table_bookings').delete().eq('table_id', currentTable);
+        if (!error) {
+          closeBookingModal();
+          await fetchAllCloudData();
+        } else {
+          alert('Gagal menghapus data: ' + error.message);
+        }
       }
     }
 
@@ -1084,7 +1143,7 @@
       document.getElementById('fdcAmount').value = (pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
     }
 
-    function saveFDCBooking() {
+    async function saveFDCBooking() {
       const name = document.getElementById('fdcName').value.trim();
       const phone = document.getElementById('fdcPhone').value.trim();
       const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
@@ -1095,20 +1154,24 @@
         return;
       }
 
-      fdcBookings.push({
-        id: 'FDC-' + Date.now().toString().slice(-5),
-        name: name,
-        phone: phone,
+      const payload = {
+        id: 'FDC-' + Date.now().toString().slice(-6),
+        guest_name: name,
+        guest_phone: phone,
         pax: pax,
         amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
-        notes: document.getElementById('fdcNotes').value,
-        timestamp: new Date().toISOString()
-      });
+        notes: document.getElementById('fdcNotes').value
+      };
 
-      localStorage.setItem(FDC_STORAGE_KEY, JSON.stringify(fdcBookings));
-      updateMetrics();
+      const { error } = await _supabase.from('fdc_bookings').insert([payload]);
+      if (error) {
+        alert('Gagal menyimpan tiket FDC ke Supabase: ' + error.message);
+        return;
+      }
+
       closeFDCModal();
-      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) - Rp ${(rawAmt ? parseInt(rawAmt, 10) : pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID')}`);
+      await fetchAllCloudData();
+      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) ke Database Cloud!`);
     }
 
     function openFDCListModal() {
@@ -1117,7 +1180,7 @@
         container.innerHTML = '<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
       } else {
         let html = '';
-        fdcBookings.forEach((item, index) => {
+        fdcBookings.forEach((item) => {
           html += `
             <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
               <div>
@@ -1126,7 +1189,7 @@
                 <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong></div>
                 ${item.notes ? `<div style="font-size:0.7rem; color:#cbd5e1; margin-top:2px; font-style:italic;">"${item.notes}"</div>` : ''}
               </div>
-              <button onclick="deleteFDC(${index})" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+              <button onclick="deleteFDC('${item.id}')" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
                 <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
               </button>
             </div>
@@ -1141,12 +1204,15 @@
       document.getElementById('fdcListModal').classList.remove('open');
     }
 
-    function deleteFDC(index) {
-      if (confirm('Hapus pesanan tiket FDC ini?')) {
-        fdcBookings.splice(index, 1);
-        localStorage.setItem(FDC_STORAGE_KEY, JSON.stringify(fdcBookings));
-        updateMetrics();
-        openFDCListModal();
+    async function deleteFDC(id) {
+      if (confirm('Hapus pesanan tiket FDC ini dari database?')) {
+        const { error } = await _supabase.from('fdc_bookings').delete().eq('id', id);
+        if (!error) {
+          await fetchAllCloudData();
+          openFDCListModal();
+        } else {
+          alert('Gagal menghapus: ' + error.message);
+        }
       }
     }
 
@@ -1154,12 +1220,10 @@
     function openReportModal() {
       const bookedKeys = Object.keys(bookings);
 
-      // Hitung Sofa
       let sofaBooked = 0;
       let sofaRev = 0;
       let sofaPax = 0;
 
-      // Hitung Cocktail
       let cocktailBooked = 0;
       let cocktailRev = 0;
       let cocktailPax = 0;
@@ -1190,7 +1254,6 @@
       const sofaOccupancy = Math.round((sofaBooked / totalSofa) * 100);
       const cocktailOccupancy = Math.round((cocktailBooked / totalCocktail) * 100);
 
-      // Hitung FDC
       let fdcPax = 0;
       let fdcTotalRev = 0;
       fdcBookings.forEach(item => {
@@ -1203,30 +1266,24 @@
       const seatingPax = sofaPax + cocktailPax;
       const totalCrowd = seatingPax + fdcPax;
 
-      // Render ke DOM Report
       document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
       
-      // Sofa
       document.getElementById('repSofaBooked').innerText = sofaBooked;
       document.getElementById('repSofaLeft').innerText = sofaLeft;
       document.getElementById('repSofaRev').innerText = 'Rp ' + sofaRev.toLocaleString('id-ID');
       document.getElementById('repSofaBar').style.width = sofaOccupancy + '%';
 
-      // Cocktail
       document.getElementById('repCocktailBooked').innerText = cocktailBooked;
       document.getElementById('repCocktailLeft').innerText = cocktailLeft;
       document.getElementById('repCocktailRev').innerText = 'Rp ' + cocktailRev.toLocaleString('id-ID');
       document.getElementById('repCocktailBar').style.width = cocktailOccupancy + '%';
 
-      // Detail Table
       document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
       document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${sofaBooked + cocktailBooked} unit terisi (${sofaBooked} Sofa + ${cocktailBooked} Cocktail)`;
 
-      // FDC
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
       document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
 
-      // Crowd
       document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
       document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${sofaPax} Sofa + ${cocktailPax} Cocktail) + ${fdcPax} Standing FDC`;
 
