@@ -26,6 +26,7 @@
       --red-glow: rgba(239, 68, 68, 0.95);
       --card-bg: rgba(18, 24, 38, 0.98);
       --purple-fdc: #a855f7;
+      --emerald-accent: #10b981;
     }
 
     * {
@@ -47,7 +48,7 @@
       overflow-x: hidden;
     }
 
-    /* HEADER KHUSUS MOBILE & DESKTOP */
+    /* HEADER */
     header {
       background: rgba(13, 19, 31, 0.96);
       backdrop-filter: blur(12px);
@@ -141,6 +142,12 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .stat-pill:hover {
+      background: rgba(51, 65, 85, 0.95);
     }
 
     .stat-pill i { font-size: 0.85rem; }
@@ -161,6 +168,12 @@
       gap: 5px;
       transition: all 0.2s ease;
       touch-action: manipulation;
+    }
+
+    .btn-dashboard {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);
     }
 
     .btn-fdc {
@@ -320,7 +333,7 @@
       border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
       max-height: 92vh;
       overflow-y: auto;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
@@ -442,7 +455,69 @@
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
-    /* LOADING SPINNER DOWNLOAD JPG */
+    /* DASHBOARD REPORT STYLES */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .dash-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dash-card.hero-card {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(15,23,42,0.95) 100%);
+      border-color: rgba(212,175,55,0.4);
+    }
+
+    .dash-card .card-lbl {
+      font-size: 0.68rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dash-card .card-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #f8fafc;
+      font-family: 'Cinzel', serif;
+    }
+
+    .dash-card .card-sub {
+      font-size: 0.65rem;
+      color: #64748b;
+    }
+
+    .occupancy-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #1e293b;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .occupancy-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8 0%, #ef4444 100%);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* LOADER */
     .loader-overlay {
       position: fixed;
       inset: 0;
@@ -490,45 +565,50 @@
 
       <div class="hdr-metrics">
         <!-- COUNTER TABLE BOOKED -->
-        <div class="stat-pill">
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat Executive Report">
           <i class="fa-solid fa-couch" style="color: var(--gold-primary);"></i>
           <div class="txt-wrap">
-            <span>Table</span>
-            <strong><span id="statBookedCount" style="color: #ef4444;">0</span> / <span id="statTotalCount">36</span> Booked</strong>
+            <span>Table Sold</span>
+            <strong><span id="statBookedCount" style="color: #ef4444;">0</span> / 36</strong>
           </div>
         </div>
 
         <!-- COUNTER FDC STANDING GUESTS -->
-        <div class="stat-pill" onclick="openFDCListModal()" style="cursor: pointer;" title="Klik untuk lihat daftar FDC">
+        <div class="stat-pill" onclick="openFDCListModal()" title="Klik untuk lihat daftar FDC">
           <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
           <div class="txt-wrap">
-            <span>FDC Standing</span>
+            <span>FDC Guests</span>
             <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span> Pax</strong>
           </div>
         </div>
 
-        <!-- TOTAL DP (TABLE + FDC) -->
-        <div class="stat-pill">
-          <i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i>
+        <!-- TOTAL REVENUE -->
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian pendapatan">
+          <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
           <div class="txt-wrap">
-            <span>Total DP / Rev</span>
-            <strong id="statDPTotal" style="color: #34d399;">Rp 0</strong>
+            <span>Total Rev / DP</span>
+            <strong id="statDPTotal" style="color: var(--emerald-accent);">Rp 0</strong>
           </div>
         </div>
 
-        <!-- TOMBOL INPUT FDC TANPA MEJA -->
-        <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
-          <i class="fa-solid fa-user-plus"></i> + Input FDC
+        <!-- EXECUTIVE REPORT DASHBOARD -->
+        <button class="btn-action btn-dashboard" onclick="openReportModal()">
+          <i class="fa-solid fa-chart-pie"></i> Report
         </button>
 
-        <!-- TOMBOL DOWNLOAD JPG UNTUK SHARE KE TAMU -->
+        <!-- INPUT TIKET FDC -->
+        <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
+          <i class="fa-solid fa-user-plus"></i> + FDC
+        </button>
+
+        <!-- DOWNLOAD JPG -->
         <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
-          <i class="fa-solid fa-file-image"></i> Download JPG
+          <i class="fa-solid fa-file-image"></i> Share JPG
         </button>
 
         <!-- EXPORT CSV -->
         <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
-          <i class="fa-solid fa-file-csv"></i> Unduh CSV
+          <i class="fa-solid fa-file-csv"></i> CSV
         </button>
       </div>
     </div>
@@ -537,8 +617,8 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> Tersedia</div>
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> Terbooking (Merah)</div>
+      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">36 Tersedia</span></div>
+      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
     </div>
     
     <div class="zoom-group">
@@ -555,7 +635,6 @@
   <!-- VIEWPORT DENAH -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
-      <!-- DETEKSI OTOMATIS BERLAPIS NAMA FILE GAMBAR DI GITHUB -->
       <img id="mainDenahImg" 
            src="LAYOUT HALLOWEN 2026.jpg" 
            alt="Infinity Sky Lounge 3D" 
@@ -687,7 +766,7 @@
     </div>
   </div>
 
-  <!-- MODAL 2: INPUT FDC (FIRST DRINK CHARGE / TANPA MEJA) -->
+  <!-- MODAL 2: INPUT FDC (HARGA DEFAULT RP 125.000) -->
   <div id="fdcModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -696,13 +775,13 @@
       </div>
 
       <div class="modal-body">
-        <div style="background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #e9d5ff;">
-          Khusus tamu standing party tanpa nomor meja. Termasuk voucher First Drink Charge.
+        <div style="background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #e9d5ff;">
+          <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (Free 1st Drink Voucher).
         </div>
 
         <div class="form-row">
           <label><i class="fa-solid fa-user"></i> Nama Tamu *</label>
-          <input type="text" id="fdcName" class="inp-field" placeholder="Nama lengkap pemesan FDC">
+          <input type="text" id="fdcName" class="inp-field" placeholder="Nama pemesan FDC">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
@@ -717,33 +796,99 @@
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total Pembayaran FDC (Manual / Otomatis) *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total Pembayaran FDC (@ Rp 125.000) *</label>
           <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="fdcAmount" class="inp-field" placeholder="Contoh: 150.000" onkeyup="formatCurrencyInput(this)">
+            <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
           </div>
         </div>
 
         <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Keterangan / PIC Penjualan</label>
-          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales by Front Office / Bar Cashier">
+          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales FO / Barium Bar Cashier">
         </div>
       </div>
 
       <div class="modal-footer">
         <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeFDCModal()">Batal</button>
         <button class="btn-modal-save" style="background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);" onclick="saveFDCBooking()">
-          <i class="fa-solid fa-check"></i> Simpan Data FDC
+          <i class="fa-solid fa-check"></i> Simpan Tiket FDC
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: DAFTAR TAMU FDC -->
+  <!-- MODAL 3: EXECUTIVE SALES DASHBOARD & REPORT -->
+  <div id="reportModal" class="modal-backdrop">
+    <div class="modal-container" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 style="color: #fef08a;"><i class="fa-solid fa-chart-line"></i> Event Executive Dashboard</h3>
+        <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="dash-grid">
+          <!-- CARD 1: TOTAL GROSS REVENUE -->
+          <div class="dash-card hero-card">
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Table DP + FDC)</div>
+            <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja & tiket standing party</div>
+          </div>
+
+          <!-- CARD 2: TABLE BREAKDOWN -->
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #ef4444;"></i> Table Reserved</div>
+            <div class="card-val"><span id="repTableBooked" style="color: #ef4444;">0</span> <span style="font-size:0.8rem; color:#94a3b8;">/ 36</span></div>
+            <div class="occupancy-bar-wrap">
+              <div id="repOccupancyBar" class="occupancy-bar"></div>
+            </div>
+            <div class="card-sub" style="margin-top: 4px;"><span id="repOccupancyPercent">0%</span> Occupancy</div>
+          </div>
+
+          <!-- CARD 3: TABLE AVAILABLE -->
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-chair" style="color: #38bdf8;"></i> Table Available</div>
+            <div class="card-val" id="repTableLeft" style="color: #38bdf8;">36</div>
+            <div class="card-sub">Meja tersisa yang belum dipesan</div>
+          </div>
+
+          <!-- CARD 4: REVENUE SOFA/MEJA -->
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-money-check-dollar" style="color: var(--emerald-accent);"></i> Sofa/Table Revenue</div>
+            <div class="card-val" id="repTableRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
+            <div class="card-sub" id="repTablePax">0 Pax tercatat di meja</div>
+          </div>
+
+          <!-- CARD 5: FDC STANDING BREAKDOWN -->
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i> FDC Standing Ticket</div>
+            <div class="card-val" id="repFDCPax" style="font-size: 1rem; color: #d8b4fe;">0 Pax</div>
+            <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC</div>
+          </div>
+
+          <!-- CARD 6: TOTAL CROWD ATTENDEES -->
+          <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.6);">
+            <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Pax</div>
+            <div class="card-sub">Gabungan tamu meja (seating) + tamu standing party FDC</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeReportModal()">Tutup</button>
+        <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+          <i class="fa-solid fa-download"></i> Unduh Laporan Lengkap (CSV)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: DAFTAR TAMU FDC -->
   <div id="fdcListModal" class="modal-backdrop">
     <div class="modal-container" style="max-width: 520px;">
       <div class="modal-header">
-        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-list-check"></i> Rekap Tamu FDC (Standing)</h3>
+        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
         <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -770,13 +915,13 @@
   <script>
     const STORAGE_KEY = 'infinity_halloween_2026_bookings';
     const FDC_STORAGE_KEY = 'infinity_halloween_2026_fdc_bookings';
+    const FDC_DEFAULT_PRICE = 125000; // Harga resmi FDC Rp 125.000 / pax
 
     let bookings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     let fdcBookings = JSON.parse(localStorage.getItem(FDC_STORAGE_KEY)) || [];
     let currentTable = null;
     let zoomLevel = 1.0;
 
-    // DAFTAR FALLBACK GAMBAR JIKA SALAH SATU GAGAL DI LOAD
     const possibleImages = [
       'LAYOUT%20HALLOWEN%202026.jpg',
       'LAYOUT HALLOWEN 2026.jpg',
@@ -794,7 +939,6 @@
       }
     }
 
-    // GANTI GAMBAR DARI GALERI HP / LAPTOP
     function loadLocalImage(e) {
       const file = e.target.files[0];
       if (file) {
@@ -852,14 +996,14 @@
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
 
       if (!name) {
-        alert('Silakan masukkan nama tamu pemesan.');
+        alert('Silakan masukkan nama tamu pemesan meja.');
         return;
       }
 
       bookings[currentTable] = {
         name: name,
         phone: phone,
-        pax: document.getElementById('guestPax').value,
+        pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         time: document.getElementById('guestTime').value,
         notes: document.getElementById('guestNotes').value,
@@ -882,12 +1026,12 @@
       }
     }
 
-    // ================= MODAL FDC (STANDING PARTY) =================
+    // ================= MODAL FDC (@ RP 125.000) =================
     function openFDCBookingModal() {
       document.getElementById('fdcName').value = '';
       document.getElementById('fdcPhone').value = '';
       document.getElementById('fdcPax').value = '1';
-      document.getElementById('fdcAmount').value = '';
+      document.getElementById('fdcAmount').value = (1 * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
       document.getElementById('fdcNotes').value = '';
       document.getElementById('fdcModal').classList.add('open');
     }
@@ -897,13 +1041,8 @@
     }
 
     function calculateFDCAmount() {
-      // Default asumsi harga tiket FDC misalnya 150rb per pax jika diinginkan
       const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
-      const amountField = document.getElementById('fdcAmount');
-      if (!amountField.value || amountField.dataset.autoCalc === "true") {
-        amountField.value = (pax * 150000).toLocaleString('id-ID');
-        amountField.dataset.autoCalc = "true";
-      }
+      document.getElementById('fdcAmount').value = (pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
     }
 
     function saveFDCBooking() {
@@ -913,7 +1052,7 @@
       const rawAmt = document.getElementById('fdcAmount').value.replace(/[^0-9]/g, '');
 
       if (!name) {
-        alert('Silakan masukkan nama tamu pemesan FDC.');
+        alert('Silakan masukkan nama pemesan tiket FDC.');
         return;
       }
 
@@ -922,7 +1061,7 @@
         name: name,
         phone: phone,
         pax: pax,
-        amount: rawAmt ? parseInt(rawAmt, 10) : 0,
+        amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
         notes: document.getElementById('fdcNotes').value,
         timestamp: new Date().toISOString()
       });
@@ -930,25 +1069,25 @@
       localStorage.setItem(FDC_STORAGE_KEY, JSON.stringify(fdcBookings));
       updateMetrics();
       closeFDCModal();
-      alert(`Berhasil menambahkan tiket FDC untuk ${name} (${pax} Pax)!`);
+      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) - Rp ${(rawAmt ? parseInt(rawAmt, 10) : pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID')}`);
     }
 
     function openFDCListModal() {
       const container = document.getElementById('fdcListContent');
       if (fdcBookings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
       } else {
         let html = '';
         fdcBookings.forEach((item, index) => {
           html += `
-            <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <strong style="color:#d8b4fe; font-size:0.85rem;">${item.name}</strong> 
-                <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px;">${item.pax} Pax</span>
-                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">WA: ${item.phone || '-'} | Rp ${(item.amount || 0).toLocaleString('id-ID')}</div>
-                ${item.notes ? `<div style="font-size:0.7rem; color:#cbd5e1; font-style:italic;">"${item.notes}"</div>` : ''}
+                <strong style="color:#d8b4fe; font-size:0.86rem;">${item.name}</strong> 
+                <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong></div>
+                ${item.notes ? `<div style="font-size:0.7rem; color:#cbd5e1; margin-top:2px; font-style:italic;">"${item.notes}"</div>` : ''}
               </div>
-              <button onclick="deleteFDC(${index})" style="background:#7f1d1d; border:none; color:#fca5a5; width:28px; height:28px; border-radius:6px; cursor:pointer;">
+              <button onclick="deleteFDC(${index})" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
                 <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
               </button>
             </div>
@@ -964,7 +1103,7 @@
     }
 
     function deleteFDC(index) {
-      if (confirm('Hapus pesanan FDC ini?')) {
+      if (confirm('Hapus pesanan tiket FDC ini?')) {
         fdcBookings.splice(index, 1);
         localStorage.setItem(FDC_STORAGE_KEY, JSON.stringify(fdcBookings));
         updateMetrics();
@@ -972,7 +1111,50 @@
       }
     }
 
-    // ================= REFRESH STATUS & HITUNG TOTAL =================
+    // ================= MODAL EXECUTIVE REPORT DASHBOARD =================
+    function openReportModal() {
+      const bookedCount = Object.keys(bookings).length;
+      const totalTables = 36;
+      const leftTables = totalTables - bookedCount;
+      const occupancy = Math.round((bookedCount / totalTables) * 100);
+
+      let tableDP = 0;
+      let tablePax = 0;
+      Object.keys(bookings).forEach(k => {
+        tableDP += (bookings[k].dp || 0);
+        tablePax += parseInt(bookings[k].pax || 0, 10);
+      });
+
+      let fdcPax = 0;
+      let fdcTotalRev = 0;
+      fdcBookings.forEach(item => {
+        fdcPax += (item.pax || 0);
+        fdcTotalRev += (item.amount || 0);
+      });
+
+      const grandGross = tableDP + fdcTotalRev;
+      const grandPax = tablePax + fdcPax;
+
+      // Render ke DOM Report
+      document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
+      document.getElementById('repTableBooked').innerText = bookedCount;
+      document.getElementById('repTableLeft').innerText = leftTables;
+      document.getElementById('repOccupancyPercent').innerText = occupancy + '%';
+      document.getElementById('repOccupancyBar').style.width = occupancy + '%';
+      document.getElementById('repTableRev').innerText = 'Rp ' + tableDP.toLocaleString('id-ID');
+      document.getElementById('repTablePax').innerText = `${tablePax} Pax duduk di meja`;
+      document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
+      document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC`;
+      document.getElementById('repTotalPax').innerText = `${grandPax} Total Tamu (${tablePax} Seating + ${fdcPax} Standing)`;
+
+      document.getElementById('reportModal').classList.add('open');
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.remove('open');
+    }
+
+    // ================= REFRESH UI & HITUNGAN =================
     function refreshMapNodes() {
       document.querySelectorAll('.spot').forEach(spot => {
         const id = spot.id.replace('spot-', '');
@@ -986,7 +1168,10 @@
 
     function updateMetrics() {
       const bookedKeys = Object.keys(bookings);
-      document.getElementById('statBookedCount').innerText = bookedKeys.length;
+      const bookedCount = bookedKeys.length;
+      document.getElementById('statBookedCount').innerText = bookedCount;
+      document.getElementById('legendBookedText').innerText = `${bookedCount} Terbooking (Merah)`;
+      document.getElementById('legendAvailText').innerText = `${36 - bookedCount} Tersedia`;
 
       let tableDP = 0;
       bookedKeys.forEach(k => {
@@ -1010,7 +1195,7 @@
       el.value = val ? parseInt(val, 10).toLocaleString('id-ID') : '';
     }
 
-    // ================= FITUR DOWNLOAD JPG (SHARE KE WHATSAPP) =================
+    // ================= DOWNLOAD JPG (HD RESULOTION) =================
     async function downloadLayoutJPG() {
       const loader = document.getElementById('loaderOverlay');
       loader.style.display = 'flex';
@@ -1034,14 +1219,14 @@
         link.click();
       } catch (err) {
         console.error('Gagal membuat JPG:', err);
-        alert('Gagal mengekspor gambar secara otomatis. Anda dapat melakukan Screenshot layar perangkat Anda.');
+        alert('Gagal mengekspor gambar secara otomatis. Anda dapat mengambil Screenshot layar perangkat Anda.');
       } finally {
         mapEl.style.transform = savedTransform;
         loader.style.display = 'none';
       }
     }
 
-    // ================= EKSPOR CSV GABUNGAN (MEJA + FDC) =================
+    // ================= EKSPOR CSV LENGKAP =================
     function exportReservationsCSV() {
       const tableKeys = Object.keys(bookings);
       if (tableKeys.length === 0 && fdcBookings.length === 0) {
@@ -1049,15 +1234,13 @@
         return;
       }
 
-      let csv = 'Tipe,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Pembayaran/DP (IDR),Jam Tiba,Catatan\n';
+      let csv = 'Tipe,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Pembayaran/DP (IDR),Jam Tiba,Catatan Khusus\n';
       
-      // Data Meja
       tableKeys.forEach(k => {
         const b = bookings[k];
         csv += `"TABLE","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.notes || ''}"\n`;
       });
 
-      // Data FDC
       fdcBookings.forEach(f => {
         csv += `"FDC STANDING","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.notes || ''}"\n`;
       });
@@ -1065,11 +1248,11 @@
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `Semua_Reservasi_Infinity_Spooky_Night_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `Report_Reservasi_Infinity_Halloween_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
 
-    // ================= ZOOM & GESTURE TOUCH (ANDROID / IOS) =================
+    // ================= ZOOM & GESTURE TOUCH =================
     function zoomMap(delta) {
       zoomLevel = Math.max(0.6, Math.min(2.2, zoomLevel + delta));
       applyTransform();
