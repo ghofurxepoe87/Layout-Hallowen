@@ -248,16 +248,19 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.85);
       border-radius: 12px;
       overflow: hidden;
-      background: #000;
+      background: #0f172a;
+      min-height: 480px;
     }
 
     .render-3d-img {
       width: 100%;
       height: auto;
       display: block;
+      min-height: 480px;
+      object-fit: contain;
     }
 
-    /* HOTSPOTS */
+    /* HOTSPOTS INTERAKTIF */
     .hotspots-layer {
       position: absolute;
       top: 0;
@@ -291,7 +294,7 @@
       border-radius: 50%;
     }
 
-    /* STATUS TERBOOKING */
+    /* STATUS TERBOOKING -> MERAH MENYALA */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.78) !important;
       border: 2px solid #ff4d4d !important;
@@ -441,7 +444,7 @@
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
-    /* PRINT STYLES UNTUK PDF */
+    /* MODE CETAK / PDF */
     @media print {
       body { background: #fff !important; color: #000 !important; }
       header, .toolbar-bar, .modal-backdrop { display: none !important; }
@@ -505,6 +508,11 @@
     </div>
     
     <div class="zoom-group">
+      <!-- Input Unggah Gambar Darurat (Bisa ganti gambar langsung dari HP) -->
+      <label class="btn-tool-icon" title="Pilih Gambar dari HP" style="cursor: pointer;">
+        <i class="fa-solid fa-image"></i>
+        <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
+      </label>
       <button class="btn-tool-icon" onclick="zoomMap(0.1)"><i class="fa-solid fa-plus"></i></button>
       <button class="btn-tool-icon" onclick="zoomMap(-0.1)"><i class="fa-solid fa-minus"></i></button>
       <button class="btn-tool-icon" onclick="resetZoom()"><i class="fa-solid fa-arrows-rotate"></i></button>
@@ -514,12 +522,12 @@
   <!-- VIEWPORT DENAH -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
-      <!-- DETEKSI NAMA FILE GAMBAR OTOMATIS -->
-      <img id="mainDenahImg" src="LAYOUT HALLOWEN 2026.jpg" alt="Infinity Sky Lounge 3D" class="render-3d-img"
-           onerror="if (!this.tried) { this.tried = 1; this.src='SKY.jpg'; } 
-                    else if (this.tried === 1) { this.tried = 2; this.src='sky.jpg'; } 
-                    else if (this.tried === 2) { this.tried = 3; this.src='layout-3d.jpg'; } 
-                    else if (this.tried === 3) { this.tried = 4; this.src='7477e3f310a34ddfbfcb844963d742ed~tplv-3rqcfx17w1-brand-ai-watermark.png'; }">
+      <!-- DETEKSI NAMA FILE GAMBAR OTOMATIS BERLAPIS -->
+      <img id="mainDenahImg" 
+           src="denah.jpg" 
+           alt="Infinity Sky Lounge 3D" 
+           class="render-3d-img"
+           onerror="handleImgFallback(this)">
 
       <div class="hotspots-layer">
         
@@ -550,7 +558,7 @@
         <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa', 6)"></div>
         <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa', 6)"></div>
 
-        <!-- ================= 3. SOFA VIP KIRI (RAPAT KE DINDING - TIDAK MENUMPUK) ================= -->
+        <!-- ================= 3. SOFA VIP KIRI (RAPAT KE DINDING KIRI - TIDAK MENUMPUK) ================= -->
         <div id="spot-116" class="spot" style="top: 39.5%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa', 6)"></div>
         <div id="spot-115" class="spot" style="top: 52.8%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa', 6)"></div>
         <div id="spot-113" class="spot" style="top: 66.0%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa', 6)"></div>
@@ -656,6 +664,36 @@
     let bookings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     let currentTable = null;
     let zoomLevel = 1.0;
+
+    // Daftar nama gambar cadangan yang dicoba berurutan jika file pertama gagal
+    const fallbackImages = [
+      'LAYOUT%20HALLOWEN%202026.jpg',
+      'LAYOUT HALLOWEN 2026.jpg',
+      'SKY.jpg',
+      'sky.jpg',
+      'layout-3d.jpg',
+      '7477e3f310a34ddfbfcb844963d742ed~tplv-3rqcfx17w1-brand-ai-watermark.png'
+    ];
+    let fallbackIndex = 0;
+
+    function handleImgFallback(img) {
+      if (fallbackIndex < fallbackImages.length) {
+        img.src = fallbackImages[fallbackIndex];
+        fallbackIndex++;
+      }
+    }
+
+    // Fungsi upload langsung gambar dari HP jika dibutuhkan
+    function loadLocalImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('mainDenahImg').src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
 
     window.addEventListener('DOMContentLoaded', () => {
       refreshMapNodes();
@@ -782,7 +820,6 @@
       a.click();
     }
 
-    // Zoom & Gestures
     function zoomMap(delta) {
       zoomLevel = Math.max(0.6, Math.min(2.0, zoomLevel + delta));
       applyTransform();
