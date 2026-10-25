@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Library HTML2Canvas untuk Download Gambar JPG -->
+  <!-- HTML2Canvas untuk Download Gambar JPG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -27,6 +27,8 @@
       --card-bg: rgba(18, 24, 38, 0.98);
       --purple-fdc: #a855f7;
       --emerald-accent: #10b981;
+      --cyan-cocktail: #38bdf8;
+      --amber-sofa: #f59e0b;
     }
 
     * {
@@ -126,7 +128,7 @@
       font-weight: 700;
     }
 
-    /* METRIK & ACTION BUTTONS */
+    /* METRIK HEADER */
     .hdr-metrics {
       display: flex;
       align-items: center;
@@ -155,7 +157,7 @@
     .stat-pill .txt-wrap span { font-size: 0.58rem; color: #94a3b8; text-transform: uppercase; }
     .stat-pill .txt-wrap strong { font-size: 0.78rem; }
 
-    /* TOMBOL AKSI UTAMA */
+    /* TOMBOL AKSI */
     .btn-action {
       border: none;
       padding: 7px 12px;
@@ -210,12 +212,13 @@
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       background: rgba(15, 23, 42, 0.85);
       padding: 4px 12px;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.7rem;
+      flex-wrap: wrap;
     }
 
     .dot-node { width: 9px; height: 9px; border-radius: 50%; }
@@ -333,7 +336,7 @@
       border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       width: 100%;
-      max-width: 460px;
+      max-width: 500px;
       max-height: 92vh;
       overflow-y: auto;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
@@ -455,7 +458,7 @@
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
-    /* DASHBOARD REPORT STYLES */
+    /* DASHBOARD REPORT GRID */
     .dash-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -466,7 +469,7 @@
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 10px;
-      padding: 12px;
+      padding: 11px 12px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -503,16 +506,15 @@
 
     .occupancy-bar-wrap {
       width: 100%;
-      height: 8px;
+      height: 7px;
       background: #1e293b;
       border-radius: 4px;
       overflow: hidden;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .occupancy-bar {
       height: 100%;
-      background: linear-gradient(90deg, #38bdf8 0%, #ef4444 100%);
       width: 0%;
       transition: width 0.4s ease;
     }
@@ -564,16 +566,25 @@
       </div>
 
       <div class="hdr-metrics">
-        <!-- COUNTER TABLE BOOKED -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat Executive Report">
-          <i class="fa-solid fa-couch" style="color: var(--gold-primary);"></i>
+        <!-- COUNTER SOFA INVENTORY -->
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian Sofa">
+          <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
           <div class="txt-wrap">
-            <span>Table Sold</span>
-            <strong><span id="statBookedCount" style="color: #ef4444;">0</span> / 36</strong>
+            <span>Sofa VIP</span>
+            <strong><span id="statSofaBooked" style="color: var(--amber-sofa);">0</span> / 21</strong>
           </div>
         </div>
 
-        <!-- COUNTER FDC STANDING GUESTS -->
+        <!-- COUNTER COCKTAIL INVENTORY -->
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian Cocktail">
+          <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
+          <div class="txt-wrap">
+            <span>Cocktail</span>
+            <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span> / 20</strong>
+          </div>
+        </div>
+
+        <!-- COUNTER FDC GUESTS -->
         <div class="stat-pill" onclick="openFDCListModal()" title="Klik untuk lihat daftar FDC">
           <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
           <div class="txt-wrap">
@@ -582,8 +593,8 @@
           </div>
         </div>
 
-        <!-- TOTAL REVENUE -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk lihat rincian pendapatan">
+        <!-- TOTAL GROSS REVENUE -->
+        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian finansial">
           <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
           <div class="txt-wrap">
             <span>Total Rev / DP</span>
@@ -591,12 +602,12 @@
           </div>
         </div>
 
-        <!-- EXECUTIVE REPORT DASHBOARD -->
+        <!-- BUTTON DASHBOARD REPORT -->
         <button class="btn-action btn-dashboard" onclick="openReportModal()">
           <i class="fa-solid fa-chart-pie"></i> Report
         </button>
 
-        <!-- INPUT TIKET FDC -->
+        <!-- INPUT FDC -->
         <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
           <i class="fa-solid fa-user-plus"></i> + FDC
         </button>
@@ -617,7 +628,7 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">36 Tersedia</span></div>
+      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sofa: 21 | Cocktail: 20</span></div>
       <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
     </div>
     
@@ -643,74 +654,76 @@
 
       <div class="hotspots-layer">
         
-        <!-- 1. SKY FLOOR ATAS (123, 122, 121, 120) -->
-        <div id="spot-123" class="spot" style="top: 1.5%; left: 48.6%; width: 6.8%; height: 7.5%;" onclick="openBooking('123', 'Dining Table 8-Pax', 8)"></div>
-        <div id="spot-122" class="spot" style="top: 1.5%; left: 56.4%; width: 6.8%; height: 7.5%;" onclick="openBooking('122', 'Dining Table 8-Pax', 8)"></div>
-        <div id="spot-121" class="spot" style="top: 1.5%; left: 64.2%; width: 6.8%; height: 7.5%;" onclick="openBooking('121', 'Dining Table 8-Pax', 8)"></div>
-        <div id="spot-120" class="spot" style="top: 1.5%; left: 72.0%; width: 6.8%; height: 7.5%;" onclick="openBooking('120', 'Dining Table 8-Pax', 8)"></div>
+        <!-- ================= 1. SOFA SKY FLOOR ATAS (DINING & VIP) ================= -->
+        <!-- Sofa Dining 8-Pax: 123, 122, 121, 120 -->
+        <div id="spot-123" class="spot" style="top: 1.5%; left: 48.6%; width: 6.8%; height: 7.5%;" onclick="openBooking('123', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
+        <div id="spot-122" class="spot" style="top: 1.5%; left: 56.4%; width: 6.8%; height: 7.5%;" onclick="openBooking('122', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
+        <div id="spot-121" class="spot" style="top: 1.5%; left: 64.2%; width: 6.8%; height: 7.5%;" onclick="openBooking('121', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
+        <div id="spot-120" class="spot" style="top: 1.5%; left: 72.0%; width: 6.8%; height: 7.5%;" onclick="openBooking('120', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
 
-        <!-- VIP Sofas: 117, 118, 119 -->
-        <div id="spot-117" class="spot" style="top: 11.6%; left: 49.0%; width: 9.5%; height: 7.8%;" onclick="openBooking('117', 'Sky Floor VIP Sofa', 6)"></div>
-        <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa', 6)"></div>
-        <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa', 6)"></div>
+        <!-- VIP Sofas Sky Floor: 117, 118, 119 -->
+        <div id="spot-117" class="spot" style="top: 11.6%; left: 49.0%; width: 9.5%; height: 7.8%;" onclick="openBooking('117', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- Cocktail High Table: 124 s/d 129 -->
-        <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table', 4)"></div>
-        <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table', 4)"></div>
-        <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table', 4)"></div>
-        <div id="spot-127" class="spot round" style="top: 24.8%; left: 72.4%; width: 4.8%; height: 7.0%;" onclick="openBooking('127', 'Cocktail Table', 4)"></div>
-        <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table', 4)"></div>
-        <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table', 4)"></div>
+        <!-- ================= 2. COCKTAIL TABLES ATAS (124 s/d 129 - TOTAL 6 UNIT) ================= -->
+        <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-127" class="spot round" style="top: 24.8%; left: 72.4%; width: 4.8%; height: 7.0%;" onclick="openBooking('127', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- 2. SOFA VIP KANAN ATAS (105, 103, 102, 101) -->
-        <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa', 6)"></div>
-        <div id="spot-103" class="spot" style="top: 37.5%; left: 67.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('103', 'VIP Lounge Sofa', 6)"></div>
-        <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa', 6)"></div>
-        <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa', 6)"></div>
+        <!-- ================= 3. SOFA VIP KANAN ATAS (105, 103, 102, 101) ================= -->
+        <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-103" class="spot" style="top: 37.5%; left: 67.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('103', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 3. SOFA VIP SISI KIRI (RAPAT KE DINDING - BEBAS TUMPANG TINDIH) -->
-        <div id="spot-116" class="spot" style="top: 39.5%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-115" class="spot" style="top: 52.8%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-113" class="spot" style="top: 66.0%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-112" class="spot" style="top: 79.2%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa', 6)"></div>
+        <!-- ================= 4. SOFA VIP SISI KIRI (116, 115, 113, 112) ================= -->
+        <div id="spot-116" class="spot" style="top: 39.5%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-115" class="spot" style="top: 52.8%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-113" class="spot" style="top: 66.0%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-112" class="spot" style="top: 79.2%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 4. MEJA TENGAH KOLOM KIRI (PAS PADA MEJA BUNDAR) -->
-        <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table', 4)"></div>
-        <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table', 4)"></div>
-        <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table', 4)"></div>
-        <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.6%; width: 5.6%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table', 4)"></div>
+        <!-- ================= 5. COCKTAIL TABLES TENGAH (TOTAL 14 UNIT) ================= -->
+        <!-- Kolom Kiri -->
+        <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.6%; width: 5.6%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- 5. MEJA TENGAH KOLOM TENGAH & KANAN -->
-        <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table', 4)"></div>
-        <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table', 4)"></div>
-        <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table', 4)"></div>
-        <div id="spot-135" class="spot round" style="top: 52.8%; left: 32.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('135', 'Cocktail Table', 4)"></div>
-        <div id="spot-137" class="spot round" style="top: 59.2%; left: 17.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('137', 'Cocktail Table', 4)"></div>
-        <div id="spot-136" class="spot round" style="top: 57.5%; left: 25.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('136', 'Cocktail Table', 4)"></div>
-        <div id="spot-150" class="spot round" style="top: 68.5%; left: 19.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('150', 'Cocktail Table', 4)"></div>
-        <div id="spot-151" class="spot round" style="top: 66.0%; left: 29.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('151', 'Cocktail Table', 4)"></div>
-        <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table', 4)"></div>
-        <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table', 4)"></div>
+        <!-- Kolom Tengah & Kanan -->
+        <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-135" class="spot round" style="top: 52.8%; left: 32.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('135', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-137" class="spot round" style="top: 59.2%; left: 17.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('137', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-136" class="spot round" style="top: 57.5%; left: 25.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('136', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-150" class="spot round" style="top: 68.5%; left: 19.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('150', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-151" class="spot round" style="top: 66.0%; left: 29.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('151', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- 6. SOFA VIP KANAN BAWAH (106, 107, 108) -->
-        <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa', 6)"></div>
-        <div id="spot-107" class="spot" style="top: 68.8%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('107', 'Center VIP Sofa', 6)"></div>
-        <div id="spot-108" class="spot" style="top: 79.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('108', 'Center VIP Sofa', 6)"></div>
+        <!-- ================= 6. SOFA VIP KANAN BAWAH (106, 107, 108) ================= -->
+        <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-107" class="spot" style="top: 68.8%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('107', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-108" class="spot" style="top: 79.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('108', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 7. SOFA VIP BAWAH (111, 110, 109) -->
-        <div id="spot-111" class="spot" style="top: 88.5%; left: 5.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('111', 'Frontline VIP Sofa', 6)"></div>
-        <div id="spot-110" class="spot" style="top: 88.5%; left: 17.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('110', 'Frontline VIP Sofa', 6)"></div>
-        <div id="spot-109" class="spot" style="top: 88.5%; left: 29.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('109', 'Frontline VIP Sofa', 6)"></div>
+        <!-- ================= 7. SOFA VIP SISI BAWAH (111, 110, 109) ================= -->
+        <div id="spot-111" class="spot" style="top: 88.5%; left: 5.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('111', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-110" class="spot" style="top: 88.5%; left: 17.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('110', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
+        <div id="spot-109" class="spot" style="top: 88.5%; left: 29.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('109', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
       </div>
     </div>
   </main>
 
-  <!-- MODAL 1: RESERVASI MEJA -->
+  <!-- MODAL 1: RESERVASI MEJA/SOFA -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi Meja <span id="modalTitle">#101</span></h3>
+        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi <span id="modalTitle">#101</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -756,17 +769,17 @@
 
       <div class="modal-footer">
         <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
-          <i class="fa-solid fa-trash"></i> Hapus Meja
+          <i class="fa-solid fa-trash"></i> Hapus
         </button>
         <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeBookingModal()">Tutup</button>
         <button class="btn-modal-save" onclick="saveBooking()">
-          <i class="fa-solid fa-check"></i> Simpan Meja (Merah)
+          <i class="fa-solid fa-check"></i> Simpan (Merah)
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: INPUT FDC (HARGA DEFAULT RP 125.000) -->
+  <!-- MODAL 2: INPUT FDC (RP 125.000 / PAX) -->
   <div id="fdcModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -805,7 +818,7 @@
 
         <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Keterangan / PIC Penjualan</label>
-          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales FO / Barium Bar Cashier">
+          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales FO / Bar Cashier">
         </div>
       </div>
 
@@ -818,9 +831,9 @@
     </div>
   </div>
 
-  <!-- MODAL 3: EXECUTIVE SALES DASHBOARD & REPORT -->
+  <!-- MODAL 3: EXECUTIVE SALES & INVENTORY DASHBOARD -->
   <div id="reportModal" class="modal-backdrop">
-    <div class="modal-container" style="max-width: 520px;">
+    <div class="modal-container">
       <div class="modal-header">
         <h3 style="color: #fef08a;"><i class="fa-solid fa-chart-line"></i> Event Executive Dashboard</h3>
         <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -828,49 +841,56 @@
 
       <div class="modal-body">
         <div class="dash-grid">
-          <!-- CARD 1: TOTAL GROSS REVENUE -->
+          <!-- HERO CARD: TOTAL GROSS REVENUE -->
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Table DP + FDC)</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Sofa + Cocktail + FDC)</div>
             <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja & tiket standing party</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi sofa, meja cocktail & tiket standing</div>
           </div>
 
-          <!-- CARD 2: TABLE BREAKDOWN -->
+          <!-- CARD: SOFA INVENTORY (TOTAL 21) -->
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #ef4444;"></i> Table Reserved</div>
-            <div class="card-val"><span id="repTableBooked" style="color: #ef4444;">0</span> <span style="font-size:0.8rem; color:#94a3b8;">/ 36</span></div>
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i> Sofa / VIP Lounge</div>
+            <div class="card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
             <div class="occupancy-bar-wrap">
-              <div id="repOccupancyBar" class="occupancy-bar"></div>
+              <div id="repSofaBar" class="occupancy-bar" style="background: var(--amber-sofa);"></div>
             </div>
-            <div class="card-sub" style="margin-top: 4px;"><span id="repOccupancyPercent">0%</span> Occupancy</div>
+            <div class="card-sub" style="margin-top: 3px;">
+              Tersisa: <strong id="repSofaLeft" style="color:#38bdf8;">21</strong> | Rev: <span id="repSofaRev" style="color:#34d399;">Rp 0</span>
+            </div>
           </div>
 
-          <!-- CARD 3: TABLE AVAILABLE -->
+          <!-- CARD: COCKTAIL INVENTORY (TOTAL 20) -->
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-chair" style="color: #38bdf8;"></i> Table Available</div>
-            <div class="card-val" id="repTableLeft" style="color: #38bdf8;">36</div>
-            <div class="card-sub">Meja tersisa yang belum dipesan</div>
+            <div class="card-lbl"><i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i> Cocktail Tables</div>
+            <div class="card-val"><span id="repCocktailBooked" style="color: var(--cyan-cocktail);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 20 Unit</span></div>
+            <div class="occupancy-bar-wrap">
+              <div id="repCocktailBar" class="occupancy-bar" style="background: var(--cyan-cocktail);"></div>
+            </div>
+            <div class="card-sub" style="margin-top: 3px;">
+              Tersisa: <strong id="repCocktailLeft" style="color:#38bdf8;">20</strong> | Rev: <span id="repCocktailRev" style="color:#34d399;">Rp 0</span>
+            </div>
           </div>
 
-          <!-- CARD 4: REVENUE SOFA/MEJA -->
+          <!-- CARD: TOTAL TABLE REVENUE GABUNGAN -->
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-money-check-dollar" style="color: var(--emerald-accent);"></i> Sofa/Table Revenue</div>
-            <div class="card-val" id="repTableRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
-            <div class="card-sub" id="repTablePax">0 Pax tercatat di meja</div>
+            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: var(--emerald-accent);"></i> All Tables Revenue</div>
+            <div class="card-val" id="repTableGrossRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
+            <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
           </div>
 
-          <!-- CARD 5: FDC STANDING BREAKDOWN -->
+          <!-- CARD: FDC STANDING BREAKDOWN -->
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i> FDC Standing Ticket</div>
             <div class="card-val" id="repFDCPax" style="font-size: 1rem; color: #d8b4fe;">0 Pax</div>
-            <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC</div>
+            <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
           </div>
 
-          <!-- CARD 6: TOTAL CROWD ATTENDEES -->
-          <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.6);">
+          <!-- CARD: TOTAL ESTIMATED CROWD -->
+          <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.65);">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
-            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Pax</div>
-            <div class="card-sub">Gabungan tamu meja (seating) + tamu standing party FDC</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Total Tamu</div>
+            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Sofa + Cocktail) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
@@ -878,7 +898,7 @@
       <div class="modal-footer">
         <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeReportModal()">Tutup</button>
         <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
-          <i class="fa-solid fa-download"></i> Unduh Laporan Lengkap (CSV)
+          <i class="fa-solid fa-download"></i> Unduh CSV
         </button>
       </div>
     </div>
@@ -886,7 +906,7 @@
 
   <!-- MODAL 4: DAFTAR TAMU FDC -->
   <div id="fdcListModal" class="modal-backdrop">
-    <div class="modal-container" style="max-width: 520px;">
+    <div class="modal-container">
       <div class="modal-header">
         <h3 style="color: #d8b4fe;"><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
         <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -915,11 +935,28 @@
   <script>
     const STORAGE_KEY = 'infinity_halloween_2026_bookings';
     const FDC_STORAGE_KEY = 'infinity_halloween_2026_fdc_bookings';
-    const FDC_DEFAULT_PRICE = 125000; // Harga resmi FDC Rp 125.000 / pax
+    const FDC_DEFAULT_PRICE = 125000;
+
+    // DEFINISI DAFTAR SOFA (21 UNIT) & COCKTAIL (20 UNIT)
+    const SOFA_IDS = [
+      '101', '102', '103', '105', 
+      '106', '107', '108', 
+      '109', '110', '111', 
+      '112', '113', '115', '116', 
+      '117', '118', '119', 
+      '120', '121', '122', '123'
+    ]; // 21 Sofa / Dining Lounge
+
+    const COCKTAIL_IDS = [
+      '124', '125', '126', '127', '128', '129', 
+      '130', '131', '132', '133', '135', '136', '137', '138', '139', 
+      '150', '151', '152', '153', '155'
+    ]; // 20 Cocktail Tables
 
     let bookings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     let fdcBookings = JSON.parse(localStorage.getItem(FDC_STORAGE_KEY)) || [];
     let currentTable = null;
+    let currentCategory = 'sofa';
     let zoomLevel = 1.0;
 
     const possibleImages = [
@@ -957,8 +994,9 @@
     });
 
     // ================= MODAL MEJA =================
-    function openBooking(tableId, tableType, defaultPax) {
+    function openBooking(tableId, tableType, defaultPax, category) {
       currentTable = tableId;
+      currentCategory = category || (SOFA_IDS.includes(tableId) ? 'sofa' : 'cocktail');
       document.getElementById('modalTitle').innerText = '#' + tableId + ' (' + tableType + ')';
 
       const data = bookings[tableId];
@@ -996,13 +1034,14 @@
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
 
       if (!name) {
-        alert('Silakan masukkan nama tamu pemesan meja.');
+        alert('Silakan masukkan nama tamu pemesan.');
         return;
       }
 
       bookings[currentTable] = {
         name: name,
         phone: phone,
+        category: currentCategory,
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         time: document.getElementById('guestTime').value,
@@ -1017,7 +1056,7 @@
     }
 
     function deleteBooking() {
-      if (confirm('Batalkan reservasi meja #' + currentTable + '? Meja akan kembali berwarna normal (tersedia).')) {
+      if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali berwarna normal (tersedia).')) {
         delete bookings[currentTable];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
         refreshMapNodes();
@@ -1111,20 +1150,47 @@
       }
     }
 
-    // ================= MODAL EXECUTIVE REPORT DASHBOARD =================
+    // ================= MODAL EXECUTIVE REPORT & INVENTORY =================
     function openReportModal() {
-      const bookedCount = Object.keys(bookings).length;
-      const totalTables = 36;
-      const leftTables = totalTables - bookedCount;
-      const occupancy = Math.round((bookedCount / totalTables) * 100);
+      const bookedKeys = Object.keys(bookings);
 
-      let tableDP = 0;
-      let tablePax = 0;
-      Object.keys(bookings).forEach(k => {
-        tableDP += (bookings[k].dp || 0);
-        tablePax += parseInt(bookings[k].pax || 0, 10);
+      // Hitung Sofa
+      let sofaBooked = 0;
+      let sofaRev = 0;
+      let sofaPax = 0;
+
+      // Hitung Cocktail
+      let cocktailBooked = 0;
+      let cocktailRev = 0;
+      let cocktailPax = 0;
+
+      bookedKeys.forEach(k => {
+        const item = bookings[k];
+        const isSofa = SOFA_IDS.includes(k);
+        const dp = item.dp || 0;
+        const pax = parseInt(item.pax || 0, 10);
+
+        if (isSofa) {
+          sofaBooked++;
+          sofaRev += dp;
+          sofaPax += pax;
+        } else {
+          cocktailBooked++;
+          cocktailRev += dp;
+          cocktailPax += pax;
+        }
       });
 
+      const totalSofa = 21;
+      const totalCocktail = 20;
+
+      const sofaLeft = totalSofa - sofaBooked;
+      const cocktailLeft = totalCocktail - cocktailBooked;
+
+      const sofaOccupancy = Math.round((sofaBooked / totalSofa) * 100);
+      const cocktailOccupancy = Math.round((cocktailBooked / totalCocktail) * 100);
+
+      // Hitung FDC
       let fdcPax = 0;
       let fdcTotalRev = 0;
       fdcBookings.forEach(item => {
@@ -1132,20 +1198,37 @@
         fdcTotalRev += (item.amount || 0);
       });
 
-      const grandGross = tableDP + fdcTotalRev;
-      const grandPax = tablePax + fdcPax;
+      const tableGrossRev = sofaRev + cocktailRev;
+      const grandGross = tableGrossRev + fdcTotalRev;
+      const seatingPax = sofaPax + cocktailPax;
+      const totalCrowd = seatingPax + fdcPax;
 
       // Render ke DOM Report
       document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
-      document.getElementById('repTableBooked').innerText = bookedCount;
-      document.getElementById('repTableLeft').innerText = leftTables;
-      document.getElementById('repOccupancyPercent').innerText = occupancy + '%';
-      document.getElementById('repOccupancyBar').style.width = occupancy + '%';
-      document.getElementById('repTableRev').innerText = 'Rp ' + tableDP.toLocaleString('id-ID');
-      document.getElementById('repTablePax').innerText = `${tablePax} Pax duduk di meja`;
+      
+      // Sofa
+      document.getElementById('repSofaBooked').innerText = sofaBooked;
+      document.getElementById('repSofaLeft').innerText = sofaLeft;
+      document.getElementById('repSofaRev').innerText = 'Rp ' + sofaRev.toLocaleString('id-ID');
+      document.getElementById('repSofaBar').style.width = sofaOccupancy + '%';
+
+      // Cocktail
+      document.getElementById('repCocktailBooked').innerText = cocktailBooked;
+      document.getElementById('repCocktailLeft').innerText = cocktailLeft;
+      document.getElementById('repCocktailRev').innerText = 'Rp ' + cocktailRev.toLocaleString('id-ID');
+      document.getElementById('repCocktailBar').style.width = cocktailOccupancy + '%';
+
+      // Detail Table
+      document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${sofaBooked + cocktailBooked} unit terisi (${sofaBooked} Sofa + ${cocktailBooked} Cocktail)`;
+
+      // FDC
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
-      document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC`;
-      document.getElementById('repTotalPax').innerText = `${grandPax} Total Tamu (${tablePax} Seating + ${fdcPax} Standing)`;
+      document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
+
+      // Crowd
+      document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
+      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${sofaPax} Sofa + ${cocktailPax} Cocktail) + ${fdcPax} Standing FDC`;
 
       document.getElementById('reportModal').classList.add('open');
     }
@@ -1168,15 +1251,21 @@
 
     function updateMetrics() {
       const bookedKeys = Object.keys(bookings);
-      const bookedCount = bookedKeys.length;
-      document.getElementById('statBookedCount').innerText = bookedCount;
-      document.getElementById('legendBookedText').innerText = `${bookedCount} Terbooking (Merah)`;
-      document.getElementById('legendAvailText').innerText = `${36 - bookedCount} Tersedia`;
-
+      let sofaCount = 0;
+      let cocktailCount = 0;
       let tableDP = 0;
+
       bookedKeys.forEach(k => {
+        if (SOFA_IDS.includes(k)) {
+          sofaCount++;
+        } else {
+          cocktailCount++;
+        }
         tableDP += (bookings[k].dp || 0);
       });
+
+      document.getElementById('statSofaBooked').innerText = sofaCount;
+      document.getElementById('statCocktailBooked').innerText = cocktailCount;
 
       let fdcPaxTotal = 0;
       let fdcAmountTotal = 0;
@@ -1188,6 +1277,9 @@
       document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
       const grandTotal = tableDP + fdcAmountTotal;
       document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+
+      document.getElementById('legendAvailText').innerText = `Sisa Sofa: ${21 - sofaCount} | Sisa Cocktail: ${20 - cocktailCount}`;
+      document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Terbooking (Merah)`;
     }
 
     function formatCurrencyInput(el) {
@@ -1195,7 +1287,7 @@
       el.value = val ? parseInt(val, 10).toLocaleString('id-ID') : '';
     }
 
-    // ================= DOWNLOAD JPG (HD RESULOTION) =================
+    // ================= DOWNLOAD JPG UNTUK SHARE KE TAMU =================
     async function downloadLayoutJPG() {
       const loader = document.getElementById('loaderOverlay');
       loader.style.display = 'flex';
@@ -1206,7 +1298,7 @@
 
       try {
         const canvas = await html2canvas(mapEl, {
-          scale: 2, // Kualitas HD
+          scale: 2,
           useCORS: true,
           allowTaint: true,
           backgroundColor: '#080c14'
@@ -1226,33 +1318,34 @@
       }
     }
 
-    // ================= EKSPOR CSV LENGKAP =================
+    // ================= EKSPOR CSV INVENTORY LENGKAP =================
     function exportReservationsCSV() {
       const tableKeys = Object.keys(bookings);
       if (tableKeys.length === 0 && fdcBookings.length === 0) {
-        alert('Belum ada data reservasi Meja maupun tiket FDC.');
+        alert('Belum ada data reservasi Sofa, Cocktail, maupun FDC.');
         return;
       }
 
-      let csv = 'Tipe,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Pembayaran/DP (IDR),Jam Tiba,Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
-        csv += `"TABLE","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.notes || ''}"\n`;
+        const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE';
+        csv += `"${categoryLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `Report_Reservasi_Infinity_Halloween_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `Executive_Inventory_Report_Halloween_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
 
-    // ================= ZOOM & GESTURE TOUCH =================
+    // ================= ZOOM & GESTURE TOUCH (ANDROID / IOS) =================
     function zoomMap(delta) {
       zoomLevel = Math.max(0.6, Math.min(2.2, zoomLevel + delta));
       applyTransform();
