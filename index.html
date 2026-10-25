@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
 
-  <!-- Font & Icons -->
+  <!-- Fonts & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,13 +51,13 @@
       overflow-x: hidden;
     }
 
-    /* ================= HEADER DESAIN BESAR & MEWAH ================= */
+    /* ================= HEADER DESAIN MEWAH & MULTI-DEVICE ================= */
     header {
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 13, 22, 0.96) 100%);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
-      padding: 12px 18px;
+      padding: clamp(10px, 1.2vw, 14px) clamp(12px, 1.6vw, 24px);
       position: sticky;
       top: 0;
       z-index: 60;
@@ -65,12 +65,12 @@
     }
 
     .hdr-wrap {
-      max-width: 1750px;
+      max-width: 1800px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -78,20 +78,21 @@
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      flex-shrink: 0;
     }
 
     .brand-logo-frame {
-      min-width: 105px;
-      height: 52px;
+      min-width: clamp(84px, 7vw, 110px);
+      height: clamp(44px, 3.8vw, 54px);
       background: #ffffff;
       border: 2px solid var(--gold-primary);
       border-radius: 10px;
-      padding: 3px 10px;
+      padding: 3px 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
     }
 
     .brand-logo-frame img {
@@ -102,9 +103,9 @@
 
     .brand-title h1 {
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: clamp(0.95rem, 1.15vw, 1.3rem);
       font-weight: 800;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       background: var(--gold-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -112,7 +113,7 @@
     }
 
     .brand-title p {
-      font-size: 0.76rem;
+      font-size: clamp(0.66rem, 0.75vw, 0.8rem);
       color: #94a3b8;
       display: flex;
       align-items: center;
@@ -125,33 +126,41 @@
       background: rgba(236, 72, 153, 0.2);
       border: 1px solid #ec4899;
       color: #f472b6;
-      padding: 3px 8px;
-      border-radius: 14px;
-      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.5px;
     }
 
-    /* METRIK HEADER LEBIH BESAR & TEGAS */
-    .hdr-metrics {
+    /* KONTROL & METRIK CONTAINER */
+    .hdr-controls {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
 
+    .metrics-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* KARTU METRIK BESAR & TEGAS */
     .metric-card-lg {
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
-      padding: 8px 14px;
+      padding: 7px clamp(10px, 1vw, 14px);
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       transition: all 0.2s ease;
-      min-width: 125px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+      min-width: clamp(105px, 9vw, 135px);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
     }
 
     .metric-card-lg:hover {
@@ -161,7 +170,7 @@
     }
 
     .metric-card-lg i {
-      font-size: 1.35rem;
+      font-size: clamp(1.1rem, 1.25vw, 1.35rem);
     }
 
     .metric-card-lg .txt-wrap {
@@ -171,73 +180,58 @@
     }
 
     .metric-card-lg .txt-wrap span {
-      font-size: 0.65rem;
+      font-size: clamp(0.56rem, 0.62vw, 0.66rem);
       color: #94a3b8;
       text-transform: uppercase;
       font-weight: 700;
-      letter-spacing: 0.6px;
-    }
-
-    .metric-card-lg .txt-wrap strong {
-      font-size: 1.15rem;
-      font-weight: 800;
-      font-family: 'Cinzel', serif;
       letter-spacing: 0.5px;
     }
 
-    /* TOMBOL AKSI LEBIH LEGA */
+    .metric-card-lg .txt-wrap strong {
+      font-size: clamp(0.95rem, 1.05vw, 1.18rem);
+      font-weight: 800;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.3px;
+    }
+
+    /* TOMBOL AKSI */
     .btn-action-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .btn-action {
       border: none;
-      padding: 9px 15px;
-      border-radius: 10px;
+      padding: clamp(7px, 0.8vw, 9px) clamp(10px, 1vw, 15px);
+      border-radius: 9px;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: clamp(0.72rem, 0.78vw, 0.82rem);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.2s ease;
       touch-action: manipulation;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
     }
 
     .btn-action:hover {
       transform: translateY(-1px);
-      filter: brightness(1.1);
+      filter: brightness(1.12);
     }
 
-    .btn-dashboard {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: #fff;
-    }
-
-    .btn-fdc {
-      background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
-      color: #fff;
-    }
-
-    .btn-jpg {
-      background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-      color: #fff;
-    }
-
-    .btn-csv {
-      background: var(--gold-grad);
-      color: #111;
-    }
+    .btn-dashboard { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; }
+    .btn-fdc { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); color: #fff; }
+    .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
+    .btn-csv { background: var(--gold-grad); color: #111; }
 
     /* ================= TOOLBAR ================= */
     .toolbar-bar {
-      max-width: 1750px;
+      max-width: 1800px;
       margin: 8px auto 0;
-      padding: 0 16px;
+      padding: 0 clamp(12px, 1.6vw, 24px);
       width: 100%;
       display: flex;
       align-items: center;
@@ -249,16 +243,16 @@
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       background: rgba(15, 23, 42, 0.88);
-      padding: 6px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.75rem;
+      font-size: clamp(0.68rem, 0.75vw, 0.76rem);
       flex-wrap: wrap;
     }
 
-    .dot-node { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
     .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
     .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
@@ -284,11 +278,9 @@
       transition: background 0.2s;
     }
 
-    .btn-tool-icon:hover {
-      background: rgba(51, 65, 85, 1);
-    }
+    .btn-tool-icon:hover { background: rgba(51, 65, 85, 1); }
 
-    /* VIEWPORT */
+    /* ================= VIEWPORT ================= */
     .viewport-area {
       flex: 1;
       position: relative;
@@ -302,7 +294,7 @@
 
     .map-frame {
       width: 100%;
-      max-width: 1180px;
+      max-width: 1220px;
       position: relative;
       transform-origin: center center;
       transition: transform 0.12s ease-out;
@@ -357,7 +349,7 @@
       z-index: 5;
     }
 
-    /* MODAL */
+    /* ================= MODAL ================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -586,6 +578,35 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    /* MEDIA QUERIES UNTUK TAMPILAN MOBILE / TABLET */
+    @media (max-width: 992px) {
+      .hdr-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hdr-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .metrics-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .btn-action-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      .btn-action {
+        justify-content: center;
+        padding: 9px 4px;
+        font-size: 0.72rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -609,45 +630,48 @@
         </div>
       </div>
 
-      <!-- KARTU METRIK UTAMA (LEBIH BESAR & TEGAS) -->
-      <div class="hdr-metrics">
-        <!-- 1. SOFA INVENTORY -->
-        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Sofa">
-          <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
-          <div class="txt-wrap">
-            <span>Sofa VIP</span>
-            <strong><span id="statSofaBooked" style="color: var(--amber-sofa);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 21</span></strong>
+      <!-- KONTROL & METRIK GROUP -->
+      <div class="hdr-controls">
+        <!-- 4 KARTU METRIK UTAMA -->
+        <div class="metrics-group">
+          <!-- 1. SOFA INVENTORY -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Sofa">
+            <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
+            <div class="txt-wrap">
+              <span>Sofa VIP</span>
+              <strong><span id="statSofaBooked" style="color: var(--amber-sofa);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 21</span></strong>
+            </div>
+          </div>
+
+          <!-- 2. COCKTAIL INVENTORY -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail">
+            <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
+            <div class="txt-wrap">
+              <span>Cocktail</span>
+              <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 20</span></strong>
+            </div>
+          </div>
+
+          <!-- 3. FDC GUESTS -->
+          <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
+            <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
+            <div class="txt-wrap">
+              <span>FDC Guests</span>
+              <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.85rem; color:#64748b;"> Pax</span></strong>
+            </div>
+          </div>
+
+          <!-- 4. TOTAL REVENUE -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
+            <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
+            <div class="txt-wrap">
+              <span>Total Rev / DP</span>
+              <strong id="statDPTotal" style="color: var(--emerald-accent);">Rp 0</strong>
+            </div>
           </div>
         </div>
 
-        <!-- 2. COCKTAIL INVENTORY -->
-        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail">
-          <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
-          <div class="txt-wrap">
-            <span>Cocktail</span>
-            <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 20</span></strong>
-          </div>
-        </div>
-
-        <!-- 3. FDC GUESTS -->
-        <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
-          <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
-          <div class="txt-wrap">
-            <span>FDC Guests</span>
-            <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.85rem; color:#64748b;"> Pax</span></strong>
-          </div>
-        </div>
-
-        <!-- 4. TOTAL REVENUE -->
-        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
-          <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
-          <div class="txt-wrap">
-            <span>Total Rev / DP</span>
-            <strong id="statDPTotal" style="color: var(--emerald-accent);">Rp 0</strong>
-          </div>
-        </div>
-
-        <!-- TOMBOL AKSI UTAMA -->
+        <!-- 4 TOMBOL AKSI UTAMA -->
         <div class="btn-action-group">
           <button class="btn-action btn-dashboard" onclick="openReportModal()">
             <i class="fa-solid fa-chart-pie"></i> Report
@@ -665,8 +689,8 @@
             <i class="fa-solid fa-file-csv"></i> CSV
           </button>
         </div>
-
       </div>
+
     </div>
   </header>
 
@@ -981,7 +1005,7 @@
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const FDC_DEFAULT_PRICE = 125000;
 
-    // DAFTAR SOFA (21 UNIT) & COCKTAIL (20 UNIT)
+    // DEFINISI 21 SOFA & 20 COCKTAIL TABLES
     const SOFA_IDS = [
       '101', '102', '103', '105', 
       '106', '107', '108', 
@@ -1045,7 +1069,7 @@
         if (!tErr && tableData) {
           bookings = {};
           tableData.forEach(row => {
-            bookings[row.table_id] = {
+            bookings[String(row.table_id)] = {
               name: row.guest_name,
               phone: row.guest_phone,
               category: row.category,
@@ -1091,7 +1115,7 @@
 
     // ================= MODAL MEJA =================
     function openBooking(tableId, tableType, defaultPax, category) {
-      currentTable = tableId;
+      currentTable = String(tableId);
       currentCategory = category || (SOFA_IDS.includes(tableId) ? 'sofa' : 'cocktail');
       document.getElementById('modalTitle').innerText = '#' + tableId + ' (' + tableType + ')';
 
@@ -1135,7 +1159,7 @@
       }
 
       const payload = {
-        table_id: currentTable,
+        table_id: String(currentTable),
         guest_name: name,
         guest_phone: phone,
         category: currentCategory,
@@ -1145,20 +1169,32 @@
         notes: document.getElementById('guestNotes').value
       };
 
-      const { error } = await _supabase.from('table_bookings').upsert(payload);
+      const { data, error } = await _supabase
+        .from('table_bookings')
+        .upsert(payload, { onConflict: 'table_id' });
+
       if (error) {
         alert('Gagal menyimpan ke database Supabase: ' + error.message);
+        console.error('Supabase Error:', error);
         return;
       }
 
+      bookings[currentTable] = payload;
+      refreshMapNodes();
+      updateMetrics();
       closeBookingModal();
+      
       await fetchAllCloudData();
+      alert(`Meja #${currentTable} berhasil dibooking dan disimpan ke database!`);
     }
 
     async function deleteBooking() {
       if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali berwarna normal (tersedia).')) {
-        const { error } = await _supabase.from('table_bookings').delete().eq('table_id', currentTable);
+        const { error } = await _supabase.from('table_bookings').delete().eq('table_id', String(currentTable));
         if (!error) {
+          delete bookings[currentTable];
+          refreshMapNodes();
+          updateMetrics();
           closeBookingModal();
           await fetchAllCloudData();
         } else {
