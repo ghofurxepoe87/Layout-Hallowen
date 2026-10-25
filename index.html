@@ -51,7 +51,7 @@
       overflow-x: hidden;
     }
 
-    /* ================= HEADER DESAIN MEWAH & MULTI-DEVICE ================= */
+    /* HEADER */
     header {
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 13, 22, 0.96) 100%);
       backdrop-filter: blur(14px);
@@ -74,7 +74,6 @@
       flex-wrap: wrap;
     }
 
-    /* BRAND LOGO & TITLE */
     .brand-section {
       display: flex;
       align-items: center;
@@ -133,7 +132,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* KONTROL & METRIK CONTAINER */
     .hdr-controls {
       display: flex;
       align-items: center;
@@ -148,7 +146,6 @@
       flex-wrap: wrap;
     }
 
-    /* KARTU METRIK BESAR & TEGAS */
     .metric-card-lg {
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
@@ -194,7 +191,6 @@
       letter-spacing: 0.3px;
     }
 
-    /* TOMBOL AKSI */
     .btn-action-group {
       display: flex;
       align-items: center;
@@ -227,7 +223,7 @@
     .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
     .btn-csv { background: var(--gold-grad); color: #111; }
 
-    /* ================= TOOLBAR ================= */
+    /* TOOLBAR */
     .toolbar-bar {
       max-width: 1800px;
       margin: 8px auto 0;
@@ -280,7 +276,7 @@
 
     .btn-tool-icon:hover { background: rgba(51, 65, 85, 1); }
 
-    /* ================= VIEWPORT ================= */
+    /* VIEWPORT */
     .viewport-area {
       flex: 1;
       position: relative;
@@ -311,7 +307,6 @@
       pointer-events: none;
     }
 
-    /* HOTSPOTS INTERAKTIF */
     .hotspots-layer {
       position: absolute;
       top: 0;
@@ -333,15 +328,9 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .spot:active {
-      transform: scale(0.96);
-    }
+    .spot:active { transform: scale(0.96); }
+    .spot.round { border-radius: 50%; }
 
-    .spot.round {
-      border-radius: 50%;
-    }
-
-    /* STATUS TERBOOKING (MERAH) */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.78) !important;
       border: 2px solid #ff4d4d !important;
@@ -349,7 +338,7 @@
       z-index: 5;
     }
 
-    /* ================= MODAL ================= */
+    /* MODAL */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -433,14 +422,9 @@
       -webkit-appearance: none;
     }
 
-    .inp-field:focus {
-      border-color: var(--gold-primary);
-    }
+    .inp-field:focus { border-color: var(--gold-primary); }
 
-    .money-input-box {
-      position: relative;
-    }
-
+    .money-input-box { position: relative; }
     .money-input-box span {
       position: absolute;
       left: 12px;
@@ -450,7 +434,6 @@
       font-weight: 700;
       font-size: 0.88rem;
     }
-
     .money-input-box input {
       padding-left: 42px;
       width: 100%;
@@ -492,7 +475,7 @@
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
-    /* DASHBOARD REPORT GRID */
+    /* REPORT GRID */
     .dash-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -533,10 +516,7 @@
       font-family: 'Cinzel', serif;
     }
 
-    .dash-card .card-sub {
-      font-size: 0.68rem;
-      color: #64748b;
-    }
+    .dash-card .card-sub { font-size: 0.68rem; color: #64748b; }
 
     .occupancy-bar-wrap {
       width: 100%;
@@ -553,7 +533,6 @@
       transition: width 0.4s ease;
     }
 
-    /* LOADER */
     .loader-overlay {
       position: fixed;
       inset: 0;
@@ -575,47 +554,22 @@
       animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* MEDIA QUERIES UNTUK TAMPILAN MOBILE / TABLET */
     @media (max-width: 992px) {
-      .hdr-wrap {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hdr-controls {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .metrics-group {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-      .btn-action-group {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 6px;
-      }
-      .btn-action {
-        justify-content: center;
-        padding: 9px 4px;
-        font-size: 0.72rem;
-      }
+      .hdr-wrap { flex-direction: column; align-items: flex-start; }
+      .hdr-controls { width: 100%; justify-content: space-between; }
+      .metrics-group { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .btn-action { justify-content: center; padding: 9px 4px; font-size: 0.72rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ================= HEADER EKSEKUTIF BESAR ================= -->
+  <!-- HEADER -->
   <header>
     <div class="hdr-wrap">
-      
-      <!-- BRAND & TITLE -->
       <div class="brand-section">
         <div class="brand-logo-frame">
           <img src="logo.png" alt="Logo Platinum Hotel"
@@ -630,11 +584,8 @@
         </div>
       </div>
 
-      <!-- KONTROL & METRIK GROUP -->
       <div class="hdr-controls">
-        <!-- 4 KARTU METRIK UTAMA -->
         <div class="metrics-group">
-          <!-- 1. SOFA INVENTORY -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Sofa">
             <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
             <div class="txt-wrap">
@@ -643,7 +594,6 @@
             </div>
           </div>
 
-          <!-- 2. COCKTAIL INVENTORY -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail">
             <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
             <div class="txt-wrap">
@@ -652,7 +602,6 @@
             </div>
           </div>
 
-          <!-- 3. FDC GUESTS -->
           <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
             <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
             <div class="txt-wrap">
@@ -661,7 +610,6 @@
             </div>
           </div>
 
-          <!-- 4. TOTAL REVENUE -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
             <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
             <div class="txt-wrap">
@@ -671,30 +619,25 @@
           </div>
         </div>
 
-        <!-- 4 TOMBOL AKSI UTAMA -->
         <div class="btn-action-group">
           <button class="btn-action btn-dashboard" onclick="openReportModal()">
             <i class="fa-solid fa-chart-pie"></i> Report
           </button>
-
           <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
             <i class="fa-solid fa-user-plus"></i> + FDC
           </button>
-
           <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
             <i class="fa-solid fa-file-image"></i> Share JPG
           </button>
-
           <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
             <i class="fa-solid fa-file-csv"></i> CSV
           </button>
         </div>
       </div>
-
     </div>
   </header>
 
-  <!-- ================= TOOLBAR ================= -->
+  <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sisa Sofa: 21 | Sisa Cocktail: 20</span></div>
@@ -712,7 +655,7 @@
     </div>
   </div>
 
-  <!-- ================= VIEWPORT DENAH ================= -->
+  <!-- VIEWPORT -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -722,8 +665,7 @@
            onerror="handleImgFallback(this)">
 
       <div class="hotspots-layer">
-        
-        <!-- 1. SOFA SKY FLOOR ATAS (DINING & VIP) -->
+        <!-- 1. SOFA SKY FLOOR ATAS -->
         <div id="spot-123" class="spot" style="top: 1.5%; left: 48.6%; width: 6.8%; height: 7.5%;" onclick="openBooking('123', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
         <div id="spot-122" class="spot" style="top: 1.5%; left: 56.4%; width: 6.8%; height: 7.5%;" onclick="openBooking('122', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
         <div id="spot-121" class="spot" style="top: 1.5%; left: 64.2%; width: 6.8%; height: 7.5%;" onclick="openBooking('121', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
@@ -733,7 +675,7 @@
         <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 2. COCKTAIL TABLES ATAS (124 s/d 129 - TOTAL 6 UNIT) -->
+        <!-- 2. COCKTAIL TABLES ATAS (124 s/d 129) -->
         <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
@@ -741,19 +683,19 @@
         <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- 3. SOFA VIP KANAN ATAS (105, 103, 102, 101) -->
+        <!-- 3. SOFA VIP KANAN ATAS -->
         <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-103" class="spot" style="top: 37.5%; left: 67.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('103', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 4. SOFA VIP SISI KIRI (116, 115, 113, 112) -->
+        <!-- 4. SOFA VIP SISI KIRI -->
         <div id="spot-116" class="spot" style="top: 39.5%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-115" class="spot" style="top: 52.8%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-113" class="spot" style="top: 66.0%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-112" class="spot" style="top: 79.2%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 5. COCKTAIL TABLES TENGAH (TOTAL 14 UNIT) -->
+        <!-- 5. COCKTAIL TABLES TENGAH -->
         <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
@@ -770,16 +712,15 @@
         <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- 6. SOFA VIP KANAN BAWAH (106, 107, 108) -->
+        <!-- 6. SOFA VIP KANAN BAWAH -->
         <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-107" class="spot" style="top: 68.8%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('107', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-108" class="spot" style="top: 79.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('108', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 7. SOFA VIP SISI BAWAH (111, 110, 109) -->
+        <!-- 7. SOFA VIP SISI BAWAH -->
         <div id="spot-111" class="spot" style="top: 88.5%; left: 5.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('111', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-110" class="spot" style="top: 88.5%; left: 17.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('110', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-109" class="spot" style="top: 88.5%; left: 29.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('109', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
-
       </div>
     </div>
   </main>
@@ -817,13 +758,19 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
-          <select id="guestTime" class="inp-field">
-            <option value="20:00 WITA">20:00 WITA (Gate Opening)</option>
-            <option value="21:00 WITA" selected>21:00 WITA (Main DJ Set)</option>
-            <option value="22:00 WITA">22:00 WITA (Midnight Bash)</option>
-          </select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
+            <select id="guestTime" class="inp-field">
+              <option value="20:00 WITA">20:00 WITA</option>
+              <option value="21:00 WITA" selected>21:00 WITA</option>
+              <option value="22:00 WITA">22:00 WITA</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-user-tag" style="color: var(--gold-primary);"></i> Created By (Staff) *</label>
+            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Nama Anda / Staff" value="Abdul Ghofur">
+          </div>
         </div>
 
         <div class="form-row">
@@ -873,11 +820,17 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total Pembayaran FDC (@ Rp 125.000) *</label>
-          <div class="money-input-box">
-            <span>Rp</span>
-            <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total FDC (@ Rp 125rb) *</label>
+            <div class="money-input-box">
+              <span>Rp</span>
+              <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
+            </div>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-user-tag" style="color: #d8b4fe;"></i> Created By (Staff) *</label>
+            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Nama Staff" value="Abdul Ghofur">
           </div>
         </div>
 
@@ -906,14 +859,12 @@
 
       <div class="modal-body">
         <div class="dash-grid">
-          <!-- HERO CARD: TOTAL GROSS REVENUE -->
           <div class="dash-card hero-card">
             <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Sofa + Cocktail + FDC)</div>
             <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
             <div class="card-sub">Akumulasi seluruh transaksi reservasi sofa, meja cocktail & tiket standing</div>
           </div>
 
-          <!-- CARD: SOFA INVENTORY (TOTAL 21) -->
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i> Sofa / VIP Lounge</div>
             <div class="card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
@@ -925,7 +876,6 @@
             </div>
           </div>
 
-          <!-- CARD: COCKTAIL INVENTORY (TOTAL 20) -->
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i> Cocktail Tables</div>
             <div class="card-val"><span id="repCocktailBooked" style="color: var(--cyan-cocktail);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 20 Unit</span></div>
@@ -937,21 +887,18 @@
             </div>
           </div>
 
-          <!-- CARD: TOTAL TABLE REVENUE GABUNGAN -->
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: var(--emerald-accent);"></i> All Tables Revenue</div>
             <div class="card-val" id="repTableGrossRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
             <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
           </div>
 
-          <!-- CARD: FDC STANDING BREAKDOWN -->
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i> FDC Standing Ticket</div>
             <div class="card-val" id="repFDCPax" style="font-size: 1rem; color: #d8b4fe;">0 Pax</div>
             <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
           </div>
 
-          <!-- CARD: TOTAL ESTIMATED CROWD -->
           <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.65);">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
             <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Total Tamu</div>
@@ -998,14 +945,12 @@
   </div>
 
   <script>
-    // ================= KREDENSIAL SUPABASE REALTIME CLOUD =================
     const SUPABASE_URL = 'https://hupvhnvztvzqbdhuukpt.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1cHZobnZ6dHZ6cWJkaHV1a3B0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDY4NTIsImV4cCI6MjEwNTgyMjg1Mn0.E-XiAzngGIe_KAe2Znk201Jy55zwLUMOwL4cHhxQCPQ';
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const FDC_DEFAULT_PRICE = 125000;
 
-    // DEFINISI 21 SOFA & 20 COCKTAIL TABLES
     const SOFA_IDS = [
       '101', '102', '103', '105', 
       '106', '107', '108', 
@@ -1061,10 +1006,9 @@
       subscribeRealtime();
     });
 
-    // ================= FUNGSI CLOUD SUPABASE =================
+    // ================= SUPABASE DATA SYNC =================
     async function fetchAllCloudData() {
       try {
-        // Ambil Data Meja
         const { data: tableData, error: tErr } = await _supabase.from('table_bookings').select('*');
         if (!tErr && tableData) {
           bookings = {};
@@ -1076,12 +1020,12 @@
               pax: row.pax,
               dp: Number(row.dp),
               time: row.arrival_time,
-              notes: row.notes
+              notes: row.notes,
+              created_by: row.created_by || 'Staff'
             };
           });
         }
 
-        // Ambil Data FDC
         const { data: fdcData, error: fErr } = await _supabase.from('fdc_bookings').select('*');
         if (!fErr && fdcData) {
           fdcBookings = fdcData.map(row => ({
@@ -1090,7 +1034,8 @@
             phone: row.guest_phone,
             pax: row.pax,
             amount: Number(row.amount),
-            notes: row.notes
+            notes: row.notes,
+            created_by: row.created_by || 'Staff'
           }));
         }
 
@@ -1128,6 +1073,7 @@
         document.getElementById('guestPax').value = data.pax || defaultPax;
         document.getElementById('guestDP').value = data.dp ? parseInt(data.dp, 10).toLocaleString('id-ID') : '';
         document.getElementById('guestTime').value = data.time || '21:00 WITA';
+        document.getElementById('guestCreatedBy').value = data.created_by || 'Abdul Ghofur';
         document.getElementById('guestNotes').value = data.notes || '';
         btnDel.style.display = 'inline-flex';
       } else {
@@ -1136,6 +1082,7 @@
         document.getElementById('guestPax').value = defaultPax;
         document.getElementById('guestDP').value = '';
         document.getElementById('guestTime').value = '21:00 WITA';
+        document.getElementById('guestCreatedBy').value = localStorage.getItem('last_staff_name') || 'Abdul Ghofur';
         document.getElementById('guestNotes').value = '';
         btnDel.style.display = 'none';
       }
@@ -1152,11 +1099,14 @@
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
         alert('Silakan masukkan nama tamu pemesan.');
         return;
       }
+
+      localStorage.setItem('last_staff_name', staff);
 
       const payload = {
         table_id: String(currentTable),
@@ -1166,6 +1116,7 @@
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         arrival_time: document.getElementById('guestTime').value,
+        created_by: staff,
         notes: document.getElementById('guestNotes').value
       };
 
@@ -1185,11 +1136,11 @@
       closeBookingModal();
       
       await fetchAllCloudData();
-      alert(`Meja #${currentTable} berhasil dibooking dan disimpan ke database!`);
+      alert(`Meja #${currentTable} berhasil dibooking oleh ${staff} dan tersimpan ke Cloud!`);
     }
 
     async function deleteBooking() {
-      if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali berwarna normal (tersedia).')) {
+      if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali tersedia.')) {
         const { error } = await _supabase.from('table_bookings').delete().eq('table_id', String(currentTable));
         if (!error) {
           delete bookings[currentTable];
@@ -1209,6 +1160,7 @@
       document.getElementById('fdcPhone').value = '';
       document.getElementById('fdcPax').value = '1';
       document.getElementById('fdcAmount').value = (1 * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
+      document.getElementById('fdcCreatedBy').value = localStorage.getItem('last_staff_name') || 'Abdul Ghofur';
       document.getElementById('fdcNotes').value = '';
       document.getElementById('fdcModal').classList.add('open');
     }
@@ -1227,11 +1179,14 @@
       const phone = document.getElementById('fdcPhone').value.trim();
       const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
       const rawAmt = document.getElementById('fdcAmount').value.replace(/[^0-9]/g, '');
+      const staff = document.getElementById('fdcCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
         alert('Silakan masukkan nama pemesan tiket FDC.');
         return;
       }
+
+      localStorage.setItem('last_staff_name', staff);
 
       const payload = {
         id: 'FDC-' + Date.now().toString().slice(-6),
@@ -1239,6 +1194,7 @@
         guest_phone: phone,
         pax: pax,
         amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
+        created_by: staff,
         notes: document.getElementById('fdcNotes').value
       };
 
@@ -1250,7 +1206,7 @@
 
       closeFDCModal();
       await fetchAllCloudData();
-      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) ke Database Cloud!`);
+      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) oleh ${staff}!`);
     }
 
     function openFDCListModal() {
@@ -1265,7 +1221,12 @@
               <div>
                 <strong style="color:#d8b4fe; font-size:0.86rem;">${item.name}</strong> 
                 <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
-                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong></div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">
+                  WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
+                </div>
+                <div style="font-size:0.7rem; color:#fce08a; margin-top:2px;">
+                  <i class="fa-solid fa-user-pen"></i> By: <strong>${item.created_by || 'Staff'}</strong>
+                </div>
                 ${item.notes ? `<div style="font-size:0.7rem; color:#cbd5e1; margin-top:2px; font-style:italic;">"${item.notes}"</div>` : ''}
               </div>
               <button onclick="deleteFDC('${item.id}')" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
@@ -1295,7 +1256,7 @@
       }
     }
 
-    // ================= MODAL EXECUTIVE REPORT & INVENTORY =================
+    // ================= MODAL EXECUTIVE REPORT =================
     function openReportModal() {
       const bookedKeys = Object.keys(bookings);
 
@@ -1462,16 +1423,16 @@
         return;
       }
 
-      let csv = 'Kategori Inventaris,Nomor Unit/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
         const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE';
-        csv += `"${categoryLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.notes || ''}"\n`;
+        csv += `"${categoryLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1481,7 +1442,7 @@
       a.click();
     }
 
-    // ================= ZOOM & GESTURE TOUCH (ANDROID / IOS) =================
+    // ================= ZOOM & GESTURE TOUCH =================
     function zoomMap(delta) {
       zoomLevel = Math.max(0.6, Math.min(2.2, zoomLevel + delta));
       applyTransform();
