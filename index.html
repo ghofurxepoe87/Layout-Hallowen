@@ -147,7 +147,7 @@
     .stat-pill .txt-wrap span { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; }
     .stat-pill .txt-wrap strong { font-size: 0.82rem; }
 
-    /* TOMBOL PDF SPESIAL */
+    /* TOMBOL PDF */
     .btn-pdf {
       background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
       color: #fff;
@@ -278,16 +278,16 @@
       align-items: center;
       justify-content: center;
       border-radius: 6px;
-      transition: transform 0.2s ease, background 0.2s ease;
-      background: rgba(56, 189, 248, 0.1);
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      background: rgba(56, 189, 248, 0.08);
       border: 1.5px solid rgba(56, 189, 248, 0.45);
     }
 
     .spot:hover {
-      background: rgba(254, 240, 138, 0.3);
+      background: rgba(254, 240, 138, 0.35);
       border-color: #fef08a;
       box-shadow: 0 0 12px rgba(254, 240, 138, 0.7);
-      transform: scale(1.05);
+      transform: scale(1.04);
       z-index: 10;
     }
 
@@ -445,7 +445,6 @@
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
-    /* LOADING SPINNER KETIKA GENERATE PDF */
     .pdf-loading-overlay {
       position: fixed;
       inset: 0;
@@ -474,7 +473,7 @@
 </head>
 <body>
 
-  <!-- HEADER HOTEL -->
+  <!-- HEADER -->
   <header>
     <div class="hdr-wrap">
       <div class="brand-section">
@@ -508,7 +507,6 @@
           </div>
         </div>
 
-        <!-- TOMBOL DOWNLOAD PDF -->
         <button class="btn-pdf" onclick="generateLayoutPDF()">
           <i class="fa-solid fa-file-pdf"></i> Export PDF Layout
         </button>
@@ -534,28 +532,27 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENAH KANVAS -->
+  <!-- VIEWPORT DENAH -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
-      <!-- GAMBAR RENDER 3D TERBARU DENGAN TEXT DISCLAIMER ASLI -->
       <img src="SKY.jpg" alt="Infinity Sky Lounge 3D" class="render-3d-img"
            onerror="this.onerror=null; this.src='layout-3d.jpg'; this.addEventListener('error', () => { this.src='7477e3f310a34ddfbfcb844963d742ed~tplv-3rqcfx17w1-brand-ai-watermark.png'; });">
 
-      <!-- LAPISAN HOTSPOT INTERAKTIF PRESISI DI SETIAP MEJA GAMBAR -->
       <div class="hotspots-layer">
         
-        <!-- MEJA MAKAN SKY FLOOR ATAS (123, 122, 121, 120) -->
+        <!-- ================= 1. SKY FLOOR ATAS ================= -->
+        <!-- Dining 8-Pax: 123, 122, 121, 120 -->
         <div id="spot-123" class="spot" style="top: 1.5%; left: 48.6%; width: 6.8%; height: 7.5%;" onclick="openBooking('123', 'Dining Table 8-Pax', 8)"></div>
         <div id="spot-122" class="spot" style="top: 1.5%; left: 56.4%; width: 6.8%; height: 7.5%;" onclick="openBooking('122', 'Dining Table 8-Pax', 8)"></div>
         <div id="spot-121" class="spot" style="top: 1.5%; left: 64.2%; width: 6.8%; height: 7.5%;" onclick="openBooking('121', 'Dining Table 8-Pax', 8)"></div>
         <div id="spot-120" class="spot" style="top: 1.5%; left: 72.0%; width: 6.8%; height: 7.5%;" onclick="openBooking('120', 'Dining Table 8-Pax', 8)"></div>
 
-        <!-- SOFA VIP SKY FLOOR (117, 118, 119) -->
-        <div id="spot-117" class="spot" style="top: 11.8%; left: 49.0%; width: 9.5%; height: 7.6%;" onclick="openBooking('117', 'Sky Floor VIP Sofa', 6)"></div>
-        <div id="spot-118" class="spot" style="top: 11.8%; left: 60.5%; width: 9.5%; height: 7.6%;" onclick="openBooking('118', 'Sky Floor VIP Sofa', 6)"></div>
-        <div id="spot-119" class="spot" style="top: 11.8%; left: 71.8%; width: 9.5%; height: 7.6%;" onclick="openBooking('119', 'Sky Floor VIP Sofa', 6)"></div>
+        <!-- VIP Sofas: 117, 118, 119 -->
+        <div id="spot-117" class="spot" style="top: 11.6%; left: 49.0%; width: 9.5%; height: 7.8%;" onclick="openBooking('117', 'Sky Floor VIP Sofa', 6)"></div>
+        <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa', 6)"></div>
+        <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa', 6)"></div>
 
-        <!-- COCKTAIL HIGH TABLE (124 s/d 129) -->
+        <!-- High Cocktail Tables: 124 s/d 129 -->
         <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table', 4)"></div>
         <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table', 4)"></div>
         <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table', 4)"></div>
@@ -563,49 +560,54 @@
         <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table', 4)"></div>
         <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table', 4)"></div>
 
-        <!-- VIP SOFA KANAN ATAS (105, 103, 102, 101) -->
+        <!-- ================= 2. SOFA VIP KANAN ATAS ================= -->
+        <!-- 105, 103, 102, 101 -->
         <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa', 6)"></div>
         <div id="spot-103" class="spot" style="top: 37.5%; left: 67.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('103', 'VIP Lounge Sofa', 6)"></div>
         <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa', 6)"></div>
         <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa', 6)"></div>
 
-        <!-- VIP SOFA PERIMETER SISI KIRI (116, 115, 113, 112) -->
-        <div id="spot-116" class="spot" style="top: 39.5%; left: 8.0%; width: 7.2%; height: 9.8%;" onclick="openBooking('116', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-115" class="spot" style="top: 52.8%; left: 8.0%; width: 7.2%; height: 9.8%;" onclick="openBooking('115', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-113" class="spot" style="top: 66.5%; left: 8.0%; width: 7.2%; height: 9.8%;" onclick="openBooking('113', 'Perimeter VIP Sofa', 6)"></div>
-        <div id="spot-112" class="spot" style="top: 78.5%; left: 8.0%; width: 7.2%; height: 9.8%;" onclick="openBooking('112', 'Perimeter VIP Sofa', 6)"></div>
+        <!-- ================= 3. SOFA VIP KIRI (RAPAT KE DINDING - TIDAK MENUMPUK) ================= -->
+        <div id="spot-116" class="spot" style="top: 39.5%; left: 1.0%; width: 6.8%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa', 6)"></div>
+        <div id="spot-115" class="spot" style="top: 52.8%; left: 1.0%; width: 6.8%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa', 6)"></div>
+        <div id="spot-113" class="spot" style="top: 66.0%; left: 1.0%; width: 6.8%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa', 6)"></div>
+        <div id="spot-112" class="spot" style="top: 79.2%; left: 1.0%; width: 6.8%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa', 6)"></div>
 
-        <!-- VIP SOFA SISI KANAN BAWAH (106, 107, 108) -->
+        <!-- ================= 4. MEJA TENGAH KOLOM KIRI (PAS PADA BUNDARAN MEJA) ================= -->
+        <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 6.0%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table', 4)"></div>
+        <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 6.0%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table', 4)"></div>
+        <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.2%; width: 6.0%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table', 4)"></div>
+        <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.5%; width: 6.0%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table', 4)"></div>
+
+        <!-- ================= 5. MEJA TENGAH KOLOM TENGAH & KANAN ================= -->
+        <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 6.0%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table', 4)"></div>
+        <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 6.0%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table', 4)"></div>
+        <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 6.0%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table', 4)"></div>
+        <div id="spot-135" class="spot round" style="top: 52.8%; left: 32.0%; width: 6.0%; height: 7.2%;" onclick="openBooking('135', 'Cocktail Table', 4)"></div>
+        <div id="spot-137" class="spot round" style="top: 59.2%; left: 17.2%; width: 6.0%; height: 7.2%;" onclick="openBooking('137', 'Cocktail Table', 4)"></div>
+        <div id="spot-136" class="spot round" style="top: 57.5%; left: 25.5%; width: 6.0%; height: 7.2%;" onclick="openBooking('136', 'Cocktail Table', 4)"></div>
+        <div id="spot-150" class="spot round" style="top: 68.5%; left: 19.5%; width: 6.0%; height: 7.2%;" onclick="openBooking('150', 'Cocktail Table', 4)"></div>
+        <div id="spot-151" class="spot round" style="top: 66.0%; left: 29.0%; width: 6.0%; height: 7.2%;" onclick="openBooking('151', 'Cocktail Table', 4)"></div>
+        <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 6.0%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table', 4)"></div>
+        <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 6.0%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table', 4)"></div>
+
+        <!-- ================= 6. SOFA VIP KANAN BAWAH ================= -->
+        <!-- 106, 107, 108 -->
         <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa', 6)"></div>
         <div id="spot-107" class="spot" style="top: 68.8%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('107', 'Center VIP Sofa', 6)"></div>
         <div id="spot-108" class="spot" style="top: 79.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('108', 'Center VIP Sofa', 6)"></div>
 
-        <!-- VIP SOFA SISI BAWAH (111, 110, 109) -->
+        <!-- ================= 7. SOFA VIP BAWAH ================= -->
+        <!-- 111, 110, 109 -->
         <div id="spot-111" class="spot" style="top: 88.5%; left: 5.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('111', 'Frontline VIP Sofa', 6)"></div>
         <div id="spot-110" class="spot" style="top: 88.5%; left: 17.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('110', 'Frontline VIP Sofa', 6)"></div>
         <div id="spot-109" class="spot" style="top: 88.5%; left: 29.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('109', 'Frontline VIP Sofa', 6)"></div>
-
-        <!-- MEJA TENGAH (130 s/d 155) -->
-        <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table', 4)"></div>
-        <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table', 4)"></div>
-        <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 6.2%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table', 4)"></div>
-        <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table', 4)"></div>
-        <div id="spot-135" class="spot round" style="top: 52.8%; left: 32.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('135', 'Cocktail Table', 4)"></div>
-        <div id="spot-138" class="spot round" style="top: 54.5%; left: 9.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table', 4)"></div>
-        <div id="spot-137" class="spot round" style="top: 59.2%; left: 17.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('137', 'Cocktail Table', 4)"></div>
-        <div id="spot-136" class="spot round" style="top: 57.5%; left: 25.5%; width: 6.2%; height: 7.2%;" onclick="openBooking('136', 'Cocktail Table', 4)"></div>
-        <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table', 4)"></div>
-        <div id="spot-150" class="spot round" style="top: 68.5%; left: 19.5%; width: 6.2%; height: 7.2%;" onclick="openBooking('150', 'Cocktail Table', 4)"></div>
-        <div id="spot-151" class="spot round" style="top: 66.0%; left: 29.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('151', 'Cocktail Table', 4)"></div>
-        <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.5%; width: 6.2%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table', 4)"></div>
-        <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table', 4)"></div>
-        <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table', 4)"></div>
 
       </div>
     </div>
   </main>
 
-  <!-- MODAL RESERVASI & DP RUPIAH MANUAL -->
+  <!-- MODAL RESERVASI & DP RUPIAH -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -630,7 +632,6 @@
           </div>
         </div>
 
-        <!-- INPUT NOMINAL DP RUPIAH SECARA MANUAL -->
         <div class="form-row">
           <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Manual) *</label>
           <div class="money-input-box">
@@ -666,7 +667,7 @@
     </div>
   </div>
 
-  <!-- LOADING OVERLAY GENERATE PDF -->
+  <!-- LOADING PDF SPINNER -->
   <div id="pdfLoading" class="pdf-loading-overlay">
     <div class="pdf-spinner"></div>
     <div style="color: var(--gold-primary); font-weight: 700; font-size: 0.95rem;">Sedang Membuat File PDF Denah Terkini...</div>
@@ -780,12 +781,11 @@
       document.getElementById('statDPTotal').innerText = 'Rp ' + total.toLocaleString('id-ID');
     }
 
-    // ================= FITUR GENERATE PDF UPDATE DENAH =================
+    // ================= FITUR EXPORT PDF =================
     async function generateLayoutPDF() {
       const loading = document.getElementById('pdfLoading');
       loading.style.display = 'flex';
 
-      // Reset zoom sementara agar hasil tangkapan PDF berkualitas tinggi & pas
       const oldTransform = document.getElementById('mapFrame').style.transform;
       document.getElementById('mapFrame').style.transform = 'scale(1)';
 
@@ -793,7 +793,7 @@
         const targetElement = document.getElementById('mapFrame');
         
         const canvas = await html2canvas(targetElement, {
-          scale: 2, // Kualitas cetak HD
+          scale: 2,
           useCORS: true,
           allowTaint: true,
           backgroundColor: '#080c14'
@@ -802,7 +802,6 @@
         const imgData = canvas.toDataURL('image/jpeg', 0.95);
         const { jsPDF } = window.jspdf;
         
-        // Buat PDF Orientasi Landscape
         const pdf = new jsPDF({
           orientation: 'landscape',
           unit: 'mm',
@@ -812,7 +811,6 @@
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
 
-        // Header Dokumen PDF
         pdf.setFillColor(13, 19, 31);
         pdf.rect(0, 0, pdfWidth, 18, 'F');
         
@@ -827,12 +825,10 @@
         const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         pdf.text('Layout Update: Infinity Sky Lounge - Halloween 2026 | ' + dateStr, 10, 14);
 
-        // Status Ringkasan
         const bookedNum = Object.keys(bookings).length;
         pdf.setTextColor(239, 68, 68);
         pdf.text(`Status: ${bookedNum} Meja Terbooking (Merah) | ${36 - bookedNum} Tersedia`, pdfWidth - 85, 14);
 
-        // Render Gambar Denah di Tengah PDF
         const marginY = 20;
         const availableHeight = pdfHeight - marginY - 6;
         const imgRatio = canvas.width / canvas.height;
@@ -847,11 +843,9 @@
         const posX = (pdfWidth - printWidth) / 2;
         pdf.addImage(imgData, 'JPEG', posX, marginY, printWidth, printHeight);
 
-        // Simpan File PDF
         pdf.save(`Layout_Update_InfinitySkyLounge_${new Date().toISOString().slice(0,10)}.pdf`);
       } catch (err) {
         console.error('Gagal membuat PDF otomatis:', err);
-        // Fallback cetak native browser
         window.print();
       } finally {
         document.getElementById('mapFrame').style.transform = oldTransform;
@@ -879,7 +873,6 @@
       a.click();
     }
 
-    // Zoom & Gestures untuk Android & iOS
     function zoomMap(delta) {
       zoomLevel = Math.max(0.6, Math.min(2.0, zoomLevel + delta));
       applyTransform();
