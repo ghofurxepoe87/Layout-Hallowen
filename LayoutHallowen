@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinity Sky Lounge - Halloween Floor Plan 2026</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            halloween: {
+              orange: '#ff6f00',
+              purple: '#9d4edd',
+              dark: '#07080f',
+              card: '#121320',
+              neonRed: '#ff2a4b'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['Cinzel', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #080911; }
+    ::-webkit-scrollbar-thumb { background: #26293f; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ff6f00; }
+
+    /* Interactive Floor Plan SVG Nodes */
+    .table-node {
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease;
+      transform-origin: center;
+    }
+    .table-node:hover {
+      transform: scale(1.045);
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.65));
+    }
+    .table-node:active {
+      transform: scale(0.98);
+    }
+
+    /* 🟢 STATUS: AVAILABLE (HIJAU / CYAN NETRAL) */
+    .status-available .table-surface {
+      fill: #16243b;
+      stroke: #38bdf8;
+      stroke-width: 1.8px;
+    }
+    .status-available .seat-part {
+      fill: #1e3552;
+      stroke: #0ea5e9;
+      stroke-width: 1.2px;
+    }
+    .status-available .status-dot {
+      fill: #22c55e;
+      filter: drop-shadow(0 0 5px #22c55e);
+    }
+    .status-available .label-num {
+      fill: #e2e8f0;
+      font-weight: 700;
+    }
+
+    /* 🔴 STATUS: BOOKED (MERAH MENYALA LENGKAP MEJA + KURSI) */
+    .status-booked {
+      animation: pulseSoft 3s ease-in-out infinite;
+    }
+    .status-booked .table-surface {
+      fill: #550711 !important;
+      stroke: #ff2a4b !important;
+      stroke-width: 2.2px !important;
+      filter: drop-shadow(0 0 8px rgba(255, 42, 75, 0.75)) !important;
+    }
+    .status-booked .seat-part {
+      fill: #8b0d1e !important;
+      stroke: #f43f5e !important;
+      stroke-width: 1.5px !important;
+    }
+    .status-booked .status-dot {
+      fill: #ff2a4b !important;
+      filter: drop-shadow(0 0 7px #ff2a4b) !important;
+    }
+    .status-booked .label-num {
+      fill: #fecdd3 !important;
+      font-weight: 800 !important;
+    }
+    .status-booked:hover {
+      filter: drop-shadow(0 0 14px rgba(255, 42, 75, 0.95)) !important;
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.92; }
+    }
+
+    /* Floor Background Grid */
+    .sky-floor-bg {
+      background-color: #07080f;
+      background-image: 
+        radial-gradient(circle at 18% 22%, rgba(157, 78, 221, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(255, 111, 0, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(239, 68, 68, 0.08) 0%, transparent 45%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    /* Lighting Beam Animation */
+    @keyframes djBeam {
+      0%, 100% { opacity: 0.35; transform: scaleX(0.92); }
+      50% { opacity: 0.75; transform: scaleX(1.08); }
+    }
+    .dj-light-cone {
+      animation: djBeam 3.6s ease-in-out infinite;
+      transform-origin: 220px 220px;
+    }
+  </style>
+</head>
+<body class="bg-[#07080f] text-slate-100 min-h-screen font-sans selection:bg-orange-500 selection:text-white flex flex-col overflow-x-hidden">
+
+  <!-- ================= TOP HEADER ================= -->
+  <header class="border-b border-slate-800/90 bg-[#0c0d18]/95 backdrop-blur-md sticky top-0 z-40 px-3 sm:px-6 py-2.5 shadow-xl">
+    <div class="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Date -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 via-amber-500 to-purple-600 flex items-center justify-center shadow-lg shadow-orange-950/50">
+          <i data-lucide="ghost" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-bold font-display uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-amber-300 to-purple-400">
+              Infinity Sky Lounge
+            </h1>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-orange-950/80 text-orange-300 border border-orange-800/60 uppercase">Halloween 2026</span>
+          </div>
+          <p class="text-[11px] text-slate-400 flex items-center gap-2">
+            <span><i data-lucide="calendar" class="w-3 h-3 inline mr-1 text-orange-400"></i>30 Oktober 2026</span>
+            <span class="text-slate-600">•</span>
+            <span><i data-lucide="layers" class="w-3 h-3 inline mr-1 text-purple-400"></i>10th Floor & Rooftop Terrace</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Buttons (Download HTML, CSV Export, Reset) -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+        
+        <!-- DIRECT DOWNLOAD HTML BUTTON -->
+        <button id="btn-download-html" title="Download file HTML ini langsung ke komputer Anda"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold shadow-md shadow-emerald-950/50 transition">
+          <i data-lucide="file-down" class="w-4 h-4"></i>
+          <span>Download File HTML</span>
+        </button>
+
+        <!-- EXPORT CSV GUEST LIST -->
+        <button id="btn-export-csv" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium transition">
+          <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-400"></i>
+          <span>Guest List CSV</span>
+        </button>
+
+        <!-- RESET BOOKINGS -->
+        <button id="btn-reset-all" title="Reset Semua Data Booking"
+          class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-950/50 hover:bg-red-900/70 text-red-300 border border-red-800/60 transition">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span class="hidden md:inline">Reset Booking</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= SUB-NAV STATS & CONTROLS ================= -->
+  <section class="border-b border-slate-800/70 bg-[#0e101d] px-3 sm:px-6 py-2">
+    <div class="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+      
+      <!-- Live Statistics Counter -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800">
+          <span class="text-slate-400">Total Meja:</span>
+          <span id="stat-total" class="font-bold text-slate-100">31</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-950/40 border border-emerald-800/40">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+          <span class="text-emerald-300">Tersedia:</span>
+          <span id="stat-available" class="font-bold text-emerald-400">0</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-red-950/50 border border-red-800/60">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_#ff2a4b]"></span>
+          <span class="text-red-300 font-medium">Terbooking (Merah):</span>
+          <span id="stat-booked" class="font-bold text-red-400">0</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-950/40 border border-purple-800/40">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-purple-400"></i>
+          <span class="text-purple-300">Total Pax Terisi:</span>
+          <span id="stat-pax" class="font-bold text-purple-200">0</span>
+        </div>
+      </div>
+
+      <!-- Search & Zoom Tools -->
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <div class="relative flex-1 sm:w-56">
+          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input type="text" id="input-search" placeholder="Cari No. Meja / Tamu..." 
+            class="w-full bg-slate-950 text-slate-200 text-xs pl-8 pr-3 py-1 rounded-lg border border-slate-700 focus:border-orange-500 focus:outline-none">
+        </div>
+        <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+          <button id="btn-zoom-in" title="Perbesar" class="p-1 hover:text-white text-slate-400 rounded"><i data-lucide="zoom-in" class="w-3.5 h-3.5"></i></button>
+          <button id="btn-zoom-out" title="Perkecil" class="p-1 hover:text-white text-slate-400 rounded"><i data-lucide="zoom-out" class="w-3.5 h-3.5"></i></button>
+          <button id="btn-zoom-reset" title="Reset Ukuran" class="p-1 hover:text-white text-slate-400 rounded"><i data-lucide="maximize" class="w-3.5 h-3.5"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MAIN FLOOR PLAN CANVAS ================= -->
+  <main class="flex-1 overflow-hidden relative flex flex-col items-center justify-center p-2 sm:p-4 sky-floor-bg">
+    
+    <!-- Outer Viewport -->
+    <div id="viewport" class="w-full h-[77vh] max-h-[920px] rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden relative flex items-center justify-center bg-[#07080f]/90">
+      
+      <!-- Interactive SVG Floor Plan -->
+      <div id="pan-zoom-container" class="w-full h-full flex items-center justify-center transition-transform duration-100 ease-out">
+        <svg id="sky-floor-svg" viewBox="0 0 1200 1080" class="w-full h-full max-h-[880px] object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.9)]" xmlns="http://www.w3.org/2000/svg">
+          
+          <defs>
+            <!-- Stage spotlight lighting gradient -->
+            <radialGradient id="stageCones" cx="50%" cy="0%" r="90%">
+              <stop offset="0%" stop-color="#9d4edd" stop-opacity="0.45"/>
+              <stop offset="60%" stop-color="#ff6f00" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+            </radialGradient>
+            <!-- Bar counter neon glow -->
+            <filter id="neonBarGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- ================= BASE ARCHITECTURAL WALLS & DECK ================= -->
+          <!-- Main Lounge Deck Outline matching blueprint -->
+          <polygon points="35,210 500,210 500,10 1165,10 1165,210 1180,210 1180,500 620,500 620,600 500,600 500,1055 35,1055" 
+            fill="#10121d" stroke="#2a3045" stroke-width="3" />
+
+          <!-- Upper Sky Terrace Deck Flooring (Top Right) -->
+          <polygon points="505,15 1160,15 1160,205 1010,205 1010,310 505,310" 
+            fill="#151726" stroke="#3b4260" stroke-width="1.5" stroke-dasharray="5,4" />
+
+          <!-- Separator wall between lower lounge and right empty section -->
+          <line x1="620" y1="500" x2="1180" y2="500" stroke="#2a3045" stroke-width="3" />
+
+          <!-- ================= CORRIDORS, ACCESS, PHOTOBOX, RESTROOM ================= -->
+          <!-- 1. Lift Access From 10th Floor & Restroom (Middle Top) -->
+          <g transform="translate(480, 215)">
+            <!-- Lift Access Gate -->
+            <rect x="15" y="6" width="115" height="42" rx="4" fill="#0d111d" stroke="#10b981" stroke-width="1.2" />
+            <text x="72" y="24" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">IN | OUT</text>
+            <text x="72" y="38" fill="#94a3b8" font-size="8" text-anchor="middle">LIFT ACCES FROM 10TH FLOOR</text>
+
+            <!-- Restroom -->
+            <rect x="175" y="8" width="64" height="32" rx="4" fill="#1e2235" stroke="#64748b" stroke-width="1" />
+            <text x="207" y="23" fill="#cbd5e1" font-size="8.5" font-weight="bold" text-anchor="middle">RESTROOM</text>
+            <text x="207" y="34" fill="#94a3b8" font-size="9" text-anchor="middle">🚹 🚺</text>
+          </g>
+
+          <!-- 2. Sky Floor & Rooftop Terrace Access (Far Right Upper Deck) -->
+          <g transform="translate(1005, 20)">
+            <!-- Stairs leading up to Sky Terrace -->
+            <g>
+              <rect x="0" y="65" width="22" height="120" fill="#171926" stroke="#475569" stroke-width="1"/>
+              <line x1="0" y1="80" x2="22" y2="80" stroke="#64748b"/>
+              <line x1="0" y1="95" x2="22" y2="95" stroke="#64748b"/>
+              <line x1="0" y1="110" x2="22" y2="110" stroke="#64748b"/>
+              <line x1="0" y1="125" x2="22" y2="125" stroke="#64748b"/>
+              <line x1="0" y1="140" x2="22" y2="140" stroke="#64748b"/>
+              <line x1="0" y1="155" x2="22" y2="155" stroke="#64748b"/>
+              <line x1="0" y1="170" x2="22" y2="170" stroke="#64748b"/>
+            </g>
+
+            <!-- Sky Floor Text Title -->
+            <rect x="25" y="0" width="135" height="190" fill="#1b1e2e" stroke="#3b4260" rx="4" />
+            <text x="92" y="42" fill="#e2e8f0" font-size="15" font-weight="bold" font-style="italic" text-anchor="middle">Sky Floor</text>
+
+            <!-- Hot Pink Photobox (as in blueprint) -->
+            <rect x="42" y="135" width="105" height="50" rx="6" fill="#e11d48" stroke="#f43f5e" stroke-width="2" />
+            <text x="94" y="165" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">photobox</text>
+
+            <!-- Rooftop Terrace IN | OUT -->
+            <rect x="30" y="200" width="125" height="38" rx="4" fill="#0d111d" stroke="#0ea5e9" stroke-width="1.2" />
+            <text x="92" y="217" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">IN | OUT</text>
+            <text x="92" y="230" fill="#94a3b8" font-size="7.5" text-anchor="middle">ACCES FROM ROOFTOP TERACE</text>
+          </g>
+
+          <!-- ================= 3. DJ STAGE & LIGHTING (TOP LEFT) ================= -->
+          <g id="dj-stage-area" transform="translate(60, 225)">
+            <!-- Beaming stage light -->
+            <polygon points="170,30 20,180 320,180" fill="url(#stageCones)" class="dj-light-cone" />
+            
+            <!-- Left Lighting Truss -->
+            <g transform="translate(60, 20)">
+              <line x1="25" y1="75" x2="10" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="25" y1="75" x2="40" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="25" y1="75" x2="25" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="10" y1="135" x2="40" y2="135" stroke="#64748b" stroke-width="2" />
+              <!-- Truss head -->
+              <rect x="0" y="5" width="50" height="12" rx="2" fill="#334155" stroke="#64748b" />
+              <circle cx="10" cy="11" r="3.5" fill="#22c55e" />
+              <circle cx="20" cy="11" r="3.5" fill="#38bdf8" />
+              <circle cx="30" cy="11" r="3.5" fill="#ec4899" />
+              <circle cx="40" cy="11" r="3.5" fill="#eab308" />
+            </g>
+
+            <!-- Main DJ Stage Platform & LED backdrop -->
+            <rect x="140" y="10" width="160" height="115" rx="5" fill="#141624" stroke="#6366f1" stroke-width="2" />
+            <line x1="140" y1="10" x2="300" y2="125" stroke="#312e81" stroke-width="1.5" />
+            <line x1="300" y1="10" x2="140" y2="125" stroke="#312e81" stroke-width="1.5" />
+            
+            <!-- DJ Console & Equipment Deck -->
+            <rect x="175" y="78" width="90" height="34" rx="4" fill="#0f172a" stroke="#818cf8" stroke-width="1.5" />
+            <circle cx="195" cy="95" r="8" fill="#020617" stroke="#38bdf8" stroke-width="1.2" />
+            <circle cx="245" cy="95" r="8" fill="#020617" stroke="#f43f5e" stroke-width="1.2" />
+            
+            <!-- DJ Performer Figure -->
+            <circle cx="220" cy="50" r="11" fill="#fbbf24" />
+            <path d="M 208 72 C 208 62, 232 62, 232 72 Z" fill="#6366f1" />
+            <path d="M 206 50 Q 220 38 234 50" stroke="#f43f5e" stroke-width="2.5" fill="none" />
+            <rect x="205" y="47" width="3" height="6" fill="#f43f5e" />
+            <rect x="232" y="47" width="3" height="6" fill="#f43f5e" />
+
+            <!-- Stage Stairs -->
+            <rect x="195" y="125" width="50" height="8" fill="#334155" stroke="#475569" />
+            <rect x="200" y="133" width="40" height="8" fill="#1e293b" stroke="#475569" />
+
+            <!-- Right Lighting Truss -->
+            <g transform="translate(320, 20)">
+              <line x1="25" y1="75" x2="10" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="25" y1="75" x2="40" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="25" y1="75" x2="25" y2="135" stroke="#94a3b8" stroke-width="2" />
+              <line x1="10" y1="135" x2="40" y2="135" stroke="#64748b" stroke-width="2" />
+              <rect x="0" y="5" width="50" height="12" rx="2" fill="#334155" stroke="#64748b" />
+              <circle cx="10" cy="11" r="3.5" fill="#22c55e" />
+              <circle cx="20" cy="11" r="3.5" fill="#38bdf8" />
+              <circle cx="30" cy="11" r="3.5" fill="#ec4899" />
+              <circle cx="40" cy="11" r="3.5" fill="#eab308" />
+            </g>
+          </g>
+
+          <!-- ================= 4. CENTRAL BAR STATION ================= -->
+          <g id="central-bar-station" transform="translate(520, 440)">
+            <!-- Top Counter (Pink Magenta as in layout) -->
+            <rect x="10" y="8" width="82" height="22" rx="3" fill="#db2777" stroke="#f472b6" stroke-width="1.5" />
+            <!-- Main Bar Body (Purple Blue) -->
+            <rect x="6" y="30" width="90" height="135" rx="6" fill="#4f46e5" stroke="#818cf8" stroke-width="2" />
+            <rect x="14" y="38" width="74" height="119" rx="4" fill="#3730a3" stroke="#6366f1" stroke-width="1" />
+            <!-- Bar Station Text -->
+            <text x="51" y="96" fill="#ffffff" font-size="11" font-weight="bold" letter-spacing="0.5" text-anchor="middle">BAR</text>
+            <text x="51" y="112" fill="#c7d2fe" font-size="10" font-weight="semibold" letter-spacing="0.5" text-anchor="middle">STATION</text>
+            <!-- Bottles and Glasses decoration -->
+            <circle cx="36" cy="54" r="3" fill="#38bdf8" />
+            <circle cx="51" cy="54" r="3" fill="#fbbf24" />
+            <circle cx="66" cy="54" r="3" fill="#ec4899" />
+          </g>
+
+          <!-- ================= 5. BRANDING TEXT ON FLOOR ================= -->
+          <g transform="translate(640, 525)">
+            <text x="0" y="0" fill="#f8fafc" font-size="33" font-family="'Cinzel', serif" font-weight="900" letter-spacing="3">INFINITY</text>
+            <text x="0" y="38" fill="#94a3b8" font-size="28" font-family="'Cinzel', serif" font-weight="700" letter-spacing="2">SKY LOUNGE</text>
+            <text x="10" y="165" fill="#f97316" font-size="28" font-weight="800" letter-spacing="1">Layout HALLOWEN</text>
+            <text x="10" y="205" fill="#cbd5e1" font-size="23" font-weight="600">30 October 2026</text>
+          </g>
+
+          <!-- ================= 6. UPPER DINING TABLES (120 - 123) ================= -->
+          <!-- Table 123 (8-Seater) -->
+          <g id="table-123" class="table-node status-available" onclick="selectTable('123')">
+            <rect x="560" y="35" width="80" height="48" rx="4" class="table-surface" />
+            <!-- 8 Chairs -->
+            <rect x="570" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="614" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="570" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="614" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="542" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="542" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="646" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="646" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <circle cx="600" cy="59" r="4.5" class="status-dot" />
+            <text x="600" y="118" font-size="14" text-anchor="middle" class="label-num">123</text>
+          </g>
+
+          <!-- Table 122 (8-Seater) -->
+          <g id="table-122" class="table-node status-available" onclick="selectTable('122')">
+            <rect x="680" y="35" width="80" height="48" rx="4" class="table-surface" />
+            <rect x="690" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="734" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="690" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="734" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="662" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="662" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="766" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="766" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <circle cx="720" cy="59" r="4.5" class="status-dot" />
+            <text x="720" y="118" font-size="14" text-anchor="middle" class="label-num">122</text>
+          </g>
+
+          <!-- Table 121 (8-Seater) -->
+          <g id="table-121" class="table-node status-available" onclick="selectTable('121')">
+            <rect x="800" y="35" width="80" height="48" rx="4" class="table-surface" />
+            <rect x="810" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="854" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="810" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="854" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="782" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="782" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="886" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="886" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <circle cx="840" cy="59" r="4.5" class="status-dot" />
+            <text x="840" y="118" font-size="14" text-anchor="middle" class="label-num">121</text>
+          </g>
+
+          <!-- Table 120 (8-Seater) -->
+          <g id="table-120" class="table-node status-available" onclick="selectTable('120')">
+            <rect x="920" y="35" width="80" height="48" rx="4" class="table-surface" />
+            <rect x="930" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="974" y="18" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="930" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="974" y="87" width="16" height="12" rx="3" class="seat-part" />
+            <rect x="902" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="902" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="1006" y="42" width="12" height="16" rx="3" class="seat-part" />
+            <rect x="1006" y="62" width="12" height="16" rx="3" class="seat-part" />
+            <circle cx="960" cy="59" r="4.5" class="status-dot" />
+            <text x="960" y="118" font-size="14" text-anchor="middle" class="label-num">120</text>
+          </g>
+
+          <!-- ================= 7. UPPER VIP SOFAS (117, 118, 119) ================= -->
+          <!-- Sofa 117 -->
+          <g id="table-117" class="table-node status-available" onclick="selectTable('117')">
+            <text x="645" y="162" font-size="13" font-weight="bold" text-anchor="middle" class="label-num">117</text>
+            <rect x="620" y="170" width="50" height="30" rx="3" class="table-surface" />
+            <rect x="608" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="672" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="614" y="205" width="62" height="12" rx="3" class="seat-part" />
+            <circle cx="645" cy="185" r="4" class="status-dot" />
+          </g>
+
+          <!-- Sofa 118 -->
+          <g id="table-118" class="table-node status-available" onclick="selectTable('118')">
+            <text x="765" y="162" font-size="13" font-weight="bold" text-anchor="middle" class="label-num">118</text>
+            <rect x="740" y="170" width="50" height="30" rx="3" class="table-surface" />
+            <rect x="728" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="792" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="734" y="205" width="62" height="12" rx="3" class="seat-part" />
+            <circle cx="765" cy="185" r="4" class="status-dot" />
+          </g>
+
+          <!-- Sofa 119 -->
+          <g id="table-119" class="table-node status-available" onclick="selectTable('119')">
+            <text x="885" y="162" font-size="13" font-weight="bold" text-anchor="middle" class="label-num">119</text>
+            <rect x="860" y="170" width="50" height="30" rx="3" class="table-surface" />
+            <rect x="848" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="912" y="166" width="10" height="38" rx="3" class="seat-part" />
+            <rect x="854" y="205" width="62" height="12" rx="3" class="seat-part" />
+            <circle cx="885" cy="185" r="4" class="status-dot" />
+          </g>
+
+          <!-- ================= 8. UPPER STANDING COCKTAILS (124 - 129) ================= -->
+          <!-- 124 -->
+          <g id="table-124" class="table-node status-available" onclick="selectTable('124')">
+            <ellipse cx="765" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M759,264 L755,285 L775,285 L771,264 Z" class="seat-part" />
+            <circle cx="765" cy="255" r="3" class="status-dot" />
+            <text x="765" y="302" font-size="11" text-anchor="middle" class="label-num">124</text>
+          </g>
+          <!-- 125 -->
+          <g id="table-125" class="table-node status-available" onclick="selectTable('125')">
+            <ellipse cx="810" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M804,264 L800,285 L820,285 L816,264 Z" class="seat-part" />
+            <circle cx="810" cy="255" r="3" class="status-dot" />
+            <text x="810" y="302" font-size="11" text-anchor="middle" class="label-num">125</text>
+          </g>
+          <!-- 126 -->
+          <g id="table-126" class="table-node status-available" onclick="selectTable('126')">
+            <ellipse cx="855" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M849,264 L845,285 L865,285 L861,264 Z" class="seat-part" />
+            <circle cx="855" cy="255" r="3" class="status-dot" />
+            <text x="855" y="302" font-size="11" text-anchor="middle" class="label-num">126</text>
+          </g>
+          <!-- 127 -->
+          <g id="table-127" class="table-node status-available" onclick="selectTable('127')">
+            <ellipse cx="900" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M894,264 L890,285 L910,285 L906,264 Z" class="seat-part" />
+            <circle cx="900" cy="255" r="3" class="status-dot" />
+            <text x="900" y="302" font-size="11" text-anchor="middle" class="label-num">127</text>
+          </g>
+          <!-- 128 -->
+          <g id="table-128" class="table-node status-available" onclick="selectTable('128')">
+            <ellipse cx="945" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M939,264 L935,285 L955,285 L951,264 Z" class="seat-part" />
+            <circle cx="945" cy="255" r="3" class="status-dot" />
+            <text x="945" y="302" font-size="11" text-anchor="middle" class="label-num">128</text>
+          </g>
+          <!-- 129 -->
+          <g id="table-129" class="table-node status-available" onclick="selectTable('129')">
+            <ellipse cx="990" cy="255" rx="14" ry="9" class="table-surface" />
+            <path d="M984,264 L980,285 L1000,285 L996,264 Z" class="seat-part" />
+            <circle cx="990" cy="255" r="3" class="status-dot" />
+            <text x="990" y="302" font-size="11" text-anchor="middle" class="label-num">129</text>
+          </g>
+
+          <!-- ================= 9. MIDDLE VIP SOFAS (105, 103, 102, 101) ================= -->
+          <!-- 105 -->
+          <g id="table-105" class="table-node status-available" onclick="selectTable('105')">
+            <text x="720" y="420" font-size="14" text-anchor="middle" class="label-num">105</text>
+            <rect x="695" y="430" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="670" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="750" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="689" y="463" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="720" cy="444" r="4" class="status-dot" />
+          </g>
+          <!-- 103 -->
+          <g id="table-103" class="table-node status-available" onclick="selectTable('103')">
+            <text x="840" y="420" font-size="14" text-anchor="middle" class="label-num">103</text>
+            <rect x="815" y="430" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="790" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="870" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="809" y="463" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="840" cy="444" r="4" class="status-dot" />
+          </g>
+          <!-- 102 -->
+          <g id="table-102" class="table-node status-available" onclick="selectTable('102')">
+            <text x="960" y="420" font-size="14" text-anchor="middle" class="label-num">102</text>
+            <rect x="935" y="430" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="910" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="990" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="929" y="463" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="960" cy="444" r="4" class="status-dot" />
+          </g>
+          <!-- 101 -->
+          <g id="table-101" class="table-node status-available" onclick="selectTable('101')">
+            <text x="1080" y="420" font-size="14" text-anchor="middle" class="label-num">101</text>
+            <rect x="1055" y="430" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="1030" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="1110" y="425" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="1049" y="463" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="1080" cy="444" r="4" class="status-dot" />
+          </g>
+
+          <!-- ================= 10. LEFT WALL VIP SOFAS (116, 115, 113, 112) ================= -->
+          <!-- 116 -->
+          <g id="table-116" class="table-node status-available" onclick="selectTable('116')">
+            <rect x="65" y="450" width="40" height="25" rx="3" class="table-surface" />
+            <rect x="60" y="425" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="60" y="480" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="42" y="435" width="16" height="55" rx="3" class="seat-part" />
+            <circle cx="85" cy="462" r="4" class="status-dot" />
+            <text x="128" y="468" font-size="14" class="label-num">116</text>
+          </g>
+          <!-- 115 -->
+          <g id="table-115" class="table-node status-available" onclick="selectTable('115')">
+            <rect x="65" y="580" width="40" height="25" rx="3" class="table-surface" />
+            <rect x="60" y="555" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="60" y="610" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="42" y="565" width="16" height="55" rx="3" class="seat-part" />
+            <circle cx="85" cy="592" r="4" class="status-dot" />
+            <text x="128" y="598" font-size="14" class="label-num">115</text>
+          </g>
+          <!-- 113 -->
+          <g id="table-113" class="table-node status-available" onclick="selectTable('113')">
+            <rect x="65" y="710" width="40" height="25" rx="3" class="table-surface" />
+            <rect x="60" y="685" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="60" y="740" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="42" y="695" width="16" height="55" rx="3" class="seat-part" />
+            <circle cx="85" cy="722" r="4" class="status-dot" />
+            <text x="128" y="728" font-size="14" class="label-num">113</text>
+          </g>
+          <!-- 112 -->
+          <g id="table-112" class="table-node status-available" onclick="selectTable('112')">
+            <rect x="65" y="840" width="40" height="25" rx="3" class="table-surface" />
+            <rect x="60" y="815" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="60" y="870" width="50" height="20" rx="3" class="seat-part" />
+            <rect x="42" y="825" width="16" height="55" rx="3" class="seat-part" />
+            <circle cx="85" cy="852" r="4" class="status-dot" />
+            <text x="128" y="858" font-size="14" class="label-num">112</text>
+          </g>
+
+          <!-- ================= 11. BOTTOM ROW VIP SOFAS (111, 110, 109) ================= -->
+          <!-- 111 -->
+          <g id="table-111" class="table-node status-available" onclick="selectTable('111')">
+            <text x="120" y="938" font-size="14" text-anchor="middle" class="label-num">111</text>
+            <rect x="95" y="948" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="70" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="150" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="89" y="981" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="120" cy="962" r="4" class="status-dot" />
+          </g>
+          <!-- 110 -->
+          <g id="table-110" class="table-node status-available" onclick="selectTable('110')">
+            <text x="245" y="938" font-size="14" text-anchor="middle" class="label-num">110</text>
+            <rect x="220" y="948" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="195" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="275" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="214" y="981" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="245" cy="962" r="4" class="status-dot" />
+          </g>
+          <!-- 109 -->
+          <g id="table-109" class="table-node status-available" onclick="selectTable('109')">
+            <text x="370" y="938" font-size="14" text-anchor="middle" class="label-num">109</text>
+            <rect x="345" y="948" width="50" height="28" rx="3" class="table-surface" />
+            <rect x="320" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="400" y="943" width="20" height="38" rx="3" class="seat-part" />
+            <rect x="339" y="981" width="62" height="16" rx="3" class="seat-part" />
+            <circle cx="370" cy="962" r="4" class="status-dot" />
+          </g>
+
+          <!-- ================= 12. LOWER RIGHT VIP SOFAS (106, 107, 108) ================= -->
+          <!-- 106 -->
+          <g id="table-106" class="table-node status-available" onclick="selectTable('106')">
+            <text x="395" y="648" font-size="14" text-anchor="end" class="label-num">106</text>
+            <rect x="420" y="630" width="30" height="42" rx="3" class="table-surface" />
+            <rect x="410" y="612" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="410" y="675" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="454" y="622" width="16" height="58" rx="3" class="seat-part" />
+            <circle cx="435" cy="651" r="4" class="status-dot" />
+          </g>
+          <!-- 107 -->
+          <g id="table-107" class="table-node status-available" onclick="selectTable('107')">
+            <text x="395" y="760" font-size="14" text-anchor="end" class="label-num">107</text>
+            <rect x="420" y="742" width="30" height="42" rx="3" class="table-surface" />
+            <rect x="410" y="724" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="410" y="787" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="454" y="734" width="16" height="58" rx="3" class="seat-part" />
+            <circle cx="435" cy="763" r="4" class="status-dot" />
+          </g>
+          <!-- 108 -->
+          <g id="table-108" class="table-node status-available" onclick="selectTable('108')">
+            <text x="395" y="872" font-size="14" text-anchor="end" class="label-num">108</text>
+            <rect x="420" y="854" width="30" height="42" rx="3" class="table-surface" />
+            <rect x="410" y="836" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="410" y="899" width="50" height="15" rx="3" class="seat-part" />
+            <rect x="454" y="846" width="16" height="58" rx="3" class="seat-part" />
+            <circle cx="435" cy="875" r="4" class="status-dot" />
+          </g>
+
+          <!-- ================= 13. CENTER DANCE FLOOR COCKTAIL TABLES (130 - 155) ================= -->
+          <!-- 130 -->
+          <g id="table-130" class="table-node status-available" onclick="selectTable('130')">
+            <ellipse cx="148" cy="460" rx="16" ry="11" class="table-surface" />
+            <path d="M142,471 L136,494 L160,494 L154,471 Z" class="seat-part" />
+            <circle cx="148" cy="460" r="3" class="status-dot" />
+            <text x="175" y="465" font-size="11" class="label-num">130</text>
+          </g>
+          <!-- 131 -->
+          <g id="table-131" class="table-node status-available" onclick="selectTable('131')">
+            <ellipse cx="245" cy="435" rx="16" ry="11" class="table-surface" />
+            <path d="M239,446 L233,469 L257,469 L251,446 Z" class="seat-part" />
+            <circle cx="245" cy="435" r="3" class="status-dot" />
+            <text x="270" y="440" font-size="11" class="label-num">131</text>
+          </g>
+          <!-- 132 -->
+          <g id="table-132" class="table-node status-available" onclick="selectTable('132')">
+            <ellipse cx="325" cy="480" rx="16" ry="11" class="table-surface" />
+            <path d="M319,491 L313,514 L337,514 L331,491 Z" class="seat-part" />
+            <circle cx="325" cy="480" r="3" class="status-dot" />
+            <text x="348" y="485" font-size="11" class="label-num">132</text>
+          </g>
+          <!-- 133 -->
+          <g id="table-133" class="table-node status-available" onclick="selectTable('133')">
+            <ellipse cx="235" cy="515" rx="16" ry="11" class="table-surface" />
+            <path d="M229,526 L223,549 L247,549 L241,526 Z" class="seat-part" />
+            <circle cx="235" cy="515" r="3" class="status-dot" />
+            <text x="258" y="520" font-size="11" class="label-num">133</text>
+          </g>
+          <!-- 135 -->
+          <g id="table-135" class="table-node status-available" onclick="selectTable('135')">
+            <ellipse cx="368" cy="560" rx="16" ry="11" class="table-surface" />
+            <path d="M362,571 L356,594 L380,594 L374,571 Z" class="seat-part" />
+            <circle cx="368" cy="560" r="3" class="status-dot" />
+            <text x="393" y="565" font-size="11" class="label-num">135</text>
+          </g>
+          <!-- 136 -->
+          <g id="table-136" class="table-node status-available" onclick="selectTable('136')">
+            <ellipse cx="300" cy="610" rx="16" ry="11" class="table-surface" />
+            <path d="M294,621 L288,644 L312,644 L306,621 Z" class="seat-part" />
+            <circle cx="300" cy="610" r="3" class="status-dot" />
+            <text x="323" y="615" font-size="11" class="label-num">136</text>
+          </g>
+          <!-- 137 -->
+          <g id="table-137" class="table-node status-available" onclick="selectTable('137')">
+            <ellipse cx="205" cy="620" rx="16" ry="11" class="table-surface" />
+            <path d="M199,631 L193,654 L217,654 L211,631 Z" class="seat-part" />
+            <circle cx="205" cy="620" r="3" class="status-dot" />
+            <text x="228" y="625" font-size="11" class="label-num">137</text>
+          </g>
+          <!-- 138 -->
+          <g id="table-138" class="table-node status-available" onclick="selectTable('138')">
+            <ellipse cx="148" cy="580" rx="16" ry="11" class="table-surface" />
+            <path d="M142,591 L136,614 L160,614 L154,591 Z" class="seat-part" />
+            <circle cx="148" cy="580" r="3" class="status-dot" />
+            <text x="173" y="585" font-size="11" class="label-num">138</text>
+          </g>
+          <!-- 139 -->
+          <g id="table-139" class="table-node status-available" onclick="selectTable('139')">
+            <ellipse cx="140" cy="710" rx="16" ry="11" class="table-surface" />
+            <path d="M134,721 L128,744 L152,744 L146,721 Z" class="seat-part" />
+            <circle cx="140" cy="710" r="3" class="status-dot" />
+            <text x="163" y="715" font-size="11" class="label-num">139</text>
+          </g>
+          <!-- 150 -->
+          <g id="table-150" class="table-node status-available" onclick="selectTable('150')">
+            <ellipse cx="240" cy="718" rx="16" ry="11" class="table-surface" />
+            <path d="M234,729 L228,752 L252,752 L246,729 Z" class="seat-part" />
+            <circle cx="240" cy="718" r="3" class="status-dot" />
+            <text x="263" y="723" font-size="11" class="label-num">150</text>
+          </g>
+          <!-- 151 -->
+          <g id="table-151" class="table-node status-available" onclick="selectTable('151')">
+            <ellipse cx="335" cy="695" rx="16" ry="11" class="table-surface" />
+            <path d="M329,706 L323,729 L347,729 L341,706 Z" class="seat-part" />
+            <circle cx="335" cy="695" r="3" class="status-dot" />
+            <text x="358" y="700" font-size="11" class="label-num">151</text>
+          </g>
+          <!-- 152 -->
+          <g id="table-152" class="table-node status-available" onclick="selectTable('152')">
+            <ellipse cx="335" cy="805" rx="16" ry="11" class="table-surface" />
+            <path d="M329,816 L323,839 L347,839 L341,816 Z" class="seat-part" />
+            <circle cx="335" cy="805" r="3" class="status-dot" />
+            <text x="358" y="810" font-size="11" class="label-num">152</text>
+          </g>
+          <!-- 153 -->
+          <g id="table-153" class="table-node status-available" onclick="selectTable('153')">
+            <ellipse cx="240" cy="825" rx="16" ry="11" class="table-surface" />
+            <path d="M234,836 L228,859 L252,859 L246,836 Z" class="seat-part" />
+            <circle cx="240" cy="825" r="3" class="status-dot" />
+            <text x="263" y="830" font-size="11" class="label-num">153</text>
+          </g>
+          <!-- 155 -->
+          <g id="table-155" class="table-node status-available" onclick="selectTable('155')">
+            <ellipse cx="145" cy="815" rx="16" ry="11" class="table-surface" />
+            <path d="M139,826 L133,849 L157,849 L151,826 Z" class="seat-part" />
+            <circle cx="145" cy="815" r="3" class="status-dot" />
+            <text x="168" y="820" font-size="11" class="label-num">155</text>
+          </g>
+
+        </svg>
+      </div>
+
+      <!-- Quick Guidance Toast -->
+      <div class="absolute bottom-3 left-4 pointer-events-none hidden sm:flex items-center gap-2 text-xs bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Klik meja/sofa hijau untuk isi data pemesan &bull; Meja terisi otomatis berwarna <strong class="text-red-400">MERAH</strong></span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= POP-UP MODAL (RESERVASI & DETAIL) ================= -->
+  <div id="modal-container" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div id="modal-box" class="bg-[#121322] border border-slate-700 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden transform transition-all scale-95 opacity-0">
+      
+      <!-- Modal Header -->
+      <div class="px-5 py-4 bg-gradient-to-r from-purple-950/70 via-slate-900 to-amber-950/40 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="modal-icon-badge" class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold text-lg text-white shadow-lg">
+            #--
+          </div>
+          <div>
+            <h3 id="modal-title" class="text-base font-bold text-white flex items-center gap-2">
+              <span>Reservasi Meja</span>
+              <span id="modal-status-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">Tersedia</span>
+            </h3>
+            <p id="modal-subtitle" class="text-xs text-slate-400">Zona Rooftop</p>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- VIEW A: FORM BOOKING (Jika Meja Belum Terisi) -->
+      <form id="form-booking" class="p-5 sm:p-6 space-y-4">
+        <input type="hidden" id="form-table-num" value="">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-orange-400"></i>
+              Nama Pemesan (Guest Name) *
+            </label>
+            <input type="text" id="input-guest-name" required placeholder="Contoh: Jessica Alexandra"
+              class="w-full bg-slate-950 text-xs text-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i>
+              No. WhatsApp / HP *
+            </label>
+            <input type="tel" id="input-guest-phone" required placeholder="0812-3456-xxxx"
+              class="w-full bg-slate-950 text-xs text-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-purple-400"></i>
+              Jumlah Tamu (Pax) *
+            </label>
+            <select id="input-guest-pax" class="w-full bg-slate-950 text-xs text-slate-100 px-3 py-2.5 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition">
+              <option value="2">2 Orang</option>
+              <option value="4" selected>4 Orang</option>
+              <option value="6">6 Orang</option>
+              <option value="8">8 Orang</option>
+              <option value="10">10+ Orang</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="wine" class="w-3.5 h-3.5 text-amber-400"></i>
+              Paket Minimum Spend / F&B
+            </label>
+            <select id="input-guest-package" class="w-full bg-slate-950 text-xs text-slate-100 px-3 py-2.5 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition">
+              <option value="Halloween Cocktail Pass">Halloween Cocktail Pass</option>
+              <option value="VIP Bottle Package">VIP Bottle Package (Min Spend)</option>
+              <option value="Sky Platinum VIP">Sky Platinum VIP Halloween</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i>
+              Jam Tiba
+            </label>
+            <select id="input-guest-arrival" class="w-full bg-slate-950 text-xs text-slate-100 px-3 py-2.5 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition">
+              <option value="20:00 WITA">20:00 WITA</option>
+              <option value="21:00 WITA" selected>21:00 WITA (Main DJ Set)</option>
+              <option value="22:00 WITA">22:00 WITA</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+            <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-400"></i>
+            Catatan Tambahan / Special Request
+          </label>
+          <textarea id="input-guest-notes" rows="2" placeholder="Cth: Request sofa dekat DJ, request bucket ice & glasses..."
+            class="w-full bg-slate-950 text-xs text-slate-100 px-3.5 py-2 rounded-xl border border-slate-700 focus:border-orange-500 focus:outline-none transition"></textarea>
+        </div>
+
+        <div class="p-3 rounded-xl bg-orange-950/40 border border-orange-800/40 text-[11px] text-orange-200 flex items-start gap-2">
+          <i data-lucide="info" class="w-4 h-4 text-orange-400 shrink-0 mt-0.5"></i>
+          <span>Saat disimpan, meja beserta seluruh kursinya akan <strong>otomatis berubah warna MERAH</strong> menandakan status terbooking.</span>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs text-slate-400 hover:text-white rounded-lg transition">
+            Batal
+          </button>
+          <button type="submit" class="px-5 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-950/50 flex items-center gap-2 transition">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Konfirmasi Booking (Ubah ke Merah)</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- VIEW B: DETAIL TAMU (Jika Meja Sudah Booked / Merah) -->
+      <div id="view-booked-details" class="p-5 sm:p-6 space-y-4 hidden">
+        <div class="bg-red-950/40 border border-red-800/70 p-3.5 rounded-xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-red-950">
+            <i data-lucide="lock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-red-200">Meja Terbooking (Status Merah)</h4>
+            <p class="text-xs text-red-300/80">Meja ini terkunci dan ditandai merah di denah.</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-950/70 border border-slate-800/90 rounded-xl p-4 divide-y divide-slate-800 text-xs">
+          <div class="py-2 flex justify-between">
+            <span class="text-slate-400">Nama Tamu</span>
+            <span id="detail-name" class="font-semibold text-white">--</span>
+          </div>
+          <div class="py-2 flex justify-between">
+            <span class="text-slate-400">WhatsApp / HP</span>
+            <span id="detail-phone" class="font-semibold text-emerald-400">--</span>
+          </div>
+          <div class="py-2 flex justify-between">
+            <span class="text-slate-400">Jumlah Tamu</span>
+            <span id="detail-pax" class="font-semibold text-white">--</span>
+          </div>
+          <div class="py-2 flex justify-between">
+            <span class="text-slate-400">Paket F&B</span>
+            <span id="detail-package" class="font-semibold text-amber-300">--</span>
+          </div>
+          <div class="py-2 flex justify-between">
+            <span class="text-slate-400">Estimasi Tiba</span>
+            <span id="detail-arrival" class="font-semibold text-slate-200">--</span>
+          </div>
+          <div class="py-2 flex flex-col gap-1">
+            <span class="text-slate-400">Catatan Khusus:</span>
+            <span id="detail-notes" class="text-[11px] text-slate-300 bg-slate-900 p-2 rounded border border-slate-800 italic">--</span>
+          </div>
+          <div class="py-2 flex justify-between text-slate-500 text-[10px]">
+            <span>Waktu Reservasi:</span>
+            <span id="detail-time">--</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+          <button type="button" id="btn-cancel-reservation" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-red-950 hover:bg-red-900 text-red-200 border border-red-800 transition flex items-center gap-1.5">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Batalkan Booking (Kembali Hijau)</span>
+          </button>
+          <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl transition">
+            Tutup
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-notif" class="fixed bottom-6 right-6 z-50 bg-[#16182a] border border-orange-500/60 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="w-7 h-7 rounded-lg bg-orange-600 flex items-center justify-center shrink-0">
+      <i data-lucide="check" class="w-4 h-4 text-white"></i>
+    </div>
+    <div>
+      <h5 id="toast-title" class="text-xs font-bold">Pemberitahuan</h5>
+      <p id="toast-desc" class="text-[11px] text-slate-300">Aksi berhasil diproses.</p>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Master Metadata for All Tables from blueprint
+    const TABLE_INFO = {
+      // Upper Dining 8-Seat
+      "123": { type: "Dining Table (8 Pax)", zone: "Sky Floor / Upper Deck", defaultPax: 8 },
+      "122": { type: "Dining Table (8 Pax)", zone: "Sky Floor / Upper Deck", defaultPax: 8 },
+      "121": { type: "Dining Table (8 Pax)", zone: "Sky Floor / Upper Deck", defaultPax: 8 },
+      "120": { type: "Dining Table (8 Pax)", zone: "Sky Floor / Upper Deck", defaultPax: 8 },
+
+      // Upper VIP Sofas
+      "117": { type: "VIP Lounge Sofa", zone: "Sky Floor Terrace", defaultPax: 6 },
+      "118": { type: "VIP Lounge Sofa", zone: "Sky Floor Terrace", defaultPax: 6 },
+      "119": { type: "VIP Lounge Sofa", zone: "Sky Floor Terrace", defaultPax: 6 },
+
+      // Upper Railing Standing Cocktails
+      "124": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+      "125": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+      "126": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+      "127": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+      "128": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+      "129": { type: "Standing Cocktail Table", zone: "Sky Floor Railing", defaultPax: 3 },
+
+      // Middle VIP Sofas
+      "105": { type: "Prime VIP Sofa", zone: "Center Floor VIP", defaultPax: 6 },
+      "103": { type: "Prime VIP Sofa", zone: "Center Floor VIP", defaultPax: 6 },
+      "102": { type: "Prime VIP Sofa", zone: "Center Floor VIP", defaultPax: 6 },
+      "101": { type: "Prime VIP Sofa", zone: "Center Floor VIP", defaultPax: 6 },
+
+      // Left Wall VIP Sofas
+      "116": { type: "Front Stage VIP Sofa", zone: "DJ Stage VIP", defaultPax: 8 },
+      "115": { type: "VIP Lounge Sofa", zone: "West Perimeter", defaultPax: 6 },
+      "113": { type: "VIP Lounge Sofa", zone: "West Perimeter", defaultPax: 6 },
+      "112": { type: "VIP Lounge Sofa", zone: "Southwest Corner", defaultPax: 6 },
+
+      // Bottom Row VIP Sofas
+      "111": { type: "VIP Lounge Sofa", zone: "South Perimeter", defaultPax: 6 },
+      "110": { type: "VIP Lounge Sofa", zone: "South Perimeter", defaultPax: 6 },
+      "109": { type: "VIP Lounge Sofa", zone: "South Perimeter", defaultPax: 6 },
+
+      // Lower Right VIP Sofas
+      "106": { type: "Bar Side VIP Sofa", zone: "Bar Lounge VIP", defaultPax: 6 },
+      "107": { type: "Bar Side VIP Sofa", zone: "Bar Lounge VIP", defaultPax: 6 },
+      "108": { type: "Bar Side VIP Sofa", zone: "Bar Lounge VIP", defaultPax: 6 },
+
+      // Center Dance Floor Standing Cocktails
+      "130": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "131": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "132": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "133": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "135": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "136": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "137": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "138": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "139": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "150": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "151": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "152": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "153": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 },
+      "155": { type: "Standing Cocktail Table", zone: "Main Dance Floor", defaultPax: 4 }
+    };
+
+    // State
+    const STORAGE_KEY = "infinity_sky_lounge_halloween_data_2026";
+    let bookings = {};
+    let activeTableId = null;
+    let zoomVal = 1;
+    let transX = 0;
+    let transY = 0;
+
+    // Load data from LocalStorage
+    function initData() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          bookings = JSON.parse(stored);
+        } else {
+          // Default initial booked demo tables (to showcase the red state)
+          bookings = {
+            "116": {
+              name: "Devon Alexander",
+              phone: "08119876543",
+              pax: "8",
+              package: "Sky Platinum VIP",
+              arrival: "21:00 WITA",
+              notes: "VIP dekat DJ stage, champagne on ice",
+              time: "24 Okt 2026, 14:10"
+            },
+            "121": {
+              name: "Michael Tan",
+              phone: "081809001122",
+              pax: "8",
+              package: "Sky Platinum VIP",
+              arrival: "20:00 WITA",
+              notes: "Halloween Birthday Dinner",
+              time: "25 Okt 2026, 09:30"
+            },
+            "130": {
+              name: "Clarissa Putri",
+              phone: "08123456789",
+              pax: "4",
+              package: "Halloween Cocktail Pass",
+              arrival: "21:00 WITA",
+              notes: "Halloween costume contest group",
+              time: "25 Okt 2026, 11:15"
+            }
+          };
+          saveData();
+        }
+      } catch (err) {
+        bookings = {};
+      }
+      renderTableStates();
+      updateStatistics();
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+      } catch (e) {
+        console.error("Storage write error", e);
+      }
+    }
+
+    // Apply Red (Booked) or Green/Cyan (Available) styling
+    function renderTableStates() {
+      Object.keys(TABLE_INFO).forEach(id => {
+        const elem = document.getElementById(`table-${id}`);
+        if (!elem) return;
+
+        elem.classList.remove('status-available', 'status-booked');
+
+        if (bookings[id]) {
+          // Meja Terbooking -> MERAH
+          elem.classList.add('status-booked');
+        } else {
+          // Meja Kosong -> HIJAU/CYAN
+          elem.classList.add('status-available');
+        }
+      });
+    }
+
+    // Refresh Counter Stats
+    function updateStatistics() {
+      const total = Object.keys(TABLE_INFO).length;
+      const bookedKeys = Object.keys(bookings);
+      const bookedCount = bookedKeys.length;
+      const availCount = total - bookedCount;
+
+      let totalPax = 0;
+      bookedKeys.forEach(k => {
+        totalPax += parseInt(bookings[k].pax || 0, 10);
+      });
+
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-available').textContent = availCount;
+      document.getElementById('stat-booked').textContent = bookedCount;
+      document.getElementById('stat-pax').textContent = totalPax;
+    }
+
+    // Table Selection & Modal Dispatcher
+    function selectTable(id) {
+      activeTableId = id;
+      const meta = TABLE_INFO[id];
+      if (!meta) return;
+
+      const modal = document.getElementById('modal-container');
+      const box = document.getElementById('modal-box');
+      const formView = document.getElementById('form-booking');
+      const detailView = document.getElementById('view-booked-details');
+      const statusBadge = document.getElementById('modal-status-badge');
+      const iconBadge = document.getElementById('modal-icon-badge');
+
+      document.getElementById('form-table-num').value = id;
+      document.getElementById('modal-title').firstElementChild.textContent = `Meja #${id}`;
+      document.getElementById('modal-subtitle').textContent = `${meta.type} • ${meta.zone}`;
+      iconBadge.textContent = `#${id}`;
+
+      if (bookings[id]) {
+        // SUDAH DIBOOKING (MERAH) -> BUKA DETAIL
+        const b = bookings[id];
+        statusBadge.textContent = "TERBOOKING (MERAH)";
+        statusBadge.className = "text-[10px] px-2 py-0.5 rounded-full bg-red-950 text-red-400 border border-red-800 font-bold";
+        iconBadge.className = "w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-red-950";
+
+        document.getElementById('detail-name').textContent = b.name;
+        document.getElementById('detail-phone').textContent = b.phone;
+        document.getElementById('detail-pax').textContent = `${b.pax} Pax`;
+        document.getElementById('detail-package').textContent = b.package;
+        document.getElementById('detail-arrival').textContent = b.arrival;
+        document.getElementById('detail-notes').textContent = b.notes || "Tidak ada catatan.";
+        document.getElementById('detail-time').textContent = b.time || "-";
+
+        formView.classList.add('hidden');
+        detailView.classList.remove('hidden');
+      } else {
+        // BELUM DIBOOKING -> BUKA FORM PENGISIAN
+        statusBadge.textContent = "TERSEDIA";
+        statusBadge.className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-semibold";
+        iconBadge.className = "w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold text-lg text-white shadow-lg";
+
+        document.getElementById('input-guest-name').value = '';
+        document.getElementById('input-guest-phone').value = '';
+        document.getElementById('input-guest-notes').value = '';
+        document.getElementById('input-guest-pax').value = meta.defaultPax >= 8 ? '8' : (meta.defaultPax >= 6 ? '6' : '4');
+
+        formView.classList.remove('hidden');
+        detailView.classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        box.classList.remove('scale-95', 'opacity-0');
+        box.classList.add('scale-100', 'opacity-100');
+      }, 20);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal-container');
+      const box = document.getElementById('modal-box');
+      box.classList.remove('scale-100', 'opacity-100');
+      box.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        activeTableId = null;
+      }, 150);
+    }
+
+    // Submit Booking Form
+    document.getElementById('form-booking').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const id = document.getElementById('form-table-num').value;
+      if (!id) return;
+
+      const name = document.getElementById('input-guest-name').value.trim();
+      const phone = document.getElementById('input-guest-phone').value.trim();
+      const pax = document.getElementById('input-guest-pax').value;
+      const pkg = document.getElementById('input-guest-package').value;
+      const arrival = document.getElementById('input-guest-arrival').value;
+      const notes = document.getElementById('input-guest-notes').value.trim();
+
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' +
+                      now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WITA';
+
+      bookings[id] = {
+        name,
+        phone,
+        pax,
+        package: pkg,
+        arrival,
+        notes,
+        time: timeStr
+      };
+
+      saveData();
+      renderTableStates();
+      updateStatistics();
+      closeModal();
+      showToastNotification(`Meja #${id} Sukses Dibooking!`, `Meja beserta kursinya kini bertanda MERAH atas nama ${name}.`);
+    });
+
+    // Cancel Booking Action
+    document.getElementById('btn-cancel-reservation').addEventListener('click', function () {
+      if (!activeTableId) return;
+      const id = activeTableId;
+
+      delete bookings[id];
+      saveData();
+      renderTableStates();
+      updateStatistics();
+      closeModal();
+      showToastNotification(`Reservasi #${id} Dibatalkan`, `Meja kembali menjadi hijau (tersedia).`);
+    });
+
+    // Reset All Bookings
+    document.getElementById('btn-reset-all').addEventListener('click', function () {
+      bookings = {};
+      saveData();
+      renderTableStates();
+      updateStatistics();
+      showToastNotification(`Semua Data Direset`, `Seluruh meja kini kosong dan berstatus hijau.`);
+    });
+
+    // ⭐️ 1-CLICK STANDALONE HTML FILE DOWNLOAD FEATURE
+    document.getElementById('btn-download-html').addEventListener('click', function () {
+      const fullHtmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([fullHtmlContent], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const tempLink = document.createElement("a");
+      tempLink.href = url;
+      tempLink.download = "Infinity_Sky_Lounge_FloorPlan_Halloween2026.html";
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      URL.revokeObjectURL(url);
+      showToastNotification("Download Dimulai!", "File HTML mandiri telah diunduh dan siap dibuka di mana saja.");
+    });
+
+    // Export Guest List CSV
+    document.getElementById('btn-export-csv').addEventListener('click', function () {
+      const ids = Object.keys(bookings);
+      if (ids.length === 0) {
+        showToastNotification("Data Kosong", "Belum ada meja yang terbooking untuk diekspor.");
+        return;
+      }
+
+      let csvContent = "No Meja,Tipe Meja,Zona,Nama Tamu,WhatsApp,Pax,Paket,Jam Tiba,Catatan,Waktu Booking\n";
+      ids.forEach(id => {
+        const b = bookings[id];
+        const m = TABLE_INFO[id] || {};
+        csvContent += `"${id}","${m.type || ''}","${m.zone || ''}","${b.name}","${b.phone}","${b.pax}","${b.package}","${b.arrival}","${(b.notes || '').replace(/"/g, '""')}","${b.time || ''}"\n`;
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Infinity_Halloween_Guests_30Oct2026.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToastNotification("Ekspor Berhasil", "Daftar tamu Halloween telah diunduh dalam format CSV.");
+    });
+
+    // Search table filter
+    document.getElementById('input-search').addEventListener('input', function (e) {
+      const q = e.target.value.toLowerCase().trim();
+      Object.keys(TABLE_INFO).forEach(id => {
+        const node = document.getElementById(`table-${id}`);
+        if (!node) return;
+
+        const booking = bookings[id];
+        const guest = booking ? booking.name.toLowerCase() : '';
+        const match = id.includes(q) || guest.includes(q);
+
+        node.style.opacity = match || !q ? '1' : '0.15';
+      });
+    });
+
+    // Toast Notification helper
+    function showToastNotification(title, text) {
+      const toast = document.getElementById('toast-notif');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-desc').textContent = text;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    // Zoom and Pan Controls
+    const panStage = document.getElementById('pan-zoom-container');
+    function applyTransform() {
+      panStage.style.transform = `translate(${transX}px, ${transY}px) scale(${zoomVal})`;
+    }
+
+    document.getElementById('btn-zoom-in').addEventListener('click', () => {
+      zoomVal = Math.min(zoomVal + 0.15, 2.3);
+      applyTransform();
+    });
+    document.getElementById('btn-zoom-out').addEventListener('click', () => {
+      zoomVal = Math.max(zoomVal - 0.15, 0.7);
+      applyTransform();
+    });
+    document.getElementById('btn-zoom-reset').addEventListener('click', () => {
+      zoomVal = 1;
+      transX = 0;
+      transY = 0;
+      applyTransform();
+    });
+
+    // Mouse Pan Dragging
+    const viewport = document.getElementById('viewport');
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.table-node')) return;
+      isDragging = true;
+      startX = e.clientX - transX;
+      startY = e.clientY - transY;
+      viewport.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      transX = e.clientX - startX;
+      transY = e.clientY - startY;
+      applyTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      viewport.style.cursor = 'default';
+    });
+
+    // Wheel Zoom
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.08 : 0.08;
+      zoomVal = Math.min(Math.max(zoomVal + delta, 0.7), 2.3);
+      applyTransform();
+    }, { passive: false });
+
+    // Initialize
+    window.addEventListener('load', () => {
+      lucide.createIcons();
+      initData();
+    });
+  </script>
+</body>
+</html>
