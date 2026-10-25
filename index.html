@@ -51,46 +51,47 @@
       overflow-x: hidden;
     }
 
-    /* HEADER */
+    /* ================= HEADER DESAIN BESAR & MEWAH ================= */
     header {
-      background: rgba(13, 19, 31, 0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
-      padding: 10px 14px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 13, 22, 0.96) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
+      padding: 12px 18px;
       position: sticky;
       top: 0;
       z-index: 60;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.7);
     }
 
     .hdr-wrap {
-      max-width: 1650px;
+      max-width: 1750px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
+    /* BRAND LOGO & TITLE */
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
 
     .brand-logo-frame {
-      min-width: 82px;
-      height: 42px;
+      min-width: 105px;
+      height: 52px;
       background: #ffffff;
-      border: 1.5px solid var(--gold-primary);
-      border-radius: 8px;
-      padding: 2px 6px;
+      border: 2px solid var(--gold-primary);
+      border-radius: 10px;
+      padding: 3px 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
     }
 
     .brand-logo-frame img {
@@ -101,9 +102,9 @@
 
     .brand-title h1 {
       font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       background: var(--gold-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -111,140 +112,180 @@
     }
 
     .brand-title p {
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       color: #94a3b8;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
+      margin-top: 3px;
     }
 
     .event-badge {
       background: rgba(236, 72, 153, 0.2);
       border: 1px solid #ec4899;
       color: #f472b6;
-      padding: 2px 6px;
-      border-radius: 12px;
-      font-size: 0.62rem;
+      padding: 3px 8px;
+      border-radius: 14px;
+      font-size: 0.68rem;
       font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
-    /* METRIK HEADER */
+    /* METRIK HEADER LEBIH BESAR & TEGAS */
     .hdr-metrics {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .stat-pill {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 4px 10px;
+    .metric-card-lg {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px 14px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
+      min-width: 125px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.4);
     }
 
-    .stat-pill:hover {
+    .metric-card-lg:hover {
       background: rgba(51, 65, 85, 0.95);
+      border-color: rgba(212, 175, 55, 0.5);
+      transform: translateY(-1px);
     }
 
-    .stat-pill i { font-size: 0.85rem; }
-    .stat-pill .txt-wrap { display: flex; flex-direction: column; line-height: 1.1; }
-    .stat-pill .txt-wrap span { font-size: 0.58rem; color: #94a3b8; text-transform: uppercase; }
-    .stat-pill .txt-wrap strong { font-size: 0.78rem; }
+    .metric-card-lg i {
+      font-size: 1.35rem;
+    }
 
-    /* TOMBOL AKSI */
+    .metric-card-lg .txt-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .metric-card-lg .txt-wrap span {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    .metric-card-lg .txt-wrap strong {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* TOMBOL AKSI LEBIH LEGA */
+    .btn-action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .btn-action {
       border: none;
-      padding: 7px 12px;
-      border-radius: 8px;
+      padding: 9px 15px;
+      border-radius: 10px;
       font-weight: 700;
-      font-size: 0.74rem;
+      font-size: 0.8rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.2s ease;
       touch-action: manipulation;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
     }
 
     .btn-dashboard {
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #fff;
-      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);
     }
 
     .btn-fdc {
       background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
       color: #fff;
-      box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4);
     }
 
     .btn-jpg {
       background: linear-gradient(135deg, #10b981 0%, #047857 100%);
       color: #fff;
-      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
     }
 
     .btn-csv {
       background: var(--gold-grad);
       color: #111;
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
     }
 
-    /* TOOLBAR */
+    /* ================= TOOLBAR ================= */
     .toolbar-bar {
-      max-width: 1650px;
-      margin: 6px auto 0;
-      padding: 0 12px;
+      max-width: 1750px;
+      margin: 8px auto 0;
+      padding: 0 16px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: rgba(15, 23, 42, 0.85);
-      padding: 4px 12px;
+      gap: 14px;
+      background: rgba(15, 23, 42, 0.88);
+      padding: 6px 16px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.75rem;
       flex-wrap: wrap;
     }
 
-    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-node { width: 10px; height: 10px; border-radius: 50%; }
     .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
     .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
     .zoom-group {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
 
     .btn-tool-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
       color: #fff;
-      font-size: 0.8rem;
+      font-size: 0.88rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       touch-action: manipulation;
+      transition: background 0.2s;
+    }
+
+    .btn-tool-icon:hover {
+      background: rgba(51, 65, 85, 1);
     }
 
     /* VIEWPORT */
@@ -256,7 +297,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px;
+      padding: 8px;
     }
 
     .map-frame {
@@ -327,7 +368,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 14px;
     }
 
     .modal-backdrop.open { display: flex; }
@@ -337,7 +378,7 @@
       border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       max-height: 92vh;
       overflow-y: auto;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
@@ -345,7 +386,7 @@
 
     .modal-header {
       background: linear-gradient(135deg, #1f2a3c 0%, #121926 100%);
-      padding: 12px 16px;
+      padding: 13px 18px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
@@ -354,7 +395,7 @@
 
     .modal-header h3 {
       font-family: 'Cinzel', serif;
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       color: #fef08a;
     }
 
@@ -362,16 +403,16 @@
       background: transparent;
       border: none;
       color: #94a3b8;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       cursor: pointer;
       padding: 4px;
     }
 
     .modal-body {
-      padding: 14px 16px;
+      padding: 16px 18px;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 12px;
     }
 
     .form-row {
@@ -381,7 +422,7 @@
     }
 
     .form-row label {
-      font-size: 0.73rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: #cbd5e1;
       display: flex;
@@ -393,9 +434,9 @@
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 8px;
-      padding: 9px 12px;
+      padding: 10px 12px;
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       outline: none;
       -webkit-appearance: none;
     }
@@ -415,7 +456,7 @@
       transform: translateY(-50%);
       color: var(--gold-primary);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
 
     .money-input-box input {
@@ -424,7 +465,7 @@
     }
 
     .modal-footer {
-      padding: 12px 16px;
+      padding: 13px 18px;
       background: #0f172a;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
@@ -437,9 +478,9 @@
       background: #7f1d1d;
       color: #fca5a5;
       border: none;
-      padding: 8px 12px;
-      border-radius: 7px;
-      font-size: 0.74rem;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
     }
@@ -448,9 +489,9 @@
       background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
       color: #fff;
       border: none;
-      padding: 8px 16px;
-      border-radius: 7px;
-      font-size: 0.76rem;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -463,14 +504,14 @@
     .dash-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 12px;
     }
 
     .dash-card {
       background: #0f172a;
       border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 11px 12px;
+      border-radius: 11px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -478,12 +519,12 @@
 
     .dash-card.hero-card {
       grid-column: span 2;
-      background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(15,23,42,0.95) 100%);
-      border-color: rgba(212,175,55,0.4);
+      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(15,23,42,0.96) 100%);
+      border-color: rgba(212,175,55,0.45);
     }
 
     .dash-card .card-lbl {
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       color: #94a3b8;
       text-transform: uppercase;
       font-weight: 700;
@@ -494,24 +535,24 @@
     }
 
     .dash-card .card-val {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: #f8fafc;
       font-family: 'Cinzel', serif;
     }
 
     .dash-card .card-sub {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       color: #64748b;
     }
 
     .occupancy-bar-wrap {
       width: 100%;
-      height: 7px;
+      height: 8px;
       background: #1e293b;
       border-radius: 4px;
       overflow: hidden;
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
     .occupancy-bar {
@@ -534,8 +575,8 @@
     }
 
     .spinner {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border: 4px solid rgba(212, 175, 55, 0.2);
       border-top-color: var(--gold-primary);
       border-radius: 50%;
@@ -549,9 +590,11 @@
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ================= HEADER EKSEKUTIF BESAR ================= -->
   <header>
     <div class="hdr-wrap">
+      
+      <!-- BRAND & TITLE -->
       <div class="brand-section">
         <div class="brand-logo-frame">
           <img src="logo.png" alt="Logo Platinum Hotel"
@@ -566,36 +609,37 @@
         </div>
       </div>
 
+      <!-- KARTU METRIK UTAMA (LEBIH BESAR & TEGAS) -->
       <div class="hdr-metrics">
-        <!-- COUNTER SOFA INVENTORY -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian Sofa">
+        <!-- 1. SOFA INVENTORY -->
+        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Sofa">
           <i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i>
           <div class="txt-wrap">
             <span>Sofa VIP</span>
-            <strong><span id="statSofaBooked" style="color: var(--amber-sofa);">0</span> / 21</strong>
+            <strong><span id="statSofaBooked" style="color: var(--amber-sofa);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 21</span></strong>
           </div>
         </div>
 
-        <!-- COUNTER COCKTAIL INVENTORY -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian Cocktail">
+        <!-- 2. COCKTAIL INVENTORY -->
+        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail">
           <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
           <div class="txt-wrap">
             <span>Cocktail</span>
-            <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span> / 20</strong>
+            <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 20</span></strong>
           </div>
         </div>
 
-        <!-- COUNTER FDC GUESTS -->
-        <div class="stat-pill" onclick="openFDCListModal()" title="Klik untuk lihat daftar FDC">
+        <!-- 3. FDC GUESTS -->
+        <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
           <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
           <div class="txt-wrap">
             <span>FDC Guests</span>
-            <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span> Pax</strong>
+            <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.85rem; color:#64748b;"> Pax</span></strong>
           </div>
         </div>
 
-        <!-- TOTAL GROSS REVENUE -->
-        <div class="stat-pill" onclick="openReportModal()" title="Klik untuk rincian finansial">
+        <!-- 4. TOTAL REVENUE -->
+        <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
           <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
           <div class="txt-wrap">
             <span>Total Rev / DP</span>
@@ -603,31 +647,34 @@
           </div>
         </div>
 
-        <!-- BUTTONS -->
-        <button class="btn-action btn-dashboard" onclick="openReportModal()">
-          <i class="fa-solid fa-chart-pie"></i> Report
-        </button>
+        <!-- TOMBOL AKSI UTAMA -->
+        <div class="btn-action-group">
+          <button class="btn-action btn-dashboard" onclick="openReportModal()">
+            <i class="fa-solid fa-chart-pie"></i> Report
+          </button>
 
-        <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
-          <i class="fa-solid fa-user-plus"></i> + FDC
-        </button>
+          <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
+            <i class="fa-solid fa-user-plus"></i> + FDC
+          </button>
 
-        <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
-          <i class="fa-solid fa-file-image"></i> Share JPG
-        </button>
+          <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
+            <i class="fa-solid fa-file-image"></i> Share JPG
+          </button>
 
-        <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
-          <i class="fa-solid fa-file-csv"></i> CSV
-        </button>
+          <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+            <i class="fa-solid fa-file-csv"></i> CSV
+          </button>
+        </div>
+
       </div>
     </div>
   </header>
 
-  <!-- TOOLBAR -->
+  <!-- ================= TOOLBAR ================= -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sofa: 21 | Cocktail: 20</span></div>
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sisa Sofa: 21 | Sisa Cocktail: 20</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
     </div>
     
     <div class="zoom-group">
@@ -641,7 +688,7 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENAH -->
+  <!-- ================= VIEWPORT DENAH ================= -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -652,19 +699,17 @@
 
       <div class="hotspots-layer">
         
-        <!-- ================= 1. SOFA SKY FLOOR ATAS (DINING & VIP) ================= -->
-        <!-- Sofa Dining 8-Pax: 123, 122, 121, 120 -->
+        <!-- 1. SOFA SKY FLOOR ATAS (DINING & VIP) -->
         <div id="spot-123" class="spot" style="top: 1.5%; left: 48.6%; width: 6.8%; height: 7.5%;" onclick="openBooking('123', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
         <div id="spot-122" class="spot" style="top: 1.5%; left: 56.4%; width: 6.8%; height: 7.5%;" onclick="openBooking('122', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
         <div id="spot-121" class="spot" style="top: 1.5%; left: 64.2%; width: 6.8%; height: 7.5%;" onclick="openBooking('121', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
         <div id="spot-120" class="spot" style="top: 1.5%; left: 72.0%; width: 6.8%; height: 7.5%;" onclick="openBooking('120', 'Sky Floor Dining Sofa (8-Pax)', 8, 'sofa')"></div>
 
-        <!-- VIP Sofas Sky Floor: 117, 118, 119 -->
         <div id="spot-117" class="spot" style="top: 11.6%; left: 49.0%; width: 9.5%; height: 7.8%;" onclick="openBooking('117', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- ================= 2. COCKTAIL TABLES ATAS (124 s/d 129 - TOTAL 6 UNIT) ================= -->
+        <!-- 2. COCKTAIL TABLES ATAS (124 s/d 129 - TOTAL 6 UNIT) -->
         <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
@@ -672,26 +717,24 @@
         <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- ================= 3. SOFA VIP KANAN ATAS (105, 103, 102, 101) ================= -->
+        <!-- 3. SOFA VIP KANAN ATAS (105, 103, 102, 101) -->
         <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-103" class="spot" style="top: 37.5%; left: 67.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('103', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-102" class="spot" style="top: 37.5%; left: 78.5%; width: 8.6%; height: 8.5%;" onclick="openBooking('102', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-101" class="spot" style="top: 37.5%; left: 89.2%; width: 8.6%; height: 8.5%;" onclick="openBooking('101', 'Prime VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- ================= 4. SOFA VIP SISI KIRI (116, 115, 113, 112) ================= -->
+        <!-- 4. SOFA VIP SISI KIRI (116, 115, 113, 112) -->
         <div id="spot-116" class="spot" style="top: 39.5%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('116', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-115" class="spot" style="top: 52.8%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('115', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-113" class="spot" style="top: 66.0%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('113', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-112" class="spot" style="top: 79.2%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- ================= 5. COCKTAIL TABLES TENGAH (TOTAL 14 UNIT) ================= -->
-        <!-- Kolom Kiri -->
+        <!-- 5. COCKTAIL TABLES TENGAH (TOTAL 14 UNIT) -->
         <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.6%; width: 5.6%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- Kolom Tengah & Kanan -->
         <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
@@ -703,12 +746,12 @@
         <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
         <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <!-- ================= 6. SOFA VIP KANAN BAWAH (106, 107, 108) ================= -->
+        <!-- 6. SOFA VIP KANAN BAWAH (106, 107, 108) -->
         <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-107" class="spot" style="top: 68.8%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('107', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-108" class="spot" style="top: 79.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('108', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- ================= 7. SOFA VIP SISI BAWAH (111, 110, 109) ================= -->
+        <!-- 7. SOFA VIP SISI BAWAH (111, 110, 109) -->
         <div id="spot-111" class="spot" style="top: 88.5%; left: 5.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('111', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-110" class="spot" style="top: 88.5%; left: 17.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('110', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-109" class="spot" style="top: 88.5%; left: 29.5%; width: 9.5%; height: 8.0%;" onclick="openBooking('109', 'Frontline VIP Sofa (6-Pax)', 6, 'sofa')"></div>
