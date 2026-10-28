@@ -25,6 +25,8 @@
       --gold-grad: linear-gradient(135deg, #fce08a 0%, #d4af37 50%, #856108 100%);
       --red-booked: #ef4444;
       --red-glow: rgba(239, 68, 68, 0.95);
+      --green-done: #10b981;
+      --green-glow: rgba(16, 185, 129, 0.95);
       --card-bg: rgba(18, 24, 38, 0.98);
       --purple-fdc: #a855f7;
       --emerald-accent: #10b981;
@@ -251,6 +253,7 @@
     .dot-node { width: 9px; height: 9px; border-radius: 50%; }
     .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
     .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+    .dot-node.done { background: #10b981; box-shadow: 0 0 8px #10b981; }
 
     .zoom-group {
       display: flex;
@@ -331,10 +334,19 @@
     .spot:active { transform: scale(0.96); }
     .spot.round { border-radius: 50%; }
 
+    /* STATUS: BOOKED (MERAH) */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.78) !important;
       border: 2px solid #ff4d4d !important;
       box-shadow: 0 0 16px var(--red-glow), inset 0 0 8px rgba(255,255,255,0.5) !important;
+      z-index: 5;
+    }
+
+    /* STATUS: DONE / ARRIVED (HIJAU) */
+    .spot.is-done {
+      background: rgba(16, 185, 129, 0.82) !important;
+      border: 2px solid #34d399 !important;
+      box-shadow: 0 0 16px var(--green-glow), inset 0 0 8px rgba(255,255,255,0.5) !important;
       z-index: 5;
     }
 
@@ -444,7 +456,15 @@
       background: #0f172a;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .modal-footer-right {
+      display: flex;
+      align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
@@ -464,7 +484,7 @@
       background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
       color: #fff;
       border: none;
-      padding: 9px 18px;
+      padding: 9px 16px;
       border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 700;
@@ -473,6 +493,21 @@
       align-items: center;
       gap: 6px;
       box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-modal-done {
+      background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+      color: #fff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
     }
 
     /* REPORT GRID */
@@ -642,6 +677,7 @@
     <div class="legend-tag">
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sisa Sofa: 21 | Sisa Cocktail: 20</span></div>
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node done"></div> <span id="legendDoneText">0 Selesai/Hadir (Hijau)</span></div>
     </div>
     
     <div class="zoom-group">
@@ -780,13 +816,17 @@
       </div>
 
       <div class="modal-footer">
-        <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
+        <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()">
           <i class="fa-solid fa-trash"></i> Hapus
         </button>
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeBookingModal()">Tutup</button>
-        <button class="btn-modal-save" onclick="saveBooking()">
-          <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
-        </button>
+        <div class="modal-footer-right">
+          <button class="btn-modal-done" onclick="saveBooking('done')" title="Tamu sudah datang & transaksi selesai">
+            <i class="fa-solid fa-check-double"></i> DONE (Hijau)
+          </button>
+          <button class="btn-modal-save" onclick="saveBooking('booked')" title="Simpan sebagai Booked">
+            <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1021,7 +1061,8 @@
               dp: Number(row.dp),
               time: row.arrival_time,
               notes: row.notes,
-              created_by: row.created_by || 'Staff'
+              created_by: row.created_by || 'Staff',
+              status: row.status || 'booked' // 'booked' (merah) atau 'done' (hijau)
             };
           });
         }
@@ -1095,7 +1136,7 @@
       currentTable = null;
     }
 
-    async function saveBooking() {
+    async function saveBooking(statusType = 'booked') {
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
@@ -1117,7 +1158,8 @@
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
-        notes: document.getElementById('guestNotes').value
+        notes: document.getElementById('guestNotes').value,
+        status: statusType // 'booked' atau 'done'
       };
 
       const { data, error } = await _supabase
@@ -1136,7 +1178,11 @@
       closeBookingModal();
       
       await fetchAllCloudData();
-      alert(`Meja #${currentTable} berhasil dibooking oleh ${staff} dan tersimpan ke Cloud!`);
+      if (statusType === 'done') {
+        alert(`Meja #${currentTable} ditandai DONE (Tamu Hadir & Selesai)!`);
+      } else {
+        alert(`Meja #${currentTable} berhasil dibooking dan tersimpan ke Cloud!`);
+      }
     }
 
     async function deleteBooking() {
@@ -1338,10 +1384,15 @@
     function refreshMapNodes() {
       document.querySelectorAll('.spot').forEach(spot => {
         const id = spot.id.replace('spot-', '');
-        if (bookings[id]) {
-          spot.classList.add('is-booked');
-        } else {
-          spot.classList.remove('is-booked');
+        const data = bookings[id];
+        
+        spot.classList.remove('is-booked', 'is-done');
+        if (data) {
+          if (data.status === 'done') {
+            spot.classList.add('is-done');
+          } else {
+            spot.classList.add('is-booked');
+          }
         }
       });
     }
@@ -1351,14 +1402,19 @@
       let sofaCount = 0;
       let cocktailCount = 0;
       let tableDP = 0;
+      let doneCount = 0;
 
       bookedKeys.forEach(k => {
+        const item = bookings[k];
         if (SOFA_IDS.includes(k)) {
           sofaCount++;
         } else {
           cocktailCount++;
         }
-        tableDP += (bookings[k].dp || 0);
+        tableDP += (item.dp || 0);
+        if (item.status === 'done') {
+          doneCount++;
+        }
       });
 
       document.getElementById('statSofaBooked').innerText = sofaCount;
@@ -1376,7 +1432,8 @@
       document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
 
       document.getElementById('legendAvailText').innerText = `Sisa Sofa: ${21 - sofaCount} | Sisa Cocktail: ${20 - cocktailCount}`;
-      document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Terbooking (Merah)`;
+      document.getElementById('legendBookedText').innerText = `${bookedKeys.length - doneCount} Booked (Merah)`;
+      document.getElementById('legendDoneText').innerText = `${doneCount} Selesai (Hijau)`;
     }
 
     function formatCurrencyInput(el) {
@@ -1423,22 +1480,23 @@
         return;
       }
 
-      let csv = 'Kategori Inventaris,Nomor Unit/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
         const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE';
-        csv += `"${categoryLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
+        const statusLabel = b.status === 'done' ? 'DONE / HADIR' : 'BOOKED';
+        csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","DONE","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `Executive_Inventory_Report_Halloween_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `Executive_Inventory_Report_Spooky_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
 
