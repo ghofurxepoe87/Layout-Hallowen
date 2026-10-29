@@ -1220,7 +1220,7 @@
       const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Silakan masukkan nama menu custom dan harga.');
+        alert('Silakan masukkan nama menu custom dan harga angka murni.');
         return;
       }
 
@@ -1290,7 +1290,7 @@
       hiddenTotalInput.value = calculatedTotal;
     }
 
-    // Fungsi parsing total murni berdasarkan data array item aktif / menu_total tersimpan
+    // PERBAIKAN UTAMA: Mengabaikan kalkulasi teks lama, murni mengambil dari menu_total database atau input aktif
     function parseMenuTotal(menuStr, rowMenuTotal = 0) {
       if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
       return Number(document.getElementById('guestMenuTotal')?.value) || 0;
