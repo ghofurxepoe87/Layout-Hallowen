@@ -918,10 +918,10 @@
               <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
             </div>
 
-            <!-- FITUR CUSTOM ITEM (INPUT NAMA & HARGA MANUAL MURNI) -->
+            <!-- FITUR CUSTOM ITEM -->
             <div class="custom-menu-box">
               <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom" style="flex: 2; font-size: 0.78rem;">
-              <input type="number" id="customItemPrice" class="inp-field" placeholder="Harga (Cth: 54450)" style="flex: 1; font-size: 0.78rem;">
+              <input type="number" id="customItemPrice" class="inp-field" placeholder="Harga Murni (Cth: 54450)" style="flex: 1; font-size: 0.78rem;">
               <button type="button" class="btn-action btn-fdc" onclick="addCustomItemToOrder()" style="padding: 0 10px; font-size: 0.75rem;">+ Custom</button>
             </div>
 
@@ -1290,73 +1290,10 @@
       hiddenTotalInput.value = calculatedTotal;
     }
 
-    // Fungsi parseMenuTotal yang akurat dan menggunakan data tersimpan langsung
+    // Fungsi parsing total murni berdasarkan data array item aktif / menu_total tersimpan
     function parseMenuTotal(menuStr, rowMenuTotal = 0) {
       if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
-      if (!menuStr) return 0;
-      
-      const priceMap = {
-        "Social Lounge Package 1": 1500000,
-        "Social Lounge Package 2": 1500000,
-        "Social Lounge Package 3": 1500000,
-        "Soju Duo Cham": 350000,
-        "Selection of Soju (2 Bottles)": 400000,
-        "Balihai Draft (3 Cans)": 200000,
-        "Balihai Pint (3 Bottles)": 200000,
-        "Prost Beer (3 Cans)": 200000,
-        "Bacardi White Rum": 1000000,
-        "Jose Cuervo Tequila": 1200000,
-        "Myers's Dark Rum": 1200000,
-        "Absolut Vodka": 1275000,
-        "Jack Daniel's": 1500000,
-        "J.W Red Label": 1300000,
-        "Baileys Original": 1600000,
-        "Baileys Strawberry": 1750000,
-        "Chivas 12 YO": 1700000,
-        "Jameson": 1400000,
-        "J.W Black Label": 1500000,
-        "Jägermeister": 1815000,
-        "Oro Tequila": 1900000,
-        "Kahlúa": 1550000,
-        "Singleton": 2500000,
-        "Chivas 18 YO": 3500000,
-        "Macallan 12 Triple Cask Matured": 5500000,
-        "J.W Blue Label": 7250000,
-        "Vibe Selection - Peach": 907500,
-        "Vibe Selection - Lychee": 907500,
-        "Vibe Selection - Black Tea": 907500,
-        "Vibe Selection - Tequila": 756250,
-        "Vibe Selection - Vodka": 756250,
-        "Vibe Selection - Sambuca": 756250,
-        "Vibe Selection - Rum": 756250,
-        "Vibe Selection - Gin": 756250,
-        "Maze Selection - Gold Whiskey": 1000000,
-        "Maze Selection - Blue Whiskey": 1000000,
-        "Maze Selection - Cranberry": 1000000,
-        "Maze Selection - Blackcurrant": 1000000,
-        "Maze Selection - Lychee": 1000000,
-        "Maze Selection - Whiskey Soda": 1000000,
-        "Dome - Vodka": 240000,
-        "Dome - Whiskey": 240000,
-        "Chicken Pop Corn": 60000,
-        "Idaho Stick Fries": 60000,
-        "Beef & Cheese Fries": 60000,
-        "BBQ Chicken Wings": 60000,
-        "Truffle Fries": 60000
-      };
-
-      let total = 0;
-      const parts = menuStr.split(', ');
-      parts.forEach(p => {
-        const match = p.match(/^(\d+)x\s+(.+)$/);
-        if (match) {
-          const qty = parseInt(match[1]);
-          const name = match[2].trim();
-          const pVal = priceMap[name] || 0;
-          total += (pVal * qty);
-        }
-      });
-      return total;
+      return Number(document.getElementById('guestMenuTotal')?.value) || 0;
     }
 
     // ================= SUPABASE DATA SYNC =================
@@ -1498,7 +1435,7 @@
       
       let calculatedSum = 0;
       currentOrderItems.forEach(i => { calculatedSum += (i.price * i.qty); });
-      const menuTotalVal = calculatedSum || Number(document.getElementById('guestMenuTotal').value) || parseMenuTotal(menuOrder);
+      const menuTotalVal = calculatedSum || Number(document.getElementById('guestMenuTotal').value) || 0;
       
       const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
@@ -1682,7 +1619,7 @@
         const isSofa = SOFA_IDS.includes(k);
         const dp = item.dp || 0;
         const pax = parseInt(item.pax || 0, 10);
-        const menuTotal = parseMenuTotal(item.menu_order, item.menu_total);
+        const menuTotal = Number(item.menu_total || 0);
 
         totalMenuRev += menuTotal;
 
@@ -1778,7 +1715,7 @@
           cocktailCount++;
         }
         tableDP += (item.dp || 0);
-        totalMenuSum += parseMenuTotal(item.menu_order, item.menu_total);
+        totalMenuSum += Number(item.menu_total || 0);
         if (item.status === 'done') {
           doneCount++;
         }
@@ -1853,7 +1790,7 @@
         const b = bookings[k];
         const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE KOTAK';
         const statusLabel = b.status === 'done' ? 'DONE / HADIR' : 'BOOKED';
-        const menuEstPrice = parseMenuTotal(b.menu_order, b.menu_total);
+        const menuEstPrice = Number(b.menu_total || 0);
         csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.menu_order || ''}","${menuEstPrice}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
