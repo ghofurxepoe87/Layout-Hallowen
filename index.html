@@ -332,9 +332,7 @@
     }
 
     .spot:active { transform: scale(0.96); }
-    .spot.round { border-radius: 50%; }
 
-    /* STATUS: BOOKED (MERAH) */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.78) !important;
       border: 2px solid #ff4d4d !important;
@@ -342,12 +340,58 @@
       z-index: 5;
     }
 
-    /* STATUS: DONE / ARRIVED (HIJAU) */
     .spot.is-done {
       background: rgba(16, 185, 129, 0.82) !important;
       border: 2px solid #34d399 !important;
       box-shadow: 0 0 16px var(--green-glow), inset 0 0 8px rgba(255,255,255,0.5) !important;
       z-index: 5;
+    }
+
+    /* POS ORDER LIST STYLING */
+    .order-builder-box {
+      background: #0b1120;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .order-select-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .order-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+    }
+
+    .order-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #34d399;
+      font-size: 0.88rem;
     }
 
     /* MODAL */
@@ -371,8 +415,8 @@
       border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       width: 100%;
-      max-width: 520px;
-      max-height: 92vh;
+      max-width: 560px;
+      max-height: 94vh;
       overflow-y: auto;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
     }
@@ -629,10 +673,10 @@
             </div>
           </div>
 
-          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail">
-            <i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i>
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Meja Cocktail Kotak">
+            <i class="fa-solid fa-square" style="color: var(--cyan-cocktail);"></i>
             <div class="txt-wrap">
-              <span>Cocktail</span>
+              <span>Cocktail Kotak</span>
               <strong><span id="statCocktailBooked" style="color: var(--cyan-cocktail);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 20</span></strong>
             </div>
           </div>
@@ -675,7 +719,7 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sisa Sofa: 21 | Sisa Cocktail: 20</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Sisa Sofa: 21 | Sisa Cocktail Kotak: 20</span></div>
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node done"></div> <span id="legendDoneText">0 Selesai/Hadir (Hijau)</span></div>
     </div>
@@ -711,13 +755,13 @@
         <div id="spot-118" class="spot" style="top: 11.6%; left: 60.5%; width: 9.5%; height: 7.8%;" onclick="openBooking('118', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
         <div id="spot-119" class="spot" style="top: 11.6%; left: 71.8%; width: 9.5%; height: 7.8%;" onclick="openBooking('119', 'Sky Floor VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
-        <!-- 2. COCKTAIL TABLES ATAS (124 s/d 129) -->
-        <div id="spot-124" class="spot round" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-125" class="spot round" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-126" class="spot round" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-127" class="spot round" style="top: 24.8%; left: 72.4%; width: 4.8%; height: 7.0%;" onclick="openBooking('127', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-128" class="spot round" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-129" class="spot round" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <!-- 2. MEJA KOTAK ATAS (124 s/d 129) -->
+        <div id="spot-124" class="spot" style="top: 24.8%; left: 55.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('124', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-125" class="spot" style="top: 24.8%; left: 61.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('125', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-126" class="spot" style="top: 24.8%; left: 66.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('126', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-127" class="spot" style="top: 24.8%; left: 72.4%; width: 4.8%; height: 7.0%;" onclick="openBooking('127', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-128" class="spot" style="top: 24.8%; left: 78.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('128', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-129" class="spot" style="top: 24.8%; left: 83.6%; width: 4.8%; height: 7.0%;" onclick="openBooking('129', 'Cocktail Square Table (4-Pax)', 4, 'cocktail')"></div>
 
         <!-- 3. SOFA VIP KANAN ATAS -->
         <div id="spot-105" class="spot" style="top: 37.5%; left: 56.4%; width: 8.6%; height: 8.5%;" onclick="openBooking('105', 'VIP Lounge Sofa (6-Pax)', 6, 'sofa')"></div>
@@ -732,21 +776,21 @@
         <div id="spot-112" class="spot" style="top: 79.2%; left: 0.8%; width: 6.5%; height: 11.5%;" onclick="openBooking('112', 'Perimeter VIP Sofa (6-Pax)', 6, 'sofa')"></div>
 
         <!-- 5. COCKTAIL TABLES TENGAH -->
-        <div id="spot-130" class="spot round" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%;" onclick="openBooking('130', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-138" class="spot round" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%;" onclick="openBooking('138', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-139" class="spot round" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%;" onclick="openBooking('139', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-155" class="spot round" style="top: 78.5%; left: 9.6%; width: 5.6%; height: 7.2%;" onclick="openBooking('155', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-130" class="spot" style="top: 41.5%; left: 10.0%; width: 5.6%; height: 7.2%; border-radius: 50%;" onclick="openBooking('130', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-138" class="spot" style="top: 54.8%; left: 9.8%; width: 5.6%; height: 7.2%; border-radius: 50%;" onclick="openBooking('138', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-139" class="spot" style="top: 67.2%; left: 9.4%; width: 5.6%; height: 7.2%; border-radius: 50%;" onclick="openBooking('139', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-155" class="spot" style="top: 78.5%; left: 9.6%; width: 5.6%; height: 7.2%; border-radius: 50%;" onclick="openBooking('155', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
-        <div id="spot-131" class="spot round" style="top: 39.5%; left: 19.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('131', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-132" class="spot round" style="top: 43.5%; left: 28.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('132', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-133" class="spot round" style="top: 48.8%; left: 19.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('133', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-135" class="spot round" style="top: 52.8%; left: 32.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('135', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-137" class="spot round" style="top: 59.2%; left: 17.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('137', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-136" class="spot round" style="top: 57.5%; left: 25.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('136', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-150" class="spot round" style="top: 68.5%; left: 19.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('150', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-151" class="spot round" style="top: 66.0%; left: 29.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('151', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-153" class="spot round" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('153', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
-        <div id="spot-152" class="spot round" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('152', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-131" class="spot" style="top: 39.5%; left: 19.8%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('131', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-132" class="spot" style="top: 43.5%; left: 28.5%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('132', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-133" class="spot" style="top: 48.8%; left: 19.0%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('133', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-135" class="spot" style="top: 52.8%; left: 32.0%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('135', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-137" class="spot" style="top: 59.2%; left: 17.2%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('137', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-136" class="spot" style="top: 57.5%; left: 25.5%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('136', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-150" class="spot" style="top: 68.5%; left: 19.5%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('150', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-151" class="spot" style="top: 66.0%; left: 29.0%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('151', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-153" class="spot" style="top: 79.2%; left: 19.2%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('153', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
+        <div id="spot-152" class="spot" style="top: 77.8%; left: 28.8%; width: 5.8%; height: 7.2%; border-radius: 50%;" onclick="openBooking('152', 'Cocktail Table (4-Pax)', 4, 'cocktail')"></div>
 
         <!-- 6. SOFA VIP KANAN BAWAH -->
         <div id="spot-106" class="spot" style="top: 58.5%; left: 36.8%; width: 6.8%; height: 10.0%;" onclick="openBooking('106', 'Center VIP Sofa (6-Pax)', 6, 'sofa')"></div>
@@ -794,6 +838,69 @@
           </div>
         </div>
 
+        <!-- FITUR POS MENU & DROPDOWN BERDASARKAN MENU BARU -->
+        <div class="form-row">
+          <label><i class="fa-solid fa-utensils" style="color: var(--gold-primary);"></i> Kasir Menu & Paket (Pilih Menu dari Daftar)</label>
+          <div class="order-builder-box">
+            <div class="order-select-row">
+              <select id="menuDropdown" class="inp-field" style="flex: 1;">
+                <option value="">-- Pilih Menu / Minuman --</option>
+                <optgroup label="Spirits & Liquors">
+                  <option value="Bacardi White Rum|1000000">Bacardi White Rum (1.000 K)</option>
+                  <option value="Jose Cuervo Tequila|1200000">Jose Cuervo Tequila (1.200 K)</option>
+                  <option value="Myers's Dark Rum|1200000">Myers's Dark Rum (1.200 K)</option>
+                  <option value="Absolut Vodka|1275000">Absolut Vodka (1.275 K)</option>
+                  <option value="Jack Daniel's|1500000">Jack Daniel's (1.500 K)</option>
+                  <option value="J.W Red Label|1300000">J.W Red Label (1.300 K)</option>
+                  <option value="Baileys Original|1600000">Baileys Original (1.600 K)</option>
+                  <option value="Baileys Strawberry|1750000">Baileys Strawberry (1.750 K)</option>
+                  <option value="Chivas 12 YO|1700000">Chivas 12 YO (1.700 K)</option>
+                  <option value="Jameson|1400000">Jameson (1.400 K)</option>
+                  <option value="J.W Black Label|1500000">J.W Black Label (1.500 K)</option>
+                  <option value="Jägermeister|1815000">Jägermeister (1.815 K)</option>
+                  <option value="Oro Tequila|1900000">Oro Tequila (1.900 K)</option>
+                  <option value="Kahlúa|1550000">Kahlúa (1.550 K)</option>
+                  <option value="Singleton|2500000">Singleton (2.500 K)</option>
+                  <option value="Chivas 18 YO|3500000">Chivas 18 YO (3.500 K)</option>
+                  <option value="Macallan 12 Triple Cask Matured|5500000">Macallan 12 T.C.M (5.500 K)</option>
+                  <option value="J.W Blue Label|7250000">J.W Blue Label (7.250 K)</option>
+                </optgroup>
+                <optgroup label="Vibe Selection">
+                  <option value="Vibe Selection (Peach/Lychee/Black Tea)|907500">Vibe Selection - Peach/Lychee/Tea (907.5 K)</option>
+                  <option value="Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)|756250">Vibe Selection - Spirits (756.25 K)</option>
+                </optgroup>
+                <optgroup label="Maze Selection">
+                  <option value="Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)|1000000">Maze Selection (1.000 K)</option>
+                </optgroup>
+                <optgroup label="Dome">
+                  <option value="Dome (Vodka/Whiskey)|240000">Dome (240 K)</option>
+                </optgroup>
+                <optgroup label="Signature Bites (IDR 60K each)">
+                  <option value="Chicken Pop Corn|60000">Chicken Pop Corn (60 K)</option>
+                  <option value="Idaho Stick Fries|60000">Idaho Stick Fries (60 K)</option>
+                  <option value="Beef & Cheese Fries|60000">Beef & Cheese Fries (60 K)</option>
+                  <option value="BBQ Chicken Wings|60000">BBQ Chicken Wings (60 K)</option>
+                  <option value="Truffle Fries|60000">Truffle Fries (60 K)</option>
+                </optgroup>
+              </select>
+              <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
+            </div>
+
+            <!-- Daftar Item Pesanan -->
+            <div id="orderItemList" class="order-item-list">
+              <div style="color:#64748b; font-size:0.75rem; text-align:center; padding: 10px;">Belum ada menu dipilih.</div>
+            </div>
+
+            <!-- Total Harga Menu -->
+            <div class="order-total-bar">
+              <span>Total Estimasi Menu:</span>
+              <strong id="orderTotalDisplay">Rp 0</strong>
+            </div>
+          </div>
+          <!-- Hidden input untuk menyimpan string ringkasan pesanan ke database -->
+          <input type="hidden" id="guestMenuOrder">
+        </div>
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div class="form-row">
             <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
@@ -811,7 +918,7 @@
 
         <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
-          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter...">
+          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, extra chair...">
         </div>
       </div>
 
@@ -900,9 +1007,9 @@
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Sofa + Cocktail + FDC)</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Sofa + Cocktail Kotak + FDC)</div>
             <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi sofa, meja cocktail & tiket standing</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi sofa, meja cocktail kotak & tiket standing</div>
           </div>
 
           <div class="dash-card">
@@ -917,7 +1024,7 @@
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-martini-glass-citrus" style="color: var(--cyan-cocktail);"></i> Cocktail Tables</div>
+            <div class="card-lbl"><i class="fa-solid fa-square" style="color: var(--cyan-cocktail);"></i> Cocktail Tables Kotak</div>
             <div class="card-val"><span id="repCocktailBooked" style="color: var(--cyan-cocktail);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 20 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repCocktailBar" class="occupancy-bar" style="background: var(--cyan-cocktail);"></div>
@@ -942,7 +1049,7 @@
           <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.65);">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
             <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Total Tamu</div>
-            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Sofa + Cocktail) + 0 Standing FDC</div>
+            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Sofa + Cocktail Kotak) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
@@ -1011,6 +1118,7 @@
     let currentTable = null;
     let currentCategory = 'sofa';
     let zoomLevel = 1.0;
+    let currentOrderItems = []; // Menyimpan daftar item pesanan aktif dalam modal
 
     const possibleImages = [
       'LAYOUT%20HALLOWEN%202026.jpg',
@@ -1046,6 +1154,79 @@
       subscribeRealtime();
     });
 
+    // ================= POS ORDER LOGIC =================
+    function addSelectedItemToOrder() {
+      const select = document.getElementById('menuDropdown');
+      const val = select.value;
+      if (!val) {
+        alert('Silakan pilih menu terlebih dahulu dari dropdown.');
+        return;
+      }
+      const [menuName, priceStr] = val.split('|');
+      const price = Number(priceStr);
+
+      // Cek apakah menu sudah ada dalam list
+      const existing = currentOrderItems.find(item => item.name === menuName);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        currentOrderItems.push({ name: menuName, price: price, qty: 1 });
+      }
+
+      select.value = '';
+      renderOrderList();
+    }
+
+    function changeItemQty(index, delta) {
+      currentOrderItems[index].qty += delta;
+      if (currentOrderItems[index].qty <= 0) {
+        currentOrderItems.splice(index, 1);
+      }
+      renderOrderList();
+    }
+
+    function renderOrderList() {
+      const container = document.getElementById('orderItemList');
+      const totalDisplay = document.getElementById('orderTotalDisplay');
+      const hiddenInput = document.getElementById('guestMenuOrder');
+
+      if (currentOrderItems.length === 0) {
+        container.innerHTML = '<div style="color:#64748b; font-size:0.75rem; text-align:center; padding: 10px;">Belum ada menu dipilih.</div>';
+        totalDisplay.innerText = 'Rp 0';
+        hiddenInput.value = '';
+        return;
+      }
+
+      let html = '';
+      let grandTotal = '';
+      let summaryStringArray = [];
+      let calculatedTotal = 0;
+
+      currentOrderItems.forEach((item, idx) => {
+        const subtotal = item.price * item.qty;
+        calculatedTotal += subtotal;
+        summaryStringArray.push(`${item.qty}x ${item.name}`);
+
+        html += `
+          <div class="order-item-row">
+            <div>
+              <strong>${item.name}</strong>
+              <div style="font-size:0.7rem; color:#94a3b8;">Rp ${item.price.toLocaleString('id-ID')} x ${item.qty} = <span style="color:#34d399;">Rp ${subtotal.toLocaleString('id-ID')}</span></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" onclick="changeItemQty(${idx}, -1)" style="background:#334155; color:#fff; border:none; width:22px; height:22px; border-radius:4px; cursor:pointer;">-</button>
+              <span style="font-weight:700; width:18px; text-align:center;">${item.qty}</span>
+              <button type="button" onclick="changeItemQty(${idx}, 1)" style="background:#334155; color:#fff; border:none; width:22px; height:22px; border-radius:4px; cursor:pointer;">+</button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      totalDisplay.innerText = 'Rp ' + calculatedTotal.toLocaleString('id-ID');
+      hiddenInput.value = summaryStringArray.join(', ');
+    }
+
     // ================= SUPABASE DATA SYNC =================
     async function fetchAllCloudData() {
       try {
@@ -1059,10 +1240,11 @@
               category: row.category,
               pax: row.pax,
               dp: Number(row.dp),
+              menu_order: row.menu_order || '',
               time: row.arrival_time,
               notes: row.notes,
               created_by: row.created_by || 'Staff',
-              status: row.status || 'booked' // 'booked' (merah) atau 'done' (hijau)
+              status: row.status || 'booked'
             };
           });
         }
@@ -1107,6 +1289,7 @@
 
       const data = bookings[tableId];
       const btnDel = document.getElementById('btnRemoveBooking');
+      currentOrderItems = []; // Reset list menu pesanan
 
       if (data) {
         document.getElementById('guestName').value = data.name || '';
@@ -1116,6 +1299,21 @@
         document.getElementById('guestTime').value = data.time || '21:00 WITA';
         document.getElementById('guestCreatedBy').value = data.created_by || 'Abdul Ghofur';
         document.getElementById('guestNotes').value = data.notes || '';
+        
+        // Parse menu_order string kembali ke objek list jika ada
+        if (data.menu_order) {
+          // Format tersimpan: "1x Bacardi White Rum, 2x Chicken Pop Corn"
+          const parts = data.menu_order.split(', ');
+          parts.forEach(p => {
+            const match = p.match(/^(\d+)x\s+(.+)$/);
+            if (match) {
+              currentOrderItems.push({ name: match[2], price: 0, qty: parseInt(match[1]) });
+            } else if (p.trim()) {
+              currentOrderItems.push({ name: p.trim(), price: 0, qty: 1 });
+            }
+          });
+        }
+
         btnDel.style.display = 'inline-flex';
       } else {
         document.getElementById('guestName').value = '';
@@ -1128,6 +1326,7 @@
         btnDel.style.display = 'none';
       }
 
+      renderOrderList();
       document.getElementById('bookingModal').classList.add('open');
     }
 
@@ -1140,6 +1339,7 @@
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const menuOrder = document.getElementById('guestMenuOrder').value.trim();
       const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
@@ -1156,10 +1356,11 @@
         category: currentCategory,
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
+        menu_order: menuOrder,
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
         notes: document.getElementById('guestNotes').value,
-        status: statusType // 'booked' atau 'done'
+        status: statusType
       };
 
       const { data, error } = await _supabase
@@ -1365,13 +1566,13 @@
       document.getElementById('repCocktailBar').style.width = cocktailOccupancy + '%';
 
       document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
-      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${sofaBooked + cocktailBooked} unit terisi (${sofaBooked} Sofa + ${cocktailBooked} Cocktail)`;
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${sofaBooked + cocktailBooked} unit terisi (${sofaBooked} Sofa + ${cocktailBooked} Cocktail Kotak)`;
 
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
       document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
 
       document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
-      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${sofaPax} Sofa + ${cocktailPax} Cocktail) + ${fdcPax} Standing FDC`;
+      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${sofaPax} Sofa + ${cocktailPax} Cocktail Kotak) + ${fdcPax} Standing FDC`;
 
       document.getElementById('reportModal').classList.add('open');
     }
@@ -1431,7 +1632,7 @@
       const grandTotal = tableDP + fdcAmountTotal;
       document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
 
-      document.getElementById('legendAvailText').innerText = `Sisa Sofa: ${21 - sofaCount} | Sisa Cocktail: ${20 - cocktailCount}`;
+      document.getElementById('legendAvailText').innerText = `Sisa Sofa: ${21 - sofaCount} | Sisa Cocktail Kotak: ${20 - cocktailCount}`;
       document.getElementById('legendBookedText').innerText = `${bookedKeys.length - doneCount} Booked (Merah)`;
       document.getElementById('legendDoneText').innerText = `${doneCount} Selesai (Hijau)`;
     }
@@ -1476,21 +1677,21 @@
     function exportReservationsCSV() {
       const tableKeys = Object.keys(bookings);
       if (tableKeys.length === 0 && fdcBookings.length === 0) {
-        alert('Belum ada data reservasi Sofa, Cocktail, maupun FDC.');
+        alert('Belum ada data reservasi Sofa, Cocktail Kotak, maupun FDC.');
         return;
       }
 
-      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Menu/Paket Pesanan,Jam Tiba,Created By (Staff),Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
-        const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE';
+        const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE KOTAK';
         const statusLabel = b.status === 'done' ? 'DONE / HADIR' : 'BOOKED';
-        csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
+        csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.menu_order || ''}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","DONE","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","DONE","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
