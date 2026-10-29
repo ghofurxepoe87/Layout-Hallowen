@@ -918,7 +918,7 @@
               <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
             </div>
 
-            <!-- FITUR CUSTOM ITEM -->
+            <!-- FITUR CUSTOM ITEM (AMAN TOTAL DARI SALAH HITUNG) -->
             <div class="custom-menu-box">
               <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom" style="flex: 2; font-size: 0.78rem;">
               <input type="number" id="customItemPrice" class="inp-field" placeholder="Harga Murni (Cth: 54450)" style="flex: 1; font-size: 0.78rem;">
@@ -934,6 +934,7 @@
               <strong id="orderTotalDisplay">Rp 0</strong>
             </div>
           </div>
+          <!-- Hidden inputs for pure data storage -->
           <input type="hidden" id="guestMenuOrder">
           <input type="hidden" id="guestMenuTotal" value="0">
         </div>
@@ -1220,7 +1221,7 @@
       const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Silakan masukkan nama menu custom dan harga angka murni.');
+        alert('Silakan masukkan nama menu custom dan harga.');
         return;
       }
 
@@ -1267,7 +1268,9 @@
         const itemPrice = item.price || 0;
         const subtotal = itemPrice * item.qty;
         calculatedTotal += subtotal;
-        summaryStringArray.push(`${item.qty}x ${item.name}`);
+        
+        // PERBAIKAN: Format penyimpanannya mengunci harga aslinya "1x Item (@Harga)"
+        summaryStringArray.push(`${item.qty}x ${item.name} (@${itemPrice})`);
 
         html += `
           <div class="order-item-row">
@@ -1288,12 +1291,6 @@
       totalDisplay.innerText = 'Rp ' + calculatedTotal.toLocaleString('id-ID');
       hiddenInput.value = summaryStringArray.join(', ');
       hiddenTotalInput.value = calculatedTotal;
-    }
-
-    // PERBAIKAN UTAMA: Mengabaikan kalkulasi teks lama, murni mengambil dari menu_total database atau input aktif
-    function parseMenuTotal(menuStr, rowMenuTotal = 0) {
-      if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
-      return Number(document.getElementById('guestMenuTotal')?.value) || 0;
     }
 
     // ================= SUPABASE DATA SYNC =================
@@ -1361,6 +1358,7 @@
       const btnDel = document.getElementById('btnRemoveBooking');
       currentOrderItems = [];
 
+      // Daftar harga default sebagai patokan dasar jika bukan menu custom
       const priceDb = {
         "Social Lounge Package 1": 1500000, "Social Lounge Package 2": 1500000, "Social Lounge Package 3": 1500000,
         "Soju Duo Cham": 350000, "Selection of Soju (2 Bottles)": 400000, "Balihai Draft (3 Cans)": 200000,
@@ -1394,14 +1392,21 @@
         if (data.menu_order) {
           const parts = data.menu_order.split(', ');
           parts.forEach(p => {
-            const match = p.match(/^(\d+)x\s+(.+)$/);
+            // PERBAIKAN: Regex mendeteksi string yang menyimpan harga khusus -> 1x Nama (@Harga)
+            const match = p.match(/^(\d+)x\s+(.+?)(?:\s+\(@(\d+)\))?$/);
+            
             if (match) {
               const q = parseInt(match[1]);
               const n = match[2].trim();
-              const fallbackPrice = (data.menu_total && q > 0) ? Math.round(data.menu_total / q) : 0;
-              currentOrderItems.push({ name: n, price: priceDb[n] || fallbackPrice, qty: q });
+              const savedPrice = match[3] ? parseInt(match[3]) : null;
+
+              // Jika ada savedPrice dari format baru, langsung gunakan. Jika tidak, cari di priceDb. 
+              // Jika tidak ketemu di priceDb (menu custom data lama), barulah set 0.
+              const finalPrice = savedPrice !== null ? savedPrice : (priceDb[n] || 0);
+
+              currentOrderItems.push({ name: n, price: finalPrice, qty: q });
             } else if (p.trim()) {
-              currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || data.menu_total || 0, qty: 1 });
+              currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || 0, qty: 1 });
             }
           });
         }
