@@ -844,7 +844,7 @@
           <div class="order-builder-box">
             <div class="order-select-row">
               <select id="menuDropdown" class="inp-field" style="flex: 1;">
-                <option value="">-- Pilih Menu / Minuman --</option>
+                <option value="">-- Pilih Menu / Varian --</option>
                 <optgroup label="Spirits & Liquors">
                   <option value="Bacardi White Rum|1000000">Bacardi White Rum (1.000 K)</option>
                   <option value="Jose Cuervo Tequila|1200000">Jose Cuervo Tequila (1.200 K)</option>
@@ -866,14 +866,26 @@
                   <option value="J.W Blue Label|7250000">J.W Blue Label (7.250 K)</option>
                 </optgroup>
                 <optgroup label="Vibe Selection">
-                  <option value="Vibe Selection (Peach/Lychee/Black Tea)|907500">Vibe Selection - Peach/Lychee/Tea (907.5 K)</option>
-                  <option value="Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)|756250">Vibe Selection - Spirits (756.25 K)</option>
+                  <option value="Vibe Selection - Peach|907500">Vibe Selection - Peach (907,5 K)</option>
+                  <option value="Vibe Selection - Lychee|907500">Vibe Selection - Lychee (907,5 K)</option>
+                  <option value="Vibe Selection - Black Tea|907500">Vibe Selection - Black Tea (907,5 K)</option>
+                  <option value="Vibe Selection - Tequila|756250">Vibe Selection - Tequila (756,25 K)</option>
+                  <option value="Vibe Selection - Vodka|756250">Vibe Selection - Vodka (756,25 K)</option>
+                  <option value="Vibe Selection - Sambuca|756250">Vibe Selection - Sambuca (756,25 K)</option>
+                  <option value="Vibe Selection - Rum|756250">Vibe Selection - Rum (756,25 K)</option>
+                  <option value="Vibe Selection - Gin|756250">Vibe Selection - Gin (756,25 K)</option>
                 </optgroup>
                 <optgroup label="Maze Selection">
-                  <option value="Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)|1000000">Maze Selection (1.000 K)</option>
+                  <option value="Maze Selection - Gold Whiskey|1000000">Maze Selection - Gold Whiskey (1.000 K)</option>
+                  <option value="Maze Selection - Blue Whiskey|1000000">Maze Selection - Blue Whiskey (1.000 K)</option>
+                  <option value="Maze Selection - Cranberry|1000000">Maze Selection - Cranberry (1.000 K)</option>
+                  <option value="Maze Selection - Blackcurrant|1000000">Maze Selection - Blackcurrant (1.000 K)</option>
+                  <option value="Maze Selection - Lychee|1000000">Maze Selection - Lychee (1.000 K)</option>
+                  <option value="Maze Selection - Whiskey Soda|1000000">Maze Selection - Whiskey Soda (1.000 K)</option>
                 </optgroup>
                 <optgroup label="Dome">
-                  <option value="Dome (Vodka/Whiskey)|240000">Dome (240 K)</option>
+                  <option value="Dome - Vodka|240000">Dome - Vodka (240 K)</option>
+                  <option value="Dome - Whiskey|240000">Dome - Whiskey (240 K)</option>
                 </optgroup>
                 <optgroup label="Signature Bites (IDR 60K each)">
                   <option value="Chicken Pop Corn|60000">Chicken Pop Corn (60 K)</option>
@@ -1198,7 +1210,6 @@
       let calculatedTotal = 0;
 
       currentOrderItems.forEach((item, idx) => {
-        // Jika harga 0 (data lama), coba estimasi dari string jika memungkinkan atau set 0
         const itemPrice = item.price || 0;
         const subtotal = itemPrice * item.qty;
         calculatedTotal += subtotal;
@@ -1224,10 +1235,8 @@
       hiddenInput.value = summaryStringArray.join(', ');
     }
 
-    // Helper untuk kalkulasi estimasi total harga dari string menu_order (jika tersimpan format "1x Menu")
     function parseMenuTotal(menuStr) {
       if (!menuStr) return 0;
-      // Kamus harga menu standar sesuai daftar
       const priceMap = {
         "Bacardi White Rum": 1000000,
         "Jose Cuervo Tequila": 1200000,
@@ -1247,10 +1256,22 @@
         "Chivas 18 YO": 3500000,
         "Macallan 12 Triple Cask Matured": 5500000,
         "J.W Blue Label": 7250000,
-        "Vibe Selection (Peach/Lychee/Black Tea)": 907500,
-        "Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)": 756250,
-        "Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)": 1000000,
-        "Dome (Vodka/Whiskey)": 240000,
+        "Vibe Selection - Peach": 907500,
+        "Vibe Selection - Lychee": 907500,
+        "Vibe Selection - Black Tea": 907500,
+        "Vibe Selection - Tequila": 756250,
+        "Vibe Selection - Vodka": 756250,
+        "Vibe Selection - Sambuca": 756250,
+        "Vibe Selection - Rum": 756250,
+        "Vibe Selection - Gin": 756250,
+        "Maze Selection - Gold Whiskey": 1000000,
+        "Maze Selection - Blue Whiskey": 1000000,
+        "Maze Selection - Cranberry": 1000000,
+        "Maze Selection - Blackcurrant": 1000000,
+        "Maze Selection - Lychee": 1000000,
+        "Maze Selection - Whiskey Soda": 1000000,
+        "Dome - Vodka": 240000,
+        "Dome - Whiskey": 240000,
         "Chicken Pop Corn": 60000,
         "Idaho Stick Fries": 60000,
         "Beef & Cheese Fries": 60000,
@@ -1336,7 +1357,6 @@
       const btnDel = document.getElementById('btnRemoveBooking');
       currentOrderItems = [];
 
-      // Daftar master harga untuk pencocokan saat dibuka kembali
       const priceDb = {
         "Bacardi White Rum": 1000000, "Jose Cuervo Tequila": 1200000, "Myers's Dark Rum": 1200000,
         "Absolut Vodka": 1275000, "Jack Daniel's": 1500000, "J.W Red Label": 1300000,
@@ -1344,8 +1364,13 @@
         "Jameson": 1400000, "J.W Black Label": 1500000, "Jägermeister": 1815000,
         "Oro Tequila": 1900000, "Kahlúa": 1550000, "Singleton": 2500000,
         "Chivas 18 YO": 3500000, "Macallan 12 Triple Cask Matured": 5500000, "J.W Blue Label": 7250000,
-        "Vibe Selection (Peach/Lychee/Black Tea)": 907500, "Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)": 756250,
-        "Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)": 1000000, "Dome (Vodka/Whiskey)": 240000,
+        "Vibe Selection - Peach": 907500, "Vibe Selection - Lychee": 907500, "Vibe Selection - Black Tea": 907500,
+        "Vibe Selection - Tequila": 756250, "Vibe Selection - Vodka": 756250, "Vibe Selection - Sambuca": 756250,
+        "Vibe Selection - Rum": 756250, "Vibe Selection - Gin": 756250,
+        "Maze Selection - Gold Whiskey": 1000000, "Maze Selection - Blue Whiskey": 1000000,
+        "Maze Selection - Cranberry": 1000000, "Maze Selection - Blackcurrant": 1000000,
+        "Maze Selection - Lychee": 1000000, "Maze Selection - Whiskey Soda": 1000000,
+        "Dome - Vodka": 240000, "Dome - Whiskey": 240000,
         "Chicken Pop Corn": 60000, "Idaho Stick Fries": 60000, "Beef & Cheese Fries": 60000,
         "BBQ Chicken Wings": 60000, "Truffle Fries": 60000
       };
