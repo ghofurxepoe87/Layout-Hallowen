@@ -394,6 +394,16 @@
       font-size: 0.88rem;
     }
 
+    .custom-menu-box {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      padding: 8px;
+      border-radius: 8px;
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
     /* MODAL */
     .modal-backdrop {
       position: fixed;
@@ -838,13 +848,23 @@
           </div>
         </div>
 
-        <!-- POS MENU & DROPDOWN -->
+        <!-- POS MENU & DROPDOWN + CUSTOM MENU -->
         <div class="form-row">
-          <label><i class="fa-solid fa-utensils" style="color: var(--gold-primary);"></i> Kasir Menu & Paket (Pilih Menu dari Daftar)</label>
+          <label><i class="fa-solid fa-utensils" style="color: var(--gold-primary);"></i> Kasir Menu & Paket Promo (Halloween After Dark)</label>
           <div class="order-builder-box">
             <div class="order-select-row">
               <select id="menuDropdown" class="inp-field" style="flex: 1;">
-                <option value="">-- Pilih Menu / Varian --</option>
+                <option value="">-- Pilih Menu / Promo Halloween --</option>
+                <optgroup label="Halloween Promo Packages">
+                  <option value="Social Lounge Package 1|1500000">Social Lounge Package 1 (1.500 K)</option>
+                  <option value="Social Lounge Package 2|1500000">Social Lounge Package 2 (1.500 K)</option>
+                  <option value="Social Lounge Package 3|1500000">Social Lounge Package 3 (1.500 K)</option>
+                  <option value="Soju Duo Cham|350000">Soju Duo Cham (350 K)</option>
+                  <option value="Selection of Soju (2 Bottles)|400000">Selection of Soju 2 Bottles (400 K)</option>
+                  <option value="Balihai Draft (3 Cans)|200000">Balihai Draft 3 Cans (200 K)</option>
+                  <option value="Balihai Pint (3 Bottles)|200000">Balihai Pint 3 Bottles (200 K)</option>
+                  <option value="Prost Beer (3 Cans)|200000">Prost Beer 3 Cans (200 K)</option>
+                </optgroup>
                 <optgroup label="Spirits & Liquors">
                   <option value="Bacardi White Rum|1000000">Bacardi White Rum (1.000 K)</option>
                   <option value="Jose Cuervo Tequila|1200000">Jose Cuervo Tequila (1.200 K)</option>
@@ -898,7 +918,14 @@
               <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
             </div>
 
-            <div id="orderItemList" class="order-item-list">
+            <!-- FITUR CUSTOM ITEM (INPUT NAMA & HARGA MANUAL) -->
+            <div class="custom-menu-box">
+              <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom (Lainnya)" style="flex: 2; font-size: 0.78rem;">
+              <input type="text" id="customItemPrice" class="inp-field" placeholder="Harga (Rp)" style="flex: 1; font-size: 0.78rem;" onkeyup="formatCurrencyInput(this)">
+              <button type="button" class="btn-action btn-fdc" onclick="addCustomItemToOrder()" style="padding: 0 10px; font-size: 0.75rem;">+ Custom</button>
+            </div>
+
+            <div id="orderItemList" class="order-item-list" style="margin-top: 6px;">
               <div style="color:#64748b; font-size:0.75rem; text-align:center; padding: 10px;">Belum ada menu dipilih.</div>
             </div>
 
@@ -907,9 +934,8 @@
               <strong id="orderTotalDisplay">Rp 0</strong>
             </div>
           </div>
-          <!-- Hidden input untuk string ringkasan menu -->
+          <!-- Hidden inputs -->
           <input type="hidden" id="guestMenuOrder">
-          <!-- Hidden input untuk total angka harga menu -->
           <input type="hidden" id="guestMenuTotal" value="0">
         </div>
 
@@ -1188,6 +1214,30 @@
       renderOrderList();
     }
 
+    function addCustomItemToOrder() {
+      const nameInput = document.getElementById('customItemName');
+      const priceInput = document.getElementById('customItemPrice');
+      const name = nameInput.value.trim();
+      const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
+
+      if (!name || !rawPrice) {
+        alert('Silakan masukkan nama menu custom dan harganya.');
+        return;
+      }
+
+      const price = Number(rawPrice);
+      const existing = currentOrderItems.find(item => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        currentOrderItems.push({ name: name, price: price, qty: 1 });
+      }
+
+      nameInput.value = '';
+      priceInput.value = '';
+      renderOrderList();
+    }
+
     function changeItemQty(index, delta) {
       currentOrderItems[index].qty += delta;
       if (currentOrderItems[index].qty <= 0) {
@@ -1245,6 +1295,14 @@
       if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
       if (!menuStr) return 0;
       const priceMap = {
+        "Social Lounge Package 1": 1500000,
+        "Social Lounge Package 2": 1500000,
+        "Social Lounge Package 3": 1500000,
+        "Soju Duo Cham": 350000,
+        "Selection of Soju (2 Bottles)": 400000,
+        "Balihai Draft (3 Cans)": 200000,
+        "Balihai Pint (3 Bottles)": 200000,
+        "Prost Beer (3 Cans)": 200000,
         "Bacardi White Rum": 1000000,
         "Jose Cuervo Tequila": 1200000,
         "Myers's Dark Rum": 1200000,
@@ -1366,6 +1424,9 @@
       currentOrderItems = [];
 
       const priceDb = {
+        "Social Lounge Package 1": 1500000, "Social Lounge Package 2": 1500000, "Social Lounge Package 3": 1500000,
+        "Soju Duo Cham": 350000, "Selection of Soju (2 Bottles)": 400000, "Balihai Draft (3 Cans)": 200000,
+        "Balihai Pint (3 Bottles)": 200000, "Prost Beer (3 Cans)": 200000,
         "Bacardi White Rum": 1000000, "Jose Cuervo Tequila": 1200000, "Myers's Dark Rum": 1200000,
         "Absolut Vodka": 1275000, "Jack Daniel's": 1500000, "J.W Red Label": 1300000,
         "Baileys Original": 1600000, "Baileys Strawberry": 1750000, "Chivas 12 YO": 1700000,
@@ -1399,9 +1460,9 @@
             if (match) {
               const q = parseInt(match[1]);
               const n = match[2].trim();
-              currentOrderItems.push({ name: n, price: priceDb[n] || 0, qty: q });
+              currentOrderItems.push({ name: n, price: priceDb[n] || (data.menu_total / q) || 0, qty: q });
             } else if (p.trim()) {
-              currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || 0, qty: 1 });
+              currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || data.menu_total || 0, qty: 1 });
             }
           });
         }
@@ -1450,7 +1511,7 @@
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         menu_order: menuOrder,
-        menu_total: menuTotalVal, // Disimpan ke Supabase
+        menu_total: menuTotalVal,
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
         notes: document.getElementById('guestNotes').value,
