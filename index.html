@@ -1023,7 +1023,7 @@
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i> Sofa / VIP Lounge</div>
-            <div class="card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
+            <div class="dash-card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repSofaBar" class="occupancy-bar" style="background: var(--amber-sofa);"></div>
             </div>
@@ -1424,6 +1424,7 @@
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const menuOrder = document.getElementById('guestMenuOrder').value.trim();
+      const menuTotalVal = parseMenuTotal(menuOrder); // Hitung total harga menu otomatis
       const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
@@ -1441,6 +1442,7 @@
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         menu_order: menuOrder,
+        menu_total: menuTotalVal, // Disimpan ke Supabase
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
         notes: document.getElementById('guestNotes').value,
@@ -1770,7 +1772,7 @@
         return;
       }
 
-      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal DP (IDR),Menu/Paket Pesanan,Estimasi Harga Menu (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal DP (IDR),Menu/Paket Pesanan,Total Harga Menu (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
