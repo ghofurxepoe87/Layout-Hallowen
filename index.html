@@ -918,10 +918,10 @@
               <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
             </div>
 
-            <!-- FITUR CUSTOM ITEM (INPUT NAMA & HARGA MANUAL) -->
+            <!-- FITUR CUSTOM ITEM (INPUT NAMA & HARGA MANUAL AMAN) -->
             <div class="custom-menu-box">
-              <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom (Lainnya)" style="flex: 2; font-size: 0.78rem;">
-              <input type="text" id="customItemPrice" class="inp-field" placeholder="Harga (Cth: 150000)" style="flex: 1; font-size: 0.78rem;" onkeyup="formatCurrencyInput(this)">
+              <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom" style="flex: 2; font-size: 0.78rem;">
+              <input type="text" id="customItemPrice" class="inp-field" placeholder="Harga (Rp)" style="flex: 1; font-size: 0.78rem;" onkeyup="formatCurrencyInput(this)">
               <button type="button" class="btn-action btn-fdc" onclick="addCustomItemToOrder()" style="padding: 0 10px; font-size: 0.75rem;">+ Custom</button>
             </div>
 
@@ -1290,9 +1290,11 @@
       hiddenTotalInput.value = calculatedTotal;
     }
 
+    // Perbaikan fungsi parseMenuTotal agar aman dari pencocokan teks keliru
     function parseMenuTotal(menuStr, rowMenuTotal = 0) {
       if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
       if (!menuStr) return 0;
+      
       const priceMap = {
         "Social Lounge Package 1": 1500000,
         "Social Lounge Package 2": 1500000,
@@ -1459,7 +1461,9 @@
             if (match) {
               const q = parseInt(match[1]);
               const n = match[2].trim();
-              currentOrderItems.push({ name: n, price: priceDb[n] || (data.menu_total / q) || 0, qty: q });
+              // Jika menu custom (tidak ada di priceDb), hitung harga satuan dari menu_total dibagi q
+              const fallbackPrice = (data.menu_total && q > 0) ? Math.round(data.menu_total / q) : 0;
+              currentOrderItems.push({ name: n, price: priceDb[n] || fallbackPrice, qty: q });
             } else if (p.trim()) {
               currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || data.menu_total || 0, qty: 1 });
             }
@@ -1492,7 +1496,12 @@
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const menuOrder = document.getElementById('guestMenuOrder').value.trim();
-      const menuTotalVal = Number(document.getElementById('guestMenuTotal').value) || parseMenuTotal(menuOrder);
+      
+      // Hitung total murni dari item yang aktif di currentOrderItems agar akurat untuk custom item
+      let calculatedSum = 0;
+      currentOrderItems.forEach(i => { calculatedSum += (i.price * i.qty); });
+      const menuTotalVal = calculatedSum || Number(document.getElementById('guestMenuTotal').value) || parseMenuTotal(menuOrder);
+      
       const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
