@@ -907,7 +907,10 @@
               <strong id="orderTotalDisplay">Rp 0</strong>
             </div>
           </div>
+          <!-- Hidden input untuk string ringkasan menu -->
           <input type="hidden" id="guestMenuOrder">
+          <!-- Hidden input untuk total angka harga menu -->
+          <input type="hidden" id="guestMenuTotal" value="0">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
@@ -1023,7 +1026,7 @@
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-sofa);"></i> Sofa / VIP Lounge</div>
-            <div class="dash-card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
+            <div class="card-val"><span id="repSofaBooked" style="color: var(--amber-sofa);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 21 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repSofaBar" class="occupancy-bar" style="background: var(--amber-sofa);"></div>
             </div>
@@ -1197,11 +1200,13 @@
       const container = document.getElementById('orderItemList');
       const totalDisplay = document.getElementById('orderTotalDisplay');
       const hiddenInput = document.getElementById('guestMenuOrder');
+      const hiddenTotalInput = document.getElementById('guestMenuTotal');
 
       if (currentOrderItems.length === 0) {
         container.innerHTML = '<div style="color:#64748b; font-size:0.75rem; text-align:center; padding: 10px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         hiddenInput.value = '';
+        hiddenTotalInput.value = 0;
         return;
       }
 
@@ -1233,9 +1238,11 @@
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + calculatedTotal.toLocaleString('id-ID');
       hiddenInput.value = summaryStringArray.join(', ');
+      hiddenTotalInput.value = calculatedTotal;
     }
 
-    function parseMenuTotal(menuStr) {
+    function parseMenuTotal(menuStr, rowMenuTotal = 0) {
+      if (rowMenuTotal && Number(rowMenuTotal) > 0) return Number(rowMenuTotal);
       if (!menuStr) return 0;
       const priceMap = {
         "Bacardi White Rum": 1000000,
@@ -1307,6 +1314,7 @@
               pax: row.pax,
               dp: Number(row.dp),
               menu_order: row.menu_order || '',
+              menu_total: Number(row.menu_total || 0),
               time: row.arrival_time,
               notes: row.notes,
               created_by: row.created_by || 'Staff',
@@ -1424,7 +1432,7 @@
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const menuOrder = document.getElementById('guestMenuOrder').value.trim();
-      const menuTotalVal = parseMenuTotal(menuOrder); // Hitung total harga menu otomatis
+      const menuTotalVal = Number(document.getElementById('guestMenuTotal').value) || parseMenuTotal(menuOrder);
       const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
 
       if (!name) {
@@ -1607,7 +1615,7 @@
         const isSofa = SOFA_IDS.includes(k);
         const dp = item.dp || 0;
         const pax = parseInt(item.pax || 0, 10);
-        const menuTotal = parseMenuTotal(item.menu_order);
+        const menuTotal = parseMenuTotal(item.menu_order, item.menu_total);
 
         totalMenuRev += menuTotal;
 
@@ -1703,7 +1711,7 @@
           cocktailCount++;
         }
         tableDP += (item.dp || 0);
-        totalMenuSum += parseMenuTotal(item.menu_order);
+        totalMenuSum += parseMenuTotal(item.menu_order, item.menu_total);
         if (item.status === 'done') {
           doneCount++;
         }
@@ -1778,7 +1786,7 @@
         const b = bookings[k];
         const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE KOTAK';
         const statusLabel = b.status === 'done' ? 'DONE / HADIR' : 'BOOKED';
-        const menuEstPrice = parseMenuTotal(b.menu_order);
+        const menuEstPrice = parseMenuTotal(b.menu_order, b.menu_total);
         csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.menu_order || ''}","${menuEstPrice}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
