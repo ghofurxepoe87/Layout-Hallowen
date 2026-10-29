@@ -838,7 +838,7 @@
           </div>
         </div>
 
-        <!-- FITUR POS MENU & DROPDOWN BERDASARKAN MENU BARU -->
+        <!-- POS MENU & DROPDOWN -->
         <div class="form-row">
           <label><i class="fa-solid fa-utensils" style="color: var(--gold-primary);"></i> Kasir Menu & Paket (Pilih Menu dari Daftar)</label>
           <div class="order-builder-box">
@@ -886,18 +886,15 @@
               <button type="button" class="btn-action btn-dashboard" onclick="addSelectedItemToOrder()" style="padding: 0 14px;">+ Tambah</button>
             </div>
 
-            <!-- Daftar Item Pesanan -->
             <div id="orderItemList" class="order-item-list">
               <div style="color:#64748b; font-size:0.75rem; text-align:center; padding: 10px;">Belum ada menu dipilih.</div>
             </div>
 
-            <!-- Total Harga Menu -->
             <div class="order-total-bar">
               <span>Total Estimasi Menu:</span>
               <strong id="orderTotalDisplay">Rp 0</strong>
             </div>
           </div>
-          <!-- Hidden input untuk menyimpan string ringkasan pesanan ke database -->
           <input type="hidden" id="guestMenuOrder">
         </div>
 
@@ -1007,9 +1004,9 @@
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Sofa + Cocktail Kotak + FDC)</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (DP + FDC + Menu F&B)</div>
             <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi sofa, meja cocktail kotak & tiket standing</div>
+            <div class="card-sub">Akumulasi keseluruhan pendapatan event (DP Meja + FDC + Total Menu)</div>
           </div>
 
           <div class="dash-card">
@@ -1019,7 +1016,7 @@
               <div id="repSofaBar" class="occupancy-bar" style="background: var(--amber-sofa);"></div>
             </div>
             <div class="card-sub" style="margin-top: 3px;">
-              Tersisa: <strong id="repSofaLeft" style="color:#38bdf8;">21</strong> | Rev: <span id="repSofaRev" style="color:#34d399;">Rp 0</span>
+              Tersisa: <strong id="repSofaLeft" style="color:#38bdf8;">21</strong> | DP Rev: <span id="repSofaRev" style="color:#34d399;">Rp 0</span>
             </div>
           </div>
 
@@ -1030,14 +1027,14 @@
               <div id="repCocktailBar" class="occupancy-bar" style="background: var(--cyan-cocktail);"></div>
             </div>
             <div class="card-sub" style="margin-top: 3px;">
-              Tersisa: <strong id="repCocktailLeft" style="color:#38bdf8;">20</strong> | Rev: <span id="repCocktailRev" style="color:#34d399;">Rp 0</span>
+              Tersisa: <strong id="repCocktailLeft" style="color:#38bdf8;">20</strong> | DP Rev: <span id="repCocktailRev" style="color:#34d399;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: var(--emerald-accent);"></i> All Tables Revenue</div>
-            <div class="card-val" id="repTableGrossRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
-            <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
+            <div class="card-lbl"><i class="fa-solid fa-utensils" style="color: #fef08a;"></i> Total Menu F&B Revenue</div>
+            <div class="card-val" id="repMenuTotalRev" style="font-size: 1rem; color: #fef08a;">Rp 0</div>
+            <div class="card-sub">Total nominal menu/minuman yang dipesan tamu</div>
           </div>
 
           <div class="dash-card">
@@ -1118,7 +1115,7 @@
     let currentTable = null;
     let currentCategory = 'sofa';
     let zoomLevel = 1.0;
-    let currentOrderItems = []; // Menyimpan daftar item pesanan aktif dalam modal
+    let currentOrderItems = [];
 
     const possibleImages = [
       'LAYOUT%20HALLOWEN%202026.jpg',
@@ -1165,7 +1162,6 @@
       const [menuName, priceStr] = val.split('|');
       const price = Number(priceStr);
 
-      // Cek apakah menu sudah ada dalam list
       const existing = currentOrderItems.find(item => item.name === menuName);
       if (existing) {
         existing.qty += 1;
@@ -1198,12 +1194,13 @@
       }
 
       let html = '';
-      let grandTotal = '';
       let summaryStringArray = [];
       let calculatedTotal = 0;
 
       currentOrderItems.forEach((item, idx) => {
-        const subtotal = item.price * item.qty;
+        // Jika harga 0 (data lama), coba estimasi dari string jika memungkinkan atau set 0
+        const itemPrice = item.price || 0;
+        const subtotal = itemPrice * item.qty;
         calculatedTotal += subtotal;
         summaryStringArray.push(`${item.qty}x ${item.name}`);
 
@@ -1211,7 +1208,7 @@
           <div class="order-item-row">
             <div>
               <strong>${item.name}</strong>
-              <div style="font-size:0.7rem; color:#94a3b8;">Rp ${item.price.toLocaleString('id-ID')} x ${item.qty} = <span style="color:#34d399;">Rp ${subtotal.toLocaleString('id-ID')}</span></div>
+              <div style="font-size:0.7rem; color:#94a3b8;">Rp ${itemPrice.toLocaleString('id-ID')} x ${item.qty} = <span style="color:#34d399;">Rp ${subtotal.toLocaleString('id-ID')}</span></div>
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
               <button type="button" onclick="changeItemQty(${idx}, -1)" style="background:#334155; color:#fff; border:none; width:22px; height:22px; border-radius:4px; cursor:pointer;">-</button>
@@ -1225,6 +1222,54 @@
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + calculatedTotal.toLocaleString('id-ID');
       hiddenInput.value = summaryStringArray.join(', ');
+    }
+
+    // Helper untuk kalkulasi estimasi total harga dari string menu_order (jika tersimpan format "1x Menu")
+    function parseMenuTotal(menuStr) {
+      if (!menuStr) return 0;
+      // Kamus harga menu standar sesuai daftar
+      const priceMap = {
+        "Bacardi White Rum": 1000000,
+        "Jose Cuervo Tequila": 1200000,
+        "Myers's Dark Rum": 1200000,
+        "Absolut Vodka": 1275000,
+        "Jack Daniel's": 1500000,
+        "J.W Red Label": 1300000,
+        "Baileys Original": 1600000,
+        "Baileys Strawberry": 1750000,
+        "Chivas 12 YO": 1700000,
+        "Jameson": 1400000,
+        "J.W Black Label": 1500000,
+        "Jägermeister": 1815000,
+        "Oro Tequila": 1900000,
+        "Kahlúa": 1550000,
+        "Singleton": 2500000,
+        "Chivas 18 YO": 3500000,
+        "Macallan 12 Triple Cask Matured": 5500000,
+        "J.W Blue Label": 7250000,
+        "Vibe Selection (Peach/Lychee/Black Tea)": 907500,
+        "Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)": 756250,
+        "Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)": 1000000,
+        "Dome (Vodka/Whiskey)": 240000,
+        "Chicken Pop Corn": 60000,
+        "Idaho Stick Fries": 60000,
+        "Beef & Cheese Fries": 60000,
+        "BBQ Chicken Wings": 60000,
+        "Truffle Fries": 60000
+      };
+
+      let total = 0;
+      const parts = menuStr.split(', ');
+      parts.forEach(p => {
+        const match = p.match(/^(\d+)x\s+(.+)$/);
+        if (match) {
+          const qty = parseInt(match[1]);
+          const name = match[2].trim();
+          const pVal = priceMap[name] || 0;
+          total += (pVal * qty);
+        }
+      });
+      return total;
     }
 
     // ================= SUPABASE DATA SYNC =================
@@ -1289,7 +1334,21 @@
 
       const data = bookings[tableId];
       const btnDel = document.getElementById('btnRemoveBooking');
-      currentOrderItems = []; // Reset list menu pesanan
+      currentOrderItems = [];
+
+      // Daftar master harga untuk pencocokan saat dibuka kembali
+      const priceDb = {
+        "Bacardi White Rum": 1000000, "Jose Cuervo Tequila": 1200000, "Myers's Dark Rum": 1200000,
+        "Absolut Vodka": 1275000, "Jack Daniel's": 1500000, "J.W Red Label": 1300000,
+        "Baileys Original": 1600000, "Baileys Strawberry": 1750000, "Chivas 12 YO": 1700000,
+        "Jameson": 1400000, "J.W Black Label": 1500000, "Jägermeister": 1815000,
+        "Oro Tequila": 1900000, "Kahlúa": 1550000, "Singleton": 2500000,
+        "Chivas 18 YO": 3500000, "Macallan 12 Triple Cask Matured": 5500000, "J.W Blue Label": 7250000,
+        "Vibe Selection (Peach/Lychee/Black Tea)": 907500, "Vibe Selection (Tequila/Vodka/Sambuca/Rum/Gin)": 756250,
+        "Maze Selection (Gold/Blue Whiskey/Cranberry/Lychee)": 1000000, "Dome (Vodka/Whiskey)": 240000,
+        "Chicken Pop Corn": 60000, "Idaho Stick Fries": 60000, "Beef & Cheese Fries": 60000,
+        "BBQ Chicken Wings": 60000, "Truffle Fries": 60000
+      };
 
       if (data) {
         document.getElementById('guestName').value = data.name || '';
@@ -1300,16 +1359,16 @@
         document.getElementById('guestCreatedBy').value = data.created_by || 'Abdul Ghofur';
         document.getElementById('guestNotes').value = data.notes || '';
         
-        // Parse menu_order string kembali ke objek list jika ada
         if (data.menu_order) {
-          // Format tersimpan: "1x Bacardi White Rum, 2x Chicken Pop Corn"
           const parts = data.menu_order.split(', ');
           parts.forEach(p => {
             const match = p.match(/^(\d+)x\s+(.+)$/);
             if (match) {
-              currentOrderItems.push({ name: match[2], price: 0, qty: parseInt(match[1]) });
+              const q = parseInt(match[1]);
+              const n = match[2].trim();
+              currentOrderItems.push({ name: n, price: priceDb[n] || 0, qty: q });
             } else if (p.trim()) {
-              currentOrderItems.push({ name: p.trim(), price: 0, qty: 1 });
+              currentOrderItems.push({ name: p.trim(), price: priceDb[p.trim()] || 0, qty: 1 });
             }
           });
         }
@@ -1514,12 +1573,16 @@
       let cocktailBooked = 0;
       let cocktailRev = 0;
       let cocktailPax = 0;
+      let totalMenuRev = 0;
 
       bookedKeys.forEach(k => {
         const item = bookings[k];
         const isSofa = SOFA_IDS.includes(k);
         const dp = item.dp || 0;
         const pax = parseInt(item.pax || 0, 10);
+        const menuTotal = parseMenuTotal(item.menu_order);
+
+        totalMenuRev += menuTotal;
 
         if (isSofa) {
           sofaBooked++;
@@ -1548,8 +1611,8 @@
         fdcTotalRev += (item.amount || 0);
       });
 
-      const tableGrossRev = sofaRev + cocktailRev;
-      const grandGross = tableGrossRev + fdcTotalRev;
+      const tableDPRev = sofaRev + cocktailRev;
+      const grandGross = tableDPRev + fdcTotalRev + totalMenuRev;
       const seatingPax = sofaPax + cocktailPax;
       const totalCrowd = seatingPax + fdcPax;
 
@@ -1565,8 +1628,7 @@
       document.getElementById('repCocktailRev').innerText = 'Rp ' + cocktailRev.toLocaleString('id-ID');
       document.getElementById('repCocktailBar').style.width = cocktailOccupancy + '%';
 
-      document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
-      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${sofaBooked + cocktailBooked} unit terisi (${sofaBooked} Sofa + ${cocktailBooked} Cocktail Kotak)`;
+      document.getElementById('repMenuTotalRev').innerText = 'Rp ' + totalMenuRev.toLocaleString('id-ID');
 
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
       document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
@@ -1604,6 +1666,7 @@
       let cocktailCount = 0;
       let tableDP = 0;
       let doneCount = 0;
+      let totalMenuSum = 0;
 
       bookedKeys.forEach(k => {
         const item = bookings[k];
@@ -1613,6 +1676,7 @@
           cocktailCount++;
         }
         tableDP += (item.dp || 0);
+        totalMenuSum += parseMenuTotal(item.menu_order);
         if (item.status === 'done') {
           doneCount++;
         }
@@ -1629,7 +1693,7 @@
       });
 
       document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
-      const grandTotal = tableDP + fdcAmountTotal;
+      const grandTotal = tableDP + fdcAmountTotal + totalMenuSum;
       document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
 
       document.getElementById('legendAvailText').innerText = `Sisa Sofa: ${21 - sofaCount} | Sisa Cocktail Kotak: ${20 - cocktailCount}`;
@@ -1681,17 +1745,18 @@
         return;
       }
 
-      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Menu/Paket Pesanan,Jam Tiba,Created By (Staff),Catatan Khusus\n';
+      let csv = 'Kategori Inventaris,Nomor Unit/ID,Status Tamu,Nama Tamu,WhatsApp,Pax,Nominal DP (IDR),Menu/Paket Pesanan,Estimasi Harga Menu (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
       
       tableKeys.forEach(k => {
         const b = bookings[k];
         const categoryLabel = SOFA_IDS.includes(k) ? 'SOFA / VIP LOUNGE' : 'COCKTAIL TABLE KOTAK';
         const statusLabel = b.status === 'done' ? 'DONE / HADIR' : 'BOOKED';
-        csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.menu_order || ''}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
+        const menuEstPrice = parseMenuTotal(b.menu_order);
+        csv += `"${categoryLabel}","${k}","${statusLabel}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.menu_order || ''}","${menuEstPrice}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","DONE","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","DONE","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","0","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
