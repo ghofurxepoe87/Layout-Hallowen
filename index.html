@@ -921,7 +921,7 @@
             <!-- FITUR CUSTOM ITEM (INPUT NAMA & HARGA MANUAL) -->
             <div class="custom-menu-box">
               <input type="text" id="customItemName" class="inp-field" placeholder="Nama Menu Custom (Lainnya)" style="flex: 2; font-size: 0.78rem;">
-              <input type="text" id="customItemPrice" class="inp-field" placeholder="Harga (Rp)" style="flex: 1; font-size: 0.78rem;" onkeyup="formatCurrencyInput(this)">
+              <input type="text" id="customItemPrice" class="inp-field" placeholder="Harga (Cth: 150000)" style="flex: 1; font-size: 0.78rem;" onkeyup="formatCurrencyInput(this)">
               <button type="button" class="btn-action btn-fdc" onclick="addCustomItemToOrder()" style="padding: 0 10px; font-size: 0.75rem;">+ Custom</button>
             </div>
 
@@ -934,7 +934,6 @@
               <strong id="orderTotalDisplay">Rp 0</strong>
             </div>
           </div>
-          <!-- Hidden inputs -->
           <input type="hidden" id="guestMenuOrder">
           <input type="hidden" id="guestMenuTotal" value="0">
         </div>
@@ -1221,7 +1220,7 @@
       const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Silakan masukkan nama menu custom dan harganya.');
+        alert('Silakan masukkan nama menu custom dan harga angka murni (tanpa titik/koma).');
         return;
       }
 
